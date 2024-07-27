@@ -1,0 +1,47 @@
+catalinaBase: ${catalina.base}
+eureka:
+  client:
+    fetch-registry: true
+    fetchRegistry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULTZONE}
+  instance:
+    healthCheckUrlPath: /actuator/health
+    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 1
+    statusPageUrlPath: /actuator/info
+log4j2:
+  contextSelector: org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+server:
+  servlet:
+    contextPath: /timeline
+spring:
+  application:
+    name: timeline-service
+  cache:
+    type: redis
+  datasource:
+    driver-class-name: ${lti.datasource.driver-class-name}
+    password: ${mysql.datasource.password}
+    url: ${mysql.datasource.url}/lti?useSSL=false
+    username: ${mysql.datasource.username}
+  jmx:
+    default-domain: timeline-service
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: true
+    properties:
+      hibernate:
+        format_sql: true
+        type: 'trace'
+        use_sql_comments: true
+  profiles:
+    active: prod
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}

@@ -1,0 +1,78 @@
+<div th:fragment="session-attendance-report" xmlns:th="http://www.thymeleaf.org">
+	<div class="row">
+		<div id="sessionAttendanceChart" class="col-lg-6 col-md-12 col-12 my-2">
+			<div class="card chart-container w-100 m-auto">
+				<h6 class="pt-3">Session Attendance Report (Track-wise)</h6>
+			    <canvas th:if="${currentCycleStudent}" id="session-attendance-chart"></canvas>
+			    <p th:unless="${currentCycleStudent}" class="text-secondary pt-3">
+				    <i class="fa-solid fa-circle-exclamation"></i>
+				    <span>0 subjects available for the <span th:text="${currentAcadMonthYear}"></span> cycle.</span>
+			    </p>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-12 col-12 my-2">
+			<div class="px-3 py-3 border rounded w-100 m-auto">
+				<h6>Session Attendance Report (Subject-wise)</h6>
+				<div th:if="${currentCycleStudent}">
+					<div class="row my-2 px-3">
+						<div class="col-lg-4 col-md-4 col-12">
+							<div class="mx-1 my-1 pt-3 border rounded">
+								<h6 class="fw-bold">Total Session</h6>
+								<p th:text="${totalSessionDetailsList.total_session}"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-12">
+							<div class="mx-1 my-1 pt-3 border rounded">
+								<h6 class="fw-bold">Attended Session</h6>
+								<p th:text="${totalSessionDetailsList.attended_session}"></p>
+							</div>
+						</div>
+						<div class="col-lg-4 col-md-4 col-12">
+							<div class="mx-1 my-1 pt-3 border rounded">
+								<h6 class="fw-bold">Total Duration</h6>
+								<p th:text="${totalSessionDetailsList.total_duration}"></p>
+							</div>
+						</div>
+					</div>
+					<div class="accordion accordion-flush my-2 px-3 border rounded" id="sessionAccordion">
+					  <div th:each="subjectDetails, status : ${totalSessionDetailsList.subject_Details}" class="accordion-item row">
+					    <h2 class="accordion-header" th:id="'flush-heading'+${status.index}">
+					      <button class="accordion-button collapsed fw-normal" type="button" data-bs-toggle="collapse" th:attr="data-bs-target='#flush-collapse'+${status.index}, aria-controls='flush-collapse'+${status.index}" aria-expanded="false" style="z-index: 1;">
+					        <span th:text="${subjectDetails.key}"></span>
+					      </button>
+					    </h2>
+					    <div th:id="'flush-collapse'+${status.index}" class="accordion-collapse collapse" th:attr="aria-labelledby='flush-heading'+${status.index}" data-bs-parent="#sessionAccordion">
+					      <div class="accordion-body">
+					      	<div class="row my-2 px-3">
+								<div class="col-lg-4 col-md-12 col-12">
+									<div class="mx-1 my-1 pt-3 border rounded">
+										<h6 class="fw-semibold">Total Session</h6>
+										<p th:text="${subjectDetails.value.subject_total_session}"></p>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12 col-12">
+									<div class="mx-1 my-1 pt-3 border rounded">
+										<h6 class="fw-semibold">Attended Session</h6>
+										<p th:text="${subjectDetails.value.subject_attended_session}"></p>
+									</div>
+								</div>
+								<div class="col-lg-4 col-md-12 col-12">
+									<div class="mx-1 my-1 pt-3 border rounded">
+										<h6 class="fw-semibold">Total Duration</h6>
+										<p th:text="${subjectDetails.value.subject_total_duration}"></p>
+									</div>
+								</div>
+							</div>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+				</div>
+				<p th:unless="${currentCycleStudent}" class="text-secondary pt-3">
+				    <i class="fa-solid fa-circle-exclamation"></i>
+				    <span>0 subjects available for the <span th:text="${currentAcadMonthYear}"></span> cycle.</span>
+			    </p>
+			</div>
+		</div>
+	</div>
+</div>

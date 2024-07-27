@@ -1,0 +1,124 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+#anker{
+z-index: auto;
+
+}
+
+</style>
+
+</head>
+<body>
+<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"> </div>
+	<div th:replace="templates/fragments/common/header :: headerbar"> </div> 
+	 <div class="sz-main-content-wrapper">
+	 <div th:replace="templates/fragments/common/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;Dashboard')"> </div>	
+		<div class="sz-main-content menu-closed">
+            <div class="sz-main-content-inner">
+            <div id="sticky-sidebar"> 
+             </div> 
+    <div th:include="templates/fragments/common/left-sidebar :: left-sidebar(activeMenu='FAQs')"></div>
+    <div class="sz-content-wrapper dashBoard withBgImage">
+      <div th:include="templates/fragments/common/studentInfoBar :: studentInfoBar" class="studentInfo"></div>
+      <div class="sz-content large-padding-top  ">
+						<div class="common-content supportWrap">
+							<div class="col-xs-12">
+								<div class="row">
+									<div class="col-lg-9 col-sm-6 col-xs-12">
+										<h3 class="information-title red">Frequently Asked Questions</h3>
+									</div>
+									<div class="col-lg-3 col-sm-6 col-xs-12"></div>
+									<div class="col-xs-12 col-md-12">
+										<div class="row" style="padding: 15px;">
+											<div class="col-md-12" style="margin: 0em 0; padding: 0px;">
+												<input type="text" id="search-criteria" class="form-control"
+													style="width: 100%" placeholder="Enter Search Text Here"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							<div class="supportFaq">
+										<div class="accordion accordion-flush container-fluid"
+											id="accordion">
+											<div class="accordion-item row" th:each="c:${category}">
+												<h2 class="accordion-header "
+													th:id="'heading-'+${c.categoryname.replaceAll(' ','')}">
+													<a class="accordion-button collapsed " type="button" id="anker"
+														data-bs-toggle="collapse"
+														th:attr="data-bs-target='#collapse-'+${c.categoryname.replaceAll(' ','')}, aria-controls='collapse-'+${c.categoryname.replaceAll(' ','')}"
+														aria-expanded="false" th:text="${c.categoryname}">
+													</a>
+												</h2>
+												<div th:id="'collapse-'+${c.categoryname.replaceAll(' ','')}"
+													class="accordion-collapse collapse"
+													th:attr="aria-labelledby='#heading-' + ${c.categoryname.replaceAll(' ','')}"
+													data-bs-parent="#accordion">
+													<div class="accordion-body panel-body">
+															<!-- catageory qn ans -->						
+																<div class="accordion accordion-flush container-fluid panel-group" id="accordion1">
+							                                          <div class="accordion-item row" th:each="qn:${questionanswerlist.get(c.Id)}">
+																			<h2 class="accordion-header " th:id="'heading-category-question-'+ ${qn.id}">
+																			  <a class="accordion-button " type="button" data-bs-toggle="collapse" id="anker" 
+																			  th:attr="data-bs-target='#collapse-category-question-'+${qn.id},
+																			  aria-controls='collapse-category-question-'+${qn.id}" aria-expanded="false" th:text="${qn.question}">
+																			  </a>
+																			</h2>
+							                                            <div th:id="'collapse-category-question-'+ ${qn.id}" class="accordion-collapse collapse" th:attr="aria-labelledby='#heading-category-question-'+${qn.id} ">
+																			  <div class="accordion-body">
+																			  	<p th:utext="${qn.answer}"></p>
+																			 </div>
+							                                            </div>
+							                                          </div>
+							                                	</div>
+															<!-- sub catagery -->
+															<div class="accordion accordion-flush container-fluid" id="accordion1">
+						                                          <div class="accordion-item row" th:each="sub:${subcatagery.get(c.id)}">
+																		<h2 class="accordion-header " th:id="'heading-subcategory-'+ ${sub.id}">
+																		  <a class="accordion-button " type="button" data-bs-toggle="collapse" id="anker"
+																		  th:attr="data-bs-target='#collapse-subcategory-'+${sub.id},
+																		  aria-controls='collapse-subcategory-'+${sub.id}" aria-expanded="false" th:text="${sub.subCategoryName}">
+																		  </a>
+																		</h2>
+						                                            <div th:id="'collapse-subcategory-'+ ${sub.id}" class="accordion-collapse collapse" th:attr="aria-labelledby='#heading-subcategory-'+${sub.id}">
+																		  <div class="accordion-body">
+																					  <!-- subcatagery qnans -->
+																					<div class="accordion accordion-flush container-fluid" id="accordionThree">
+												                                          <div class="accordion-item row" th:each="subqn:${listOfQnASubCategory.get(c.Id+'-'+sub.id)}">
+																								<h2 class="accordion-header " th:id="'heading-category-subQnA-'+ ${subqn.id}">
+																									  <a class="accordion-button " type="button" data-bs-toggle="collapse" id="anker"
+																									  th:attr="data-bs-target='#collapse-category-subQnA-'+${subqn.id},
+																									  aria-controls='collapse-category-subQnA-'+${subqn.id}" aria-expanded="false" th:text="${subqn.question}">
+																									  </a>
+																								</h2>
+												                                            <div th:id="'collapse-category-subQnA-'+ ${subqn.id}" class="accordion-collapse collapse" th:attr="aria-labelledby='#heading-category-subQnA-'+${subqn.id}">
+																									  <div class="accordion-body">
+																									  	<p th:utext="${subqn.answer}"></p>
+																									 </div>
+												                                            </div>
+												                                          </div>
+												                                	</div>  <!-- end of subcatagery qnans -->																
+																		 </div>
+						                                            </div>
+						                                          </div>
+						                                </div>						
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+						<div class="clearfix"></div>
+		</div>
+    </div>
+    </div>
+    </div>
+    </div> 
+<div th:include="templates/fragments/common/footer :: footer"></div>
+<script th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/js/faq.js'"></script> 
+</body>
+</html>

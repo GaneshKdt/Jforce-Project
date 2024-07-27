@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link href="https://d3udzp2n88cf0o.cloudfront.net/css/bootstrap.min.css"
+	rel="stylesheet" />
+<link href="https://d3udzp2n88cf0o.cloudfront.net/css/all.min.css"
+	rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+<title>Welcome to Student Portal</title>
+</head>
+<body>
+	<!------------------------------------------------ NavBar ------------------------------------------------------------------------->
+	<div th:replace="./common/navbar.html :: headerNav('LOGIN')"></div>
+
+	<div class="container-fluid">
+		<div class="row justify-content-center">
+			<!------------------------------------------ Left Site Content ---------------------------------------------------------------- -->
+			<div class="col-12 col-lg-4 col-xl-2">
+				<div class="login-cont">
+					<h4 class="text-light pt-4">LOGIN</h4>
+					<form th:action="@{/}" method="post">
+						<div class="mb-3 ">
+							<label for="userId" class="form-label text-light">USER
+								NAME</label> <input type="text" class="form-control" id="userId"
+								name="username" placeholder="Sapid" required autofocus></input>
+						</div>
+
+						<div class="mb-3">
+							<label for="password" class="form-label text-light">PASSWORD</label>
+							<input type="password" class="form-control" id="password"
+								name="password" placeholder="Password" required></input> 
+						</div>
+						  <div class="mb-2">
+                              <a class="text-decoration-none" href="forgotPasswordForm">Forgot Password?</a>
+                          </div>
+                          <div class="mb-3">
+                              <a class="text-decoration-none" href="loginForLeadsForm">Not a student? Get started here.</a>
+                          </div>
+
+						<button type="submit" class="btn  btn-danger button mt-1">LOGIN</button>
+					</form>
+				</div>
+			</div>
+			<!------------------------------------------ Right Site Content ---------------------------------------------------------------- -->
+			<div class="col-12 col-lg-8 col-xl-8">
+				<div class="card">
+					<div class="card-body">
+						<img
+							src="https://d3udzp2n88cf0o.cloudfront.net/css/content-image.jpg"
+							class="img-fluid pb-3" />
+						<p>Welcome to NMIMS Global Access - School for Continuing
+							Education (NGASCE)! You are about to log in to the world of
+							Online Learning at NGASCE, a world made possible due to a
+							combination of 30 years of legacy of best in class education and
+							state of the art learning technology!</p>
+						<p>As you log in using the credentials given to you by the
+							University, please take time to go through your profile and
+							update your contact information. The details mentioned there are
+							your details as per the current University Student Database. In
+							case there is any change or any error in these details, it will
+							hamper the University to stay in touch with you.</p>
+						<p>With this Portal, we hope to provide you all the support
+							you need during your enrolment with the Program offered by the
+							University. It will be our endeavour to keep improving your
+							experience with this Portal as we go along.</p>
+						<p>Happy Learning!</p>
+						<p>
+							<b>Team NGASCE</b>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!---------------------------------------------------------------- Footer ------------------------------------------>
+	<div th:replace="./common/footer.html"></div>
+
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/jquery-3.6.0.min.js'></script>
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/bootstrap.min.js'></script>
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/logout_for_sso.js'></script>
+</body>
+</html>

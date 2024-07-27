@@ -1,0 +1,32 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<body>
+
+
+
+<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"> </div>
+	<div th:replace="templates/fragments/common/header :: headerbar"> </div> 
+	 <div class="sz-main-content-wrapper">
+	 <div th:replace="templates/fragments/common/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;Dashboard')"> </div>	
+		<div class="sz-main-content menu-closed">
+            <div class="sz-main-content-inner">
+            <div id="sticky-sidebar"> 
+             </div> 
+    <div th:include="templates/fragments/common/left-sidebar :: left-sidebar(activeMenu='Dashboard')"></div>
+    <div class="sz-content-wrapper dashBoard withBgImage">
+      <div th:include="templates/fragments/common/studentInfoBar :: studentInfoBar"></div>
+      <div class="sz-content large-padding-top  ">
+		<div class="clearfix mt-md-4 mt-lg-0 mt-sm-0" style="padding-bottom: 20px;"></div>
+		 <div th:include="templates/fragments/common/messages :: messages"></div>
+		 </div>
+    </div>
+    </div>
+    </div>
+    </div> 
+<!-- <div th:include="templates/fragments/common/SSOLoader :: ssoloaderbar" th:with="activeMenu='Dashboard'"></div> -->
+<div th:include="templates/fragments/common/footer :: footer"></div>
+</body>
+</html>

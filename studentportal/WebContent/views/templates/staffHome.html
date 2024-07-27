@@ -1,0 +1,43 @@
+
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
+<style>
+.jumbotron {
+	background-color: #fff;
+	padding: 0.5px;
+}
+</style>
+<div th:replace="templates/fragments/adminCommon/jscss :: jscssbar(title='Welcome to Student Zone')"></div>
+<body>
+<th:block th:with="person=${session.user_studentportal}">
+	<div
+		th:replace="templates/fragments/adminCommon/adminHeader :: adminHeader">
+	</div>
+	<div class="sz-main-content-wrapper">
+		<div th:replace="templates/fragments/adminCommon/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;Home')"></div>
+		<div class="sz-main-content menu-closed">
+			<div class="sz-main-content-inner">
+			<div th:replace="templates/fragments/adminCommon/left-sidebar :: leftsidebar"></div>
+				<div class="sz-content-wrapper examsPage">
+				<div th:replace="templates/fragments/adminCommon/adminInfoBar :: adminInfoBar"></div>
+				<div class="sz-content">
+					<h2 class="red text-capitalize">
+							Welcome
+							<span th:text="${person.firstName}+ ' '+${person.lastName}"></span></h2>
+						<div class="clearfix"></div>
+						<div class="panel-content-wrapper" style="min-height: 450px;">
+				<div class="starter-template">
+					<h1>Admin Home Page</h1>
+				</div>
+				</div>
+				</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="templates/fragments/adminCommon/footer :: footerbar"></div>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,24 @@
+.btn-custom{
+    float: right !important; 
+    background-color: darkorange;
+}
+.btn-back{
+    background-color: darkgreen;
+}
+
+cite{
+    font-size: 10px;
+}
+
+.fa:hover{
+    cursor: pointer;
+}
+
+.fa-remove:hover{
+    color: red;
+}
+
+.chosen-container-single .chosen-search input[type=text]{
+    color: #000;
+}
+

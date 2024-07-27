@@ -1,0 +1,76 @@
+<div th:fragment="leftsidebar" xmlns:th="http://www.thymeleaf.org/">
+	<th:block
+		th:with="userId = ${session.userId},user= ${session.user_studentportal},userAuthorization=${session.userAuthorization_studentportal},
+ roles=(${userAuthorization != null} and !${#strings.isEmpty(userAuthorization.roles)}) ? ${userAuthorization.roles} : ${user.roles}">
+		<style>
+.sz-main-content.menu-closed .sz-main-content-inner .sz-main-navigation ul.sz-nav>li
+	{
+	padding: 0.35em 0;
+}
+</style>
+
+		<div class="sz-main-navigation">
+			<div class="mobile-logo visible-xs">
+				<a href="#"><img
+					th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/images/logo.png'"
+					class="img-responsive" alt="" /></a>
+			</div>
+			<ul class="sz-nav">
+				<!-- <li id="toggle-nav"><a href="#"><span class="icon-arrow-right"></span></a></li> -->
+				<li><a href="/studentportal/home" title="Home"><i
+						class="fa fa-home fa-lg"></i></a></li>
+
+				<div
+					th:replace="templates/fragments/adminCommon/studentPortalHeader :: adminStudentheader(roles=${roles})">
+				</div>
+
+				<div
+					th:replace="templates/fragments/adminCommon/examHeader :: adminexamheader(roles=${roles})">
+				</div>
+
+				<div
+					th:replace="templates/fragments/adminCommon/acadsHeader :: adminacadsheaderbar(roles=${roles})">
+				</div>
+
+				<div
+					th:replace="templates/fragments/adminCommon/careerServicesHeader :: adminCSheaderbar(roles=${roles})">
+				</div>
+
+				<li
+					th:if="${roles.contains('Acads Admin') || roles.contains('Exam Admin') || roles.contains('Student Support')}">
+					<a href="/studentportal/admin/powerbireports"
+					title="Power BI Reports">Power BI Reports</a>
+				</li>
+			</ul>
+			<!-- sz-nav END  -->
+		</div>
+
+
+		<!-- Mobile notification contents -->
+		<div class="mobile-notification-wrapper visible-xs"
+			id="mobile-announcements">
+			<div class="mobile-notification-header">
+				<a href="#" class="hide-link">Hide <span
+					class="glyphicon glyphicon-menu-right"></span></a>
+				<div class="clearfix"></div>
+				<h4>Announcements</h4>
+				<!-- <div class="btn-group" role="group">
+			  <a href="#" class="btn btn-default active">Show </a>
+			  <a href="#" class="btn btn-default">All Announcements <span class="glyphicon glyphicon-menu-down"></span></a>
+		  </div> -->
+			</div>
+			<ul class="announcement-list">
+				<th:block th:each="announcement,iter : ${session.announcementsPortal}">
+					<li>
+						<a href="#" data-bs-toggle="modal"  data-bs-dismiss="modal" data-row="${announcement}" th:attr="data-bs-target='#modal-warning'+${iter.index}"> 
+								<p class="card-text text-dark fw-bold" th:text="${announcement.subject}"></p>
+							 	<p  class="card-text text-dark"  th:utext="(${#strings.length(announcement.description) > 150 } ? ${#strings.substring(announcement.description, 0, 149)}+'...' : ${announcement.description})" ></p> 
+								<p  class="card-text text-dark" th:text="${announcement.startDate + ' by ' + announcement.category}" > </p> 
+						</a>
+					</li>
+				<hr/>
+				</th:block>
+			</ul>
+		</div>
+	</th:block>
+</div>

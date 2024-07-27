@@ -1,0 +1,89 @@
+
+
+.calculator {
+width: 300px;
+    background-color: hsl(0, 0%, 20%);
+padding: 5px;
+border-radius: 10px;
+margin: 0px 10px 0px 0px;
+
+}
+
+
+input[type=text] {
+width: 290px;
+    height: 40px;
+    border-radius: 5px;
+    border: 0px;
+    background-color: #d9d9d9;
+    color: #333333;
+    padding: 0 5px 0 5px;
+    margin: 10px auto;
+    
+    font-size: 30px;
+    
+
+}
+
+.calc-buttons {
+    display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+
+}
+
+.button {
+   margin: 3px;
+width: 63px;
+border: none;
+height: 25px;
+border-radius: 4px;
+    color: hsl(0, 0%, 85%);
+    background-color: hsl(0, 0%, 10%);
+cursor: pointer;
+    padding: 0;
+  text-transform: lowercase;
+    font-size: 14px;
+}
+
+button:hover {
+  background-color: hsla(180, 100%, 40%, 0.3);
+  transition: .2s;
+  color:#d9d9d9;
+}
+
+
+
+
+.functions-one {
+    width: 210px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+
+.functions-two {
+width: 280px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.triggers {
+    background-color: hsl(0, 0%, 10%);
+}
+
+
+
+.numbers {
+    background-color: hsl(0, 0%, 10%);
+}
+
+.basic-stuff {
+    background-color: hsl(0, 0%, 10%);
+}
+
+.complex-stuff {
+    background-color: hsl(0, 0%, 10%);
+}

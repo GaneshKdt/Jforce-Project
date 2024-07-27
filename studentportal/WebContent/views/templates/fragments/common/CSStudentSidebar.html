@@ -1,0 +1,35 @@
+<div th:fragment="careerServiceBar" th:remove="tag">
+<th:block th:with="isLoginAsLead=${session.isLoginAsLead},
+csActiveInSidebar=${session.student_studentportal.purchasedOtherPackages},CSFeatureViseAccess=${session.CSFeatureAccess}">
+	<li id="csSidebarIcon" class="has-sub-menu"
+		th:if="${csActiveInSidebar}"><a
+		href="/careerservices/Home"><span class="fa-solid fa-briefcase"></span>
+			<p class="toggle-name" style="display: none;">Career Services</p> </a>
+		<ul class="sz-sub-menu">
+			<li><a href="/careerservices/home?resetSessions=true">
+					<p>Dashboard</p>
+			</a></li>
+			<li><a href="/careerservices/career_forum"
+				th:if="${CSFeatureViseAccess.get('Career_Forum')}">
+					<p>Career Forum</p>
+			</a> <a th:unless="${CSFeatureViseAccess.get('Career_Forum')}">
+					<p style="color: #b9b9b9;">Career Forum</p>
+			</a></li>
+			<li><a href="/careerservices/learning_portal"
+				th:if="${CSFeatureViseAccess.get('Learning_Portal')}">
+					<p>Learning Portal</p>
+			</a><a th:unless="${CSFeatureViseAccess.get('Learning_Portal')}">
+					<p style="color: #b9b9b9;">Learning Portal</p>
+			</a></li>
+			<li><a>
+					<p style="color: #b9b9b9;">Career Counselling</p>
+			</a></li>
+			<li><a>
+					<p style="color: #b9b9b9;">Practice Interviews</p>
+			</a></li>
+			<li><a>
+					<p style="color: #b9b9b9;">Upgrade Package</p>
+			</a></li>
+		</ul></li>
+</th:block>
+</div>

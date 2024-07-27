@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+
+
+@media screen and (width: 1024px) {
+	.p1 .p2 .p3 .p4{
+	padding-top: 30px;
+	padding-bottom: 15px;
+	}
+	.p5 .p6 .p7 .p8{
+	padding-top: 32px;
+	}
+	.p5 .p6 .p7 .p9{
+	padding-top: 10px;
+	}
+}

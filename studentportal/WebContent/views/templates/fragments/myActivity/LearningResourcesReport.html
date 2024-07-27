@@ -1,0 +1,151 @@
+<div th:fragment="learning-resources-report" xmlns:th="http://www.thymeleaf.org">
+	<div class="container-fluid py-3 border rounded">
+		<h6 class="text-center">Learning Resources Report</h6>
+		<div th:if="${currentCycleStudent}" th:each="pdfReadDetails : ${pdfReadDetailsList}" class="row">
+	        <!-- Left Side -->
+	        <div class="col-lg-4 col-md-12 col-12">
+	          <div class="row text-center mx-1 my-2 border rounded">
+	            <div class="col-lg-6 col-md-12 col-12 py-3">
+	            	<div class="mx-2 py-2 border rounded">
+			           	<h6 class="fw-bold">Total Content File</h6>
+			           	<div th:text="${pdfReadDetails.total_pdf}"></div>
+	              	</div>
+	            </div>
+	            <div class="col-lg-6 col-md-12 col-12 py-3">
+	            	<div class="mx-2 py-2 border rounded">
+	              		<h6 class="fw-bold">Read Content File</h6>
+	              		<div th:text="${pdfReadDetails.read_pdf}"></div>
+	              	</div>
+	            </div>
+	            <div class="col-lg-6 col-md-12 col-12 py-3">
+	            	<div class="mx-2 py-2 border rounded">
+			            <h6 class="fw-bold">Total Percentage</h6>
+			            <div class="mx-2">
+			              	<div class="progress">
+			                 	<div class="progress-bar bg-success" 
+			                 		role="progressbar" 
+			                 		aria-label="Example with label" 
+			                 		th:style="'width:'+${pdfReadDetails.read_percentage}+'%;'" 
+			                 		th:attr="aria-valuenow=${pdfReadDetails.read_percentage}" 
+			                 		aria-valuemin="0" 
+			                 		aria-valuemax="100" 
+			                 		th:text="${pdfReadDetails.read_percentage+'%'}">
+			                 	</div>
+			               	</div>
+			            </div>
+	              	</div>
+	            </div>
+	            <div class="col-lg-6 col-md-12 col-12 py-3">
+	            	<div class="mx-2 py-2 border rounded">
+		              	<h6 class="fw-bold">Total Time Spent</h6>
+		              	<div th:text="${pdfReadDetails.time_spent}"></div>
+	              	</div>
+	            </div>
+	          </div>
+	          <ul class="nav nav-tabs flex-column text-start border rounded" id="myTab" role="tablist">
+	            <li th:each="subjectDetails, iterStat : ${pdfReadDetails.subject_details}" class="nav-item" role="presentation">
+	              <a class="nav-link text-dark border"
+	              	th:classappend="${iterStat.index == 0} ? 'active' : ''"
+	              	th:id="'tab' + ${iterStat.index + 1} + '-tab'"
+	              	data-bs-toggle="tab" 
+	              	th:href="'#tab' + ${iterStat.index + 1}"
+	              	role="tab" 
+	              	th:attr="aria-controls=tab + ${iterStat.index + 1}, aria-selected=${iterStat.index == 0} ? 'true' : 'false'"
+	              	th:text="${subjectDetails.subject_name}">
+	              </a>
+	            </li>
+	          </ul>
+	        </div>
+        
+	        <!-- Right Side -->
+	  		<div class="col-lg-8 col-md-12 col-12">
+	          	<div th:each="subjectDetails, iterStat : ${pdfReadDetails.subject_details}" class="tab-content mt-3" id="myTabContent">
+		            <div class="tab-pane fade" 
+		            	th:classappend="${iterStat.index == 0} ? 'show active' : ''"
+		            	th:id="'tab' + ${iterStat.index + 1}" 
+		            	role="tabpanel" 
+		            	th:attr="aria-labelledby='tab' + ${iterStat.index + 1} + '-tab'">
+		              <div class="my-2 border rounded">
+		                <h6 class="fs-5 text-center pt-2" th:text="${subjectDetails.subject_name}"></h6>
+		                <div class="row text-center">
+		                  <div class="col-lg-3 col-md-6 col-12 py-3">
+		                    <div class="mx-2 py-2 border rounded">
+			                    <h6 class="fw-bold">Total Content File</h6>
+			                    <div th:text="${subjectDetails.total_pdf}"></div>
+		                    </div>
+		                  </div>
+		                  <div class="col-lg-3 col-md-6 col-12 py-3">
+		                  	<div class="mx-2 py-2 border rounded">
+		                    	<h6 class="fw-bold">Read Content File</h6>
+		                    	<div th:text="${subjectDetails.read_pdf}"></div>
+		                    </div>
+		                  </div>
+		                  <div class="col-lg-3 col-md-6 col-12 py-3">
+		                  	<div class="mx-2 py-2 border rounded">
+			                    <h6 class="fw-bold">Total Percentage</h6>
+			                    <div class="mx-2">
+			                      <div class="progress">
+			                        <div class="progress-bar bg-success" 
+			                        	role="progressbar" 
+			                        	aria-label="Example with label" 
+			                        	th:style="'width:'+${subjectDetails.read_percentage}+'%;'" 
+			                        	th:attr="aria-valuenow=${subjectDetails.read_percentage}" 
+			                        	aria-valuemin="0" 
+			                        	aria-valuemax="100" 
+			                        	th:text="${subjectDetails.read_percentage+'%'}">
+			                        </div>
+			                      </div>
+			                    </div>
+		                    </div>
+		                  </div>
+		                  <div class="col-lg-3 col-md-6 col-12 py-3">
+		                  	<div class="mx-2 py-2 border rounded">
+			                    <h6 class="fw-bold">Total Time Spent</h6>
+			                    <div th:text="${subjectDetails.time_spent}"></div>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		              <table class="contentFileReport table table-hover border rounded">
+		                <thead>
+		                  <tr>
+		                    <th>Sr. No.</th>
+		                    <th>Content File Name</th>
+		                    <th>Percentage</th>
+		                    <th>Time Spent</th>
+		                    <th>Read Page</th>
+		                    <th>Total Page</th>
+		                  </tr>
+		                </thead>
+		                <tbody>
+		                  <tr th:each="pdfDetails, iterStat : ${subjectDetails.pdf_details}">
+		                    <td th:text="${iterStat.index + 1}"></td>
+		                    <td th:text="${pdfDetails.pdf_name}"></td>
+		                    <td class="mx-2">
+		                      <div class="progress">
+		                        <div class="progress-bar bg-success" 
+		                        	role="progressbar" 
+		                        	aria-label="Example with label" 
+		                        	th:style="'width:'+${pdfDetails.read_percentage}+'%;'" 
+		                        	th:attr="aria-valuenow=${pdfDetails.read_percentage}" 
+		                        	aria-valuemin="0" 
+		                        	aria-valuemax="100"
+		                        	th:text="${pdfDetails.read_percentage+'%'}"></div>
+		                      </div>
+		                    </td>
+		                    <td th:text="${pdfDetails.time_spent}"></td>
+		                    <td th:text="${pdfDetails.read_page}"></td>
+		                    <td th:text="${pdfDetails.total_page}"></td>
+		                  </tr>
+		                </tbody>
+		              </table>
+		    		</div>
+	    		</div>
+	    	</div>
+		</div>
+		<p th:unless="${currentCycleStudent}" class="text-secondary pt-3">
+		    <i class="fa-solid fa-circle-exclamation"></i>
+		    <span>0 subjects available for the <span th:text="${currentAcadMonthYear}"></span> cycle.</span>
+	    </p>
+	</div>
+</div>

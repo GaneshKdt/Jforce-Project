@@ -1,0 +1,25 @@
+
+<nav th:fragment="headerNav(breadcrumPath)" class="navbar bg-light">
+	<div class="container-fluid">
+		<img src="https://d3udzp2n88cf0o.cloudfront.net/css/logo.png" />
+		<h2 class="pull-right text-danger font-header">WELCOME TO NGASCE
+			STUDENT ZONE</h2>
+	</div>
+	<div class="container-fluid bg-danger">
+		<nav>
+			<ol class="breadcrumb list-unstyled">
+				<li class="breadcrumb-item text-light">STUDENT ZONE</li>
+				<li class="breadcrumb-item text-light" th:text="${breadcrumPath}"></li>
+			</ol>
+		</nav>
+
+		<ul class="breadcrumb-fb-twr">
+			<li class="list-inline-item"><a
+				href="https://www.facebook.com/NMIMSSCE"><i
+					class="fab fa-facebook text-light"></i></a></li>
+			<li class="list-inline-item"><a
+				href="https://twitter.com/NMIMS_SCE"><i
+					class="fab fa-twitter text-light"></i></a></li>
+		</ul>
+	</div>
+</nav>

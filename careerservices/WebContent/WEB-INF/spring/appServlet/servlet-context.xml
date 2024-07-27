@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/task 
+     http://www.springframework.org/schema/task/spring-task-3.0.xsd
+     http://www.springframework.org/schema/util 
+     http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
+
+
+
+	
+	<util:properties id="propertyConfigurer" location="file:c:/NMIMS_PROPERTY_FILE/ngasce.properties" />
+	<context:property-placeholder properties-ref="propertyConfigurer" order="0" ignore-unresolvable="true" />
+	<context:property-placeholder location="file:${catalina.base}/conf/application.properties" order="1" />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
+<!-- 	<resources mapping="/resources/**" location="/resources/" /> -->
+	
+<!-- 	<resources mapping="/resources_2015/**" location="resources_2015/" /> -->
+<!-- 	<resources mapping="/assets/**" location="/assets/" /> -->
+ 
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+<!-- 	<beans:bean -->
+<!-- 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"> -->
+<!-- 		<beans:property name="order" value="2" /> -->
+<!-- 		<beans:property name="prefix" value="/views/" /> -->
+<!-- 		<beans:property name="suffix" value=".jsp" /> -->
+<!-- 		<beans:property name="exposeContextBeansAsAttributes" -->
+<!-- 			value="true" /> -->
+<!-- 	</beans:bean> -->
+
+	<!-- <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"> 
+		<beans:property name="driverClassName" value="com.mysql.jdbc.Driver" /> <beans:property 
+		name="url" value="jdbc:mysql://localhost:3306/exam" /> <beans:property name="username" 
+		value="root" /> <beans:property name="password" value="admin" /> </beans:bean> -->
+
+
+	
+<!-- 	<beans:bean id="careerServicesDAO" class="com.nmims.daos.CareerServicesDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="entitlementActivationDAO" -->
+<!-- 		class="com.nmims.daos.EntitlementActivationDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="entitlementCheckerDAO" -->
+<!-- 		class="com.nmims.daos.EntitlementCheckerDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="entitlementManagementDAO" -->
+<!-- 		class="com.nmims.daos.EntitlementManagementDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="packageApplicabilityDAO" class="com.nmims.daos.PackageApplicabilityDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="paymentManagerDAO" class="com.nmims.daos.PaymentManagerDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="LoginDAO" class="com.nmims.daos.LoginDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="StudentDataManagementDAO" class="com.nmims.daos.StudentDataManagementDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="PackageAdminDAO" class="com.nmims.daos.PackageAdminDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="progressDetailsDAO" class="com.nmims.daos.ProgressDetailsDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="interviewDAO" class="com.nmims.daos.InterviewDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="ConsumerProgramStructureDAO" class="com.nmims.daos.ConsumerProgramStructureDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean id="SessionSchedulerDAO" class="com.nmims.daos.SessionSchedulerDao"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="NotificationDAO" class="com.nmims.daos.NotificationDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="sessionFeedbackDAO" -->
+<!-- 		class="com.nmims.daos.SessionFeedbackDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="SessionAttendanceDAO" class="com.nmims.daos.SessionAttendanceDao"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="sessionQueryAnswerDAO" class="com.nmims.daos.SessionQueryAnswerDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="SessionsDAO" class="com.nmims.daos.SessionsDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="FacultyDAO" class="com.nmims.daos.FacultyDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="VideoDAO" class="com.nmims.daos.VideoRecordingDao"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="webinarScheduler" class="com.nmims.daos.WebinarSchedulerDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+<!-- 	<beans:bean id="counsellingDAO" class="com.nmims.daos.CounsellingDAO"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	 <beans:bean id="zoomManger" class="com.nmims.helpers.ZoomManager"> -->
+    	
+<!--      </beans:bean> -->
+     
+<!-- 	 <beans:bean id="salesforceHelper" class="com.nmims.helpers.SalesforceHelper_Sessions"> -->
+    	
+<!--      </beans:bean> -->
+     
+<!--      <beans:bean id="mailer" class="com.nmims.helpers.MailSender"> -->
+<!-- 		<beans:property name="host" value="192.168.2.99" /> -->
+<!-- 		<beans:property name="port" value="25" /> -->
+<!-- 		<beans:property name="username" value="ngasce@nmims.edu" /> -->
+<!-- 		<beans:property name="password" value="May@2014#" /> -->
+<!-- 		<beans:property name="from" value="ngasce@nmims.edu" /> -->
+<!-- 	</beans:bean> -->
+	
+<!-- 	<beans:bean class="org.apache.commons.dbcp2.BasicDataSource" -->
+<!-- 		destroy-method="close" id="dataSource"> -->
+
+<!-- 		<beans:property name="driverClassName" value="${mysql.datasource.driver-class-name}" /> -->
+<!-- 		<beans:property name="url" value="${mysql.datasource.url}/products" /> -->
+<!-- 		<beans:property name="username" value="${mysql.datasource.username}" /> -->
+<!-- 		<beans:property name="password" value="${mysql.datasource.password}" /> -->
+
+<!-- 		<beans:property name="testOnBorrow" value="true" /> -->
+<!-- 		<beans:property name="testOnReturn" value="true" /> -->
+<!-- 		<beans:property name="testWhileIdle" value="true" /> -->
+<!-- 		<beans:property name="timeBetweenEvictionRunsMillis" -->
+<!-- 			value="1800000" /> -->
+<!-- 		<beans:property name="numTestsPerEvictionRun" value="3" /> -->
+<!-- 		<beans:property name="minEvictableIdleTimeMillis" -->
+<!-- 			value="1800000" /> -->
+<!-- 		<beans:property name="validationQuery" value="SELECT 1" /> -->
+<!-- 		<beans:property name="initialSize" value="50" /> -->
+<!-- 		<beans:property name="maxIdle" value="50" /> -->
+<!-- 		<beans:property name="maxTotal" value="-1" /> -->
+<!-- 	</beans:bean> -->
+
+
+<!-- 	<context:component-scan base-package="com.nmims" /> -->
+
+<!-- 	<beans:bean id="contextSource" -->
+<!-- 		class="org.springframework.ldap.core.support.LdapContextSource"> -->
+<!-- 		<beans:property name="url" value="ldaps://192.168.2.51:636" /> -->
+<!-- 		<beans:property name="base" value="DC=SVKMGRP,DC=com" /> -->
+<!-- 		<beans:property name="UserDn" -->
+<!-- 			value="CN=NGASCEAdmin,OU=NGA-SCE Student,OU=NMIMS Students,OU=NMIMS,OU=Institute,DC=SVKMGRP,DC=COM" /> -->
+<!-- 		<beans:property name="password" value="distance@nmims1" /> -->
+<!-- 	</beans:bean> -->
+
+
+
+<!-- 	<beans:bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate"> -->
+<!-- 		<beans:constructor-arg ref="contextSource" /> -->
+<!-- 	</beans:bean> -->
+
+<!--     <beans:bean id="ldapdao" -->
+<!--         class="com.nmims.daos.LDAPDao"> -->
+<!--         <beans:property name="ldapTemplate" ref="ldapTemplate" /> -->
+<!--     </beans:bean> -->
+    
+<!-- 	<beans:bean id="multipartResolver" -->
+<!-- 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"> -->
+<!-- 		<beans:property name="maxUploadSize" value="200000000" /> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean id="transactionManager" -->
+<!-- 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean id="transactionTemplate" -->
+<!-- 		class="org.springframework.transaction.support.TransactionTemplate"> -->
+<!-- 		<beans:property name="transactionManager" ref="transactionManager"></beans:property> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean id="examBookingTransactionManager" -->
+<!-- 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> -->
+<!-- 		<beans:property name="dataSource" ref="dataSource"></beans:property> -->
+<!-- 	</beans:bean> -->
+
+
+
+<!-- 	<beans:bean id="messageFactory" -->
+<!-- 		class="org.springframework.ws.soap.saaj.SaajSoapMessageFactory"> -->
+<!-- 		<beans:property name="soapVersion"> -->
+<!-- 			<util:constant static-field="org.springframework.ws.soap.SoapVersion.SOAP_12" /> -->
+<!-- 		</beans:property> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean id="marshaller" -->
+<!-- 		class="org.springframework.oxm.jaxb.Jaxb2Marshaller"> -->
+<!-- 		<beans:property name="contextPath" value="bookingservice.wsdl" /> -->
+<!-- 	</beans:bean> -->
+
+<!-- 	<beans:bean id="conferenceWsTemplate" -->
+<!-- 		class="org.springframework.ws.client.core.WebServiceTemplate"> -->
+<!-- 		<beans:constructor-arg ref="messageFactory" /> -->
+<!-- 		<beans:property name="defaultUri" value="${TMS_URL}" /> -->
+<!-- 		<beans:property name="marshaller" ref="marshaller" /> -->
+<!-- 		<beans:property name="unmarshaller" ref="marshaller" /> -->
+<!-- 		<beans:property name="messageSender"> -->
+<!-- 			<beans:bean -->
+<!-- 				class="org.springframework.ws.transport.http.HttpComponentsMessageSender"> -->
+<!-- 				<beans:property name="connectionTimeout" value="1200000" /> -->
+<!-- 				<beans:property name="readTimeout" value="1200000" /> -->
+<!-- 				<beans:property name="credentials"> -->
+<!-- 					<beans:bean class="org.apache.http.auth.NTCredentials"> -->
+<!-- 						<beans:constructor-arg name="userName" -->
+<!-- 							value="testuser" /> -->
+<!-- 						<beans:constructor-arg name="password" -->
+<!-- 							value="pass@123" /> -->
+<!-- 						<beans:constructor-arg name="domain" value="svkmgrp" /> -->
+<!-- 						<beans:constructor-arg name="workstation" -->
+<!-- 							value="" /> -->
+<!-- 					</beans:bean> -->
+<!-- 				</beans:property> -->
+<!-- 				<beans:property name="authScope"> -->
+<!-- 					<beans:bean class="org.apache.http.auth.AuthScope"> -->
+<!-- 						<beans:constructor-arg name="host"> -->
+<!-- 							<util:constant static-field="org.apache.http.auth.AuthScope.ANY_HOST" /> -->
+<!-- 						</beans:constructor-arg> -->
+<!-- 						<beans:constructor-arg name="port"> -->
+<!-- 							<util:constant static-field="org.apache.http.auth.AuthScope.ANY_PORT" /> -->
+<!-- 						</beans:constructor-arg> -->
+<!-- 						<beans:constructor-arg name="realm" -->
+<!-- 							value="122.170.126.150" /> -->
+<!-- 						<beans:constructor-arg name="scheme" value="NTLM" /> -->
+<!-- 					</beans:bean> -->
+<!-- 				</beans:property> -->
+<!-- 			</beans:bean> -->
+<!-- 		</beans:property> -->
+<!-- 	</beans:bean> -->
+
+</beans:beans>

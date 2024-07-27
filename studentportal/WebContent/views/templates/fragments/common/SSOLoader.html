@@ -1,0 +1,282 @@
+<div th:fragment="ssoloaderbar">
+<style>
+	#fullPageLoading, .fullPageLoading {
+		position : fixed;
+		height : 100%;
+		width : 100%;
+		z-index: 9999;
+		display : flex;
+	}
+	#loader-container {
+		margin-top : auto;
+		margin-bottom : auto;
+		margin-left : auto;
+		margin-right : auto;
+		background-color : white;
+		padding : 20px;
+		border-radius : 5px;
+		z-index: 11111;
+		text-align: center;
+	}
+	
+	#loader {
+		border: 16px solid #f3f3f3; /* Light grey */
+		border-top: 16px solid #d2232a; /* Blue */
+		border-radius: 50%;
+		width: 120px;
+		height: 120px;
+		animation: spin 2s linear infinite;
+	}
+	
+	@keyframes spin {
+		0% { transform: rotate(0deg); }
+		100% { transform: rotate(360deg); }
+	}
+</style>
+
+
+<div id="examApp"></div>
+<div id="acadsApp"></div>
+<div id="ltiApp"></div>
+<div id="csApp"></div>
+<script th:inline="javascript">
+
+	var examAppLoaded = false;
+	var acadsAppLoaded = false;
+	var ltiAppLoaded = false;
+	var csAppLoaded = false;
+
+	$(document).ready(function(){
+	
+		$('body').prepend(`
+				<div class="fullPageLoading">
+					<div class="modal-backdrop fade in"></div>
+					<div id="loader-container">
+				 		<div id="loader"></div>
+						<div> Please wait... </div>
+					</div>
+				</div>`)
+
+			$( "#ltiApp" ).load([[${ltiAppSSOUrl}]], function() {
+				ltiAppLoaded = true
+				// checkIfLoadingFinished();
+			});
+		
+		 if([[${loadCS}]])	{
+			$( "#csApp" ).load([[${csAppSSOUrl}]], function() {
+				csAppLoaded = true
+				// checkIfLoadingFinished();
+			});
+		}
+		
+
+		ssoAnnouncementLoading();
+		ssoKnowYourPolicyLoading();
+		ssoLoadingAcadsWithAjax();
+        ssoLoadingExamWithAjax();
+        //ssoLoadingLtidemoWithAjax();
+        ssoJobSearchLoading();
+        setTimeout(function(){ $('.fullPageLoading').fadeOut(200); }, 15000);
+	});
+	
+	/*<![CDATA[*/
+		
+	
+	function ssoAnnouncementLoading()
+    {
+		
+    	var JsonStr = [[${str}]];
+            var search = {}
+            search["userId"] = JsonStr.userId;
+            search["student"] = JsonStr.student ;
+            search["personDetails"] = JsonStr.personDetails ;
+            search["userBean"] = JsonStr.userBean ;
+            search["applicableSubjects"] = JsonStr.applicableSubjects ;
+            search["harvard"] = JsonStr.harvard ;
+            search["stukent"] = JsonStr.stukent ;
+            search["announcements"] = JsonStr.announcements;
+            search["validityExpired"] = JsonStr.validityExpired;
+            search["courseraAccess"]= JsonStr.courseraAccess;
+
+    	$.ajax({
+		   		type : "POST",
+		   		url : "/announcement/loginforSSO", 
+		   	 	contentType : 'application/json',
+		        data: JSON.stringify(search),
+		  		success : function(data) {
+			  
+			   		},
+		 		error : function(e) {
+		   		}
+		  });
+    }
+	
+	function ssoLoadingExamWithAjax()
+    {
+        
+		var JsonStr = [[${str}]];
+		  var userId_encrypted = [[${encryptedSapId}]];
+            var search = {}
+            search["userId"] = JsonStr.encryptedUserId;
+            search["student"] = JsonStr.student ;
+            search["personDetails"] = JsonStr.personDetails ;
+            search["userBean"] = JsonStr.userBean ;
+            search["announcements"] = JsonStr.announcements;
+            search["validityExpired"] = JsonStr.validityExpired;
+            search["isLoginAsLead"] = JsonStr.isLoginAsLead;
+            search["featureViseAccess"] = JsonStr.featureViseAccess;
+            search["earlyAccess"] = JsonStr.earlyAccess;
+            search["consumerProgramStructureHasCSAccess"] = JsonStr.consumerProgramStructureHasCSAccess;
+            search["csAdmin"] = JsonStr.csAdmin
+            search["courseraAccess"]= JsonStr.courseraAccess;
+
+        $.ajax({
+                type : "POST",
+                url : "/exam/loginforSSO_new?uid="+userId_encrypted, 
+                contentType : 'application/json',
+                data: JSON.stringify(search),
+                success : function(data) {
+                    examAppLoaded = true
+                    checkIfLoadingFinished();
+               
+                    },
+                error : function(e) {
+                   
+                }
+          });
+    } 
+	
+
+	function ssoKnowYourPolicyLoading()
+    {
+		var JsonStr = [[${str}]];
+            var search = {}
+            search["userId"] = JsonStr.userId;
+            search["student"] = JsonStr.student ;
+            search["personDetails"] = JsonStr.personDetails ;
+            search["userBean"] = JsonStr.userBean ;
+            search["applicableSubjects"] = JsonStr.applicableSubjects ;
+            search["harvard"] = JsonStr.harvard ;
+            search["stukent"] = JsonStr.stukent ;
+            search["announcements"] = JsonStr.announcements;
+            search["validityExpired"] = JsonStr.validityExpired;
+            search["courseraAccess"]= JsonStr.courseraAccess;
+            
+    	$.ajax({
+		   		type : "POST",
+		   		url : "/knowyourpolicy/loginforSSO", 
+		   	 	contentType : 'application/json',
+		        data: JSON.stringify(search),
+		  		success : function(data) {
+			  
+			   		},
+		 		error : function(e) {
+		   		}
+		  });
+    }
+
+ 	function ssoLoadingAcadsWithAjax()
+    {
+	    
+ 		var JsonStr = [[${str}]];
+		  var userId_encrypted = [[${encryptedSapId}]];
+            var search = {}
+            search["userId"] = JsonStr.encryptedUserId;
+            search["student"] = JsonStr.student ;
+            search["personDetails"] = JsonStr.personDetails ;
+            search["userBean"] = JsonStr.userBean ;
+            search["applicableSubjects"] = JsonStr.applicableSubjects ;
+            search["harvard"] = JsonStr.harvard ;
+            search["stukent"] = JsonStr.stukent ;
+            search["announcements"] = JsonStr.announcements;
+            search["validityExpired"] = JsonStr.validityExpired;
+            search["regOrder"] = JsonStr.regOrder;
+            search["maxOrderWhereContentLive"] = JsonStr.maxOrderWhereContentLive;
+            search["currentOrder"] = JsonStr.currentOrder;
+            search["currentSemPSSId"] = JsonStr.currentSemPSSId;
+            search["isLoginAsLead"] = JsonStr.isLoginAsLead;
+            search["liveSessionPssIdAccess"] = JsonStr.liveSessionPssIdAccess;
+            search["featureViseAccess"] = JsonStr.featureViseAccess;
+            search["regData"] = JsonStr.regData;
+            search["earlyAccess"] = JsonStr.earlyAccess;
+            search["consumerProgramStructureHasCSAccess"] = JsonStr.consumerProgramStructureHasCSAccess;
+            search["acadSessionLiveOrder"] = JsonStr.acadSessionLiveOrder;
+            search["csAdmin"] = JsonStr.csAdmin;
+            search["courseraAccess"]= JsonStr.courseraAccess;
+            
+    	$.ajax({
+		   		type : "POST",
+		   		url : "/acads/loginforSSO_new?uid="+userId_encrypted, 
+		   	 	contentType : 'application/json',
+		        data: JSON.stringify(search),
+		  		success : function(data) {
+		  			acadsAppLoaded = true
+					checkIfLoadingFinished();
+			  	
+			   		},
+		 		error : function(e) {
+			 		
+		   		}
+		  });
+    } 
+
+    function ssoLoadingLtidemoWithAjax()
+    {
+    	var JsonStr = [[${str}]];
+		  var userId_encrypted = [[${encryptedSapId}]];
+            var search = {}
+            search["userId"] = JsonStr.encryptedUserId;
+            search["student"] = JsonStr.student ;
+            search["personDetails"] = JsonStr.personDetails ;
+            search["earlyAccess"] = JsonStr.earlyAccess;
+            search["courseraAccess"]= JsonStr.courseraAccess;
+
+        $.ajax({
+                type : "POST",
+                url : "/ltidemo/loginforSSO_new?uid="+userId_encrypted, 
+                contentType : 'application/json',
+                data: JSON.stringify(search),
+                success : function(data) {
+                    ltiAppLoaded = true
+                    },
+                error : function(e) {}
+          });
+    } 
+
+    function ssoJobSearchLoading(){
+    	var JsonStr = [[${str}]];
+		
+        var search = {}
+        search["userId"] = JsonStr.userId;
+        search["student"] = JsonStr.student ;
+        search["personDetails"] = JsonStr.personDetails ;
+        search["userBean"] = JsonStr.userBean ;
+        search["applicableSubjects"] = JsonStr.applicableSubjects ;
+        search["harvard"] = JsonStr.harvard ;
+        search["stukent"] = JsonStr.stukent ;
+        search["announcements"] = JsonStr.announcements;
+        search["validityExpired"] = JsonStr.validityExpired;
+        search["csAdmin"] = JsonStr.csAdmin
+    	$.ajax({
+		   	type : "POST",
+		   	url : "/jobsearch/loginforSSO", 
+		   	contentType : 'application/json',
+		   	data: JSON.stringify(search),
+		   	success : function(data) {
+			  
+			},
+		 	error : function(e) {
+			 	
+		   	}
+		});
+    }
+
+    function checkIfLoadingFinished() {
+		if(examAppLoaded && acadsAppLoaded) {
+			$('.fullPageLoading').fadeOut(200);
+		}
+	}
+
+    /*]]>*/
+</script>
+</div>

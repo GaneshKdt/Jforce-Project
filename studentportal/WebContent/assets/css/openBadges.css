@@ -1,0 +1,118 @@
+
+.badgeSlider {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
+
+.badgeSlides {
+  display: flex;
+  
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  
+  padding-bottom: 25px;
+  
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  /*
+  scroll-snap-points-x: repeat(300px);
+  scroll-snap-type: mandatory;
+  */
+}
+.badgeSlides::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.badgeSlides::-webkit-scrollbar-thumb {
+  background: black;
+  border-radius: 10px;
+}
+.badgeSlides::-webkit-scrollbar-track {
+  background: transparent;
+}
+.badgeSlides > div {
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  width: 300px;
+  height: 300px;
+  margin-right: 50px;
+/*   border-radius: 10px;  */
+/*   background: #eee;  */
+  transform-origin: center center;
+  transform: scale(1);
+  transition: transform 0.5s;
+  position: relative;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+/*   font-size: 100px; */
+}
+.badgeSlides > div:target {
+/*   transform: scale(0.8); */
+}
+
+.badgeNotIssued {
+	opacity: 0.5;
+}
+
+.badge-lock{
+	position: absolute;
+	left: 10px;
+	font-size: 25px;
+}
+
+
+.badge-awardedAt-text {
+	position: absolute;
+	bottom: -10px;
+}
+
+.unclaimedText{
+	position: absolute;
+	font-weight : 900;
+	color : #FFB302;
+	margin-bottom : 280px;
+}
+
+.block-x-title {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: var(--theme-text1);
+}
+
+.block-x-desc {
+    font-size: 12px;
+    line-height: 16px;
+}
+.icon_{
+	width: 100%;
+}
+.icon_claimed{
+	fill: #2BAB9C;
+}
+.icon_not_claimed{
+	fill: #d2d2d2;
+}
+
+.share-div{
+	padding: 45px 15px;
+    font-size: smaller;
+	display: flex;
+}
+
+.share-div > input {
+	width: 60%;
+    height: 40px;
+}
+
+.share-div > button {
+width: 40%;
+    height: 40px;
+    padding: 5px;
+}

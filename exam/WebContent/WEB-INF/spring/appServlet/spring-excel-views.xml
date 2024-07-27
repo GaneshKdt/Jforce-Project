@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="verifyTestDataForUpgradExcelView" class="com.nmims.views.VerifyTestDataForUpgradExcelView" />
+	<bean id="graceEligibleExcelView"  class="com.nmims.views.GraceEligibleExcelView"/>
+	<bean id="activeStudentSemWiseRegistrationExcelView"  class="com.nmims.views.ActiveStudentSemWiseRegistrationExcelView"/>
+	<!-- <bean id="passFailResultsExcelView"  class="com.nmims.views.PassFailResultsExcelView"/>  In Boot, Component used for this -->
+	<bean id="studentMarksResultsExcelView"  class="com.nmims.views.StudentMarksResultsExcelView"/>  
+	<bean id="examRegisteredStudentMarksExcelView"  class="com.nmims.views.ExamRegisteredStudentMarksExcelView"/>
+	<bean id="programCompleteReportExcelView"  class="com.nmims.views.ProgramCompleteReportExcelView"/> 
+	<bean id="graceToCompleteProgramReportExcelView"  class="com.nmims.views.GraceToCompleteProgramReportExcelView"/>   
+	<bean id="studentsExcelView"  class="com.nmims.views.StudentsExcelView"/>   
+	<bean id="examBookingReportExcelView"  class="com.nmims.views.ExamBookingReportExcelView"/>   
+	<bean id="examBookingPendingReportExcelView"  class="com.nmims.views.ExamBookingPendingReportExcelView"/>  
+	<bean id="examBookingExecutivePendingReportExcelView"  class="com.nmims.views.ExecutiveExamBookingPendingReportExcelView"/>   
+	<bean id="examBookingStudentCountReportExcelView"  class="com.nmims.views.ExamBookingStudentCountReportExcelView"/>
+	<bean id="examCenterCapacityReportExcelView"  class="com.nmims.views.ExamCenterCapacityReportExcelView"/>
+	<bean id="examCenterCapacityReportExcelViewMBAX"  class="com.nmims.views.ExamCenterCapacityReportExcelViewMBAX"/>
+	<bean id="asignmentUploadErrorReportExcelView"  class="com.nmims.views.AssignmentUploadErrorReportExcelView"/>
+	<bean id="asignmentUploadSuccessReportExcelView"  class="com.nmims.views.AssignmentUploadSuccessReportExcelView"/>
+	<bean id="assignmentStatusReportExcelView"  class="com.nmims.views.AssignmentStatusReportExcelView"/>
+	<bean id="cumulativeFinanceReportExcelView"  class="com.nmims.views.CumulativeFinanceReportExcelView"/>
+	<bean id="questionPaperCountReportExcelView"  class="com.nmims.views.QuestionPaperCountReportExcelView"/>
+	<bean id="onlineExamPasswordReportExcelView"  class="com.nmims.views.OnlineExamPasswordReportExcelView"/>
+	<bean id="onlineMarksExcelView"  class="com.nmims.views.OnlineMarksExcelView"/>
+	<bean id="studentClearingSubjectsReportExcelView"  class="com.nmims.views.StudentClearingSubjectsReportExcelView"/>
+	<bean id="studentRegistrationsExcelView"  class="com.nmims.views.StudentRegistrationsExcelView"/>
+	<bean id="ansExcelView"  class="com.nmims.views.ANSExcelView"/>
+	<bean id="assignmentSubmittedExcelView"  class="com.nmims.views.AssignmentSubmittedExcelView"/>
+	<bean id="expectedExamRegistrationReportExcelView"  class="com.nmims.views.ExpectedExamRegistrationReportExcelView"/>
+	<bean id="assignmentEvaluatedExcelView"  class="com.nmims.views.AssignmentEvaluatedExcelView"/>
+	<bean id="pgReexamEligibleStudentsExcelView"  class="com.nmims.views.PGReexamEligibleStudentsExcelView"/>
+	<bean id="toppersReportExcelView"  class="com.nmims.views.ToppersReportExcelView"/>
+	<bean id="absentReportExcelView"  class="com.nmims.views.AbsentReportExcelView"/>
+	<bean id="absentReportExcelViewMBAWX"  class="com.nmims.views.AbsentReportExcelViewMBAWX"/>
+	<bean id="marksheetSignatureExcelView"  class="com.nmims.views.MarksheetSignatureExcelView"/>
+	<bean id="copyCaseExcelView"  class="com.nmims.views.CopyCaseExcelView"/>
+	<bean id="assignmentEvaluationLevel3EligibleExcelView"  class="com.nmims.views.AssignmentEvaluationLevel3EligibleExcelView"/>
+	<bean id="assignmntNormalizedScoreExcelView"  class="com.nmims.views.AssignmntNormalizedScoreExcelView"/>
+	<bean id="allStudentsExamBookingDetails"  class="com.nmims.views.AllStudentsExamBookingDetails"/>
+	<bean id="assignmentCopyCasesExcelView"  class="com.nmims.views.AssignmentCopyCasesExcelView"/>
+	<bean id="questionReviewExcelView"  class="com.nmims.views.QuestionReviewExcelView"/>
+	<bean id="assignmentPaymentReportExcelView"  class="com.nmims.views.AssignmentPaymentReportExcelView"/>
+	<bean id="projectEvaluationReportExcelView"  class="com.nmims.views.ProjectEvaluationReportExcelView"/>
+	<bean id="sifySummaryReportView"  class="com.nmims.views.SifySummaryReport"/>
+	<bean id="downloadMDMReport"  class="com.nmims.views.DownloadMDMReport"/>
+	<bean id="downloadMDMSubjectCodeReport"  class="com.nmims.views.DownloadMDMSubjectCodeReport"/>
+	<bean id="downloadMDMSubjectCodeMappingReport"  class="com.nmims.views.DownloadMDMSubjectCodeMappingReport"/>
+	<bean id="downloadRemarksGradedPFReport"  class="com.nmims.views.DownloadRemarksGradedPFReport"/>
+	<bean id="downloadRemarksGradedPFResultsReport"  class="com.nmims.views.DownloadRemarksGradedPFResultsReport"/>
+	<bean id="downloadLiveSessionReportAdmin"  class="com.nmims.views.DownloadLiveSessionReportAdmin"/>
+	<!--  called-->
+	<bean id="executiveBookingExcelView"  class="com.nmims.views.ExecutiveBookingExcelView"/>
+	<bean id="testResultsExcelView"  class="com.nmims.views.TestResultsExcelView"/>
+	<bean id="testAttendenceExcelView"  class="com.nmims.views.TestAttendenceExcelView"/>
+	<bean id="consolidatedStudentsWiseExcelView"  class="com.nmims.views.ConsolidatedStudentsWiseExcelView"/>
+	<bean id="IAtoEvaluateExcelView"  class="com.nmims.views.IAtoEvaluateExcelView"/>
+	<bean id="embaPassFailExcelView" class="com.nmims.views.EmbaPassFailExcelView" />
+	<bean id="mbaXPassFailExcelView" class="com.nmims.views.MbaXPassFailExcelView" />
+	<bean id="LateralEntriesStudentsExcelView"  class="com.nmims.views.LateralEntriesStudentsExcelView"/>
+	<bean id="tcsOnlineExamPasswordView"  class="com.nmims.views.TcsOnlineExamPasswordView"/>
+	<bean id="absentReportExcelViewMBAX" class="com.nmims.views.AbsentReportExcelViewMBAX" />
+	<bean id="CopyCasesExcelView"  class="com.nmims.views.CopyCasesExcelView"/>
+	<bean id="subjectReportExcelView"  class="com.nmims.views.SubjectReportExcelView"/>
+	
+	<bean id="reRegistrationReportExcelView"  class="com.nmims.views.ReRegistrationReportExcelView"/>
+	<!--Added to show a report of payments which were recieved twice from student
+	 <bean id="assignmentDoublePaymentReportExcelView"  class="com.nmims.views.AssignmentDoublePaymentReportExcelView"/> -->
+	
+	<bean id="embaPassFailReportView"  class="com.nmims.views.EmbaPassFailReportView"/>
+	<bean id="embaMettlScoresView"  class="com.nmims.views.EmbaMettlScoresView"/>
+	<bean id="mbaxMettlScoresView"  class="com.nmims.views.MBAXMettlScoresView"/>
+	<bean id="mbaxPassFailReportView"  class="com.nmims.views.MBAXPassFailReportView"/>
+	<bean id="lostFocusReportView"  class="com.nmims.views.LostFocusReportView"/>
+	
+	<bean id="studentPortalRediret" class="org.springframework.web.servlet.view.RedirectView">  
+        <property name="url"  value="/studentportal/?sessionExpired=true"></property>  
+    </bean>   
+    
+    <bean id="studentPortalHome" class="org.springframework.web.servlet.view.RedirectView">  
+        <property name="url"  value="/studentportal/home"></property>  
+    </bean>   
+    
+	<bean id="examBookingRefundRequestReportExcelView"  class="com.nmims.views.ExamBookingRefundRequestReportExcelView"/> 	
+	<bean id="executiveExamBookingReportExcelView"  class="com.nmims.views.ExecutiveExamBookingReportExcelView"/>
+	<bean id="executiveExamCenterSlotCapacityReportExcelView"  class="com.nmims.views.ExecutiveExamCenterCapacityReportExcelView"/>
+	<bean id="executiveAbsentReportExcelView"  class="com.nmims.views.ExecutiveAbsentReportExcelView"/>
+	<bean id="projectStatusReportExcelView"  class="com.nmims.views.ProjectStatusReportExcelView"/>
+	<bean id="studentPassedInRevalAndRegisteredReportExcelView" class="com.nmims.views.StudentPassedInRevalAndRegisteredReportExcelView" />
+	<bean id="studentCaseStudySubmissionReportExcelView" class="com.nmims.views.StudentCaseStudySubmissionReportExcelView" />
+	<bean id="newPassFailReport" class="com.nmims.views.NewPassFailReport" />
+		
+	<bean id="graceToCompleteProgramDetailExcelView" class="com.nmims.views.GraceToCompleteProgramDetailExcelView" />	
+	<bean id="evaluatedCaseStudyReport" class="com.nmims.views.EvaluatedCaseStudyReport" />	
+	<bean id="tcsSummaryReportView"  class="com.nmims.views.TcsSummaryReport"/>
+	<bean id="tcsMarksReportView"  class="com.nmims.views.TcsMarksReport"/>
+	
+	<!-- MBA Exam Booking reports ( For WX and X ) -->
+	<bean id="mbaExamBookingReportExcelView"  class="com.nmims.views.MBAExamBookingReportExcelView"/>   
+	<bean id="mbaExamCenterCapacityReportExcelView"  class="com.nmims.views.MBAExamCenterCapacityReportExcelView"/>
+	
+	<bean id="electiveReportExcelView"  class="com.nmims.views.ElectiveReportExcelView"/>
+	<bean id="electivePendingReportExcelView"  class="com.nmims.views.ElectivePendingReportExcelView"/>
+	<bean id="assignmentEvaluationLevel2ExcelView"  class="com.nmims.views.AssignmentEvaluationLevel2ExcelView"/>
+
+	<bean id="studentBatchMappingExcelView"  class="com.nmims.views.StudentBatchMappingExcelView"/>
+	<bean id="mbaReExamEligibilityReportExcelView"  class="com.nmims.views.MBAReExamEligibilityReportExcelView"/>
+	<bean id="mettlEvaluationReportExcelView"  class="com.nmims.views.MettlEvaluationReportExcelView"/>
+	<bean id="UFMListExcelView"  class="com.nmims.views.UFMListExcelView"/>
+	<bean id="aisheugcReports"  class="com.nmims.views.AISHEUGCReportsExcelVew"/>
+	<bean id="PGTeePullProcessFailureResponseExcelView"  class="com.nmims.views.PGTeePullProcessFailureResponseExcelView"/>
+	<bean id="ApplyBodFailureResponseExcelView" class="com.nmims.views.ApplyBodFailureResponseExcelView"/>
+	<bean id="UFMMarkRIAExcelView" class="com.nmims.views.UFMMarkRIAExcelView"/>
+	<bean id="UFMMarkNVExcelView" class="com.nmims.views.UFMMarkNVExcelView"/>
+	<bean id="UFMMarkScoredExcelView" class="com.nmims.views.UFMMarkScoredExcelView"/>
+	
+	<bean id="downloadReportForPassFail"  class="com.nmims.views.DownloadReportForPassFail"/>
+
+</beans>

@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<style>
+		
+		.nav.nav-tabs > li > a {
+			color: #404041;
+		}
+		
+		.text-wrap {
+			white-space: normal;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			padding-left: 16px;
+			padding-right: 12px;
+		}
+		
+		.badge-div {
+			width: auto;
+			height: 400px;
+			overflow: auto;
+			padding-right: 10px;
+		}
+		
+		.badge-img {
+			margin-top: 7px;
+			margin-bottom: -10px;
+		}
+					
+		.nav-tabs .badge {
+			position: relative;
+			top: -15px;
+			right: -5px;
+			background: green;
+		}
+		
+		.button-container {
+		  padding-left: 10px;
+		  padding-right: 10px;
+		}
+		
+		#locked-tab-pane .badge {
+			position: relative;
+			top: -15px;
+			right: +5px;
+			background: red;		
+		}
+		
+		#revoked-tab-pane .badge {
+			position: relative;
+			top: -15px;
+			right: -5px;
+			background: red;		
+		}	
+				
+	</style> 
+</head>
+
+<body>
+
+	<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"></div>
+	<div th:replace="templates/fragments/common/header :: headerbar"></div>	
+	
+	<div class="sz-main-content-wrapper">
+		<div th:replace="templates/fragments/common/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;Dashboard')"></div>
+		<div class="sz-main-content menu-closed">
+			<div class="sz-main-content-inner">
+				<div id="sticky-sidebar"></div>				
+				<div th:include="templates/fragments/common/left-sidebar :: left-sidebar(activeMenu='Dashboard')"></div>
+				<div th:include="templates/fragments/common/studentInfoBar :: studentInfoBar"></div>
+				
+				<div th:class="'container-fluid mt-3'" style="padding-top: 120px; position: relative; height: auto; padding-left: 120px;">
+					<h2 class="red text-uppercase">My Badges</h2>
+                    	<div class="clearfix"></div>
+                    	
+                    	<nav>
+						  <div class="nav nav-tabs" id="nav-tab" role="tablist" style="padding-top: 10px; position: relative;">
+						    <button class="nav-link active" id="earned-tab-pane" data-bs-toggle="tab" data-bs-target="#nav-earned" type="button" role="tab" aria-controls="nav-earned" aria-selected="true" style="height: 60px;">
+						    	<h6 class="mt-3 text-uppercase">Earned<span class="badge" th:text="${mybadges.earnedBadgeList.size()}"></span></h6>
+						    </button>
+					    
+						    <th:block th:if="${mybadges.claimedBadgeList.size() > 0}">
+						    	<button class="nav-link" id="claimed-tab-pane" data-bs-toggle="tab" data-bs-target="#nav-claimed" type="button" role="tab" aria-controls="nav-claimed" aria-selected="false" style="height: 60px;">
+						    		<h6 class="mt-3 text-uppercase">Claimed<span class="badge" th:text="${mybadges.claimedBadgeList.size()}"></span></h6>
+						    	</button>
+						    </th:block>
+						    
+						    <th:block th:if="${mybadges.lockedBadgeList.size() > 0}">
+						    	<button class="nav-link" id="locked-tab-pane" data-bs-toggle="tab" data-bs-target="#nav-locked" type="button" role="tab" aria-controls="nav-locked" aria-selected="false" style="height: 60px;">
+						    		<h6 class="mt-3 text-uppercase">Locked<span class="badge" th:text="${mybadges.lockedBadgeList.size()}"></span></h6>
+						    	</button>
+						    </th:block>
+						    
+						    <th:block th:if="${mybadges.revokedBadgeList.size() > 0}">
+						    	<button class="nav-link" id="revoked-tab-pane" data-bs-toggle="tab" data-bs-target="#nav-revoked" type="button" role="tab" aria-controls="nav-revoked" aria-selected="false" style="height: 60px;">
+						    		<h6 class="mt-3 text-uppercase">Revoked<span class="badge" th:text="${mybadges.revokedBadgeList.size()}"></span></h6>
+						    	</button>
+						    </th:block>						    					    
+						        
+						  </div>
+						</nav>
+						
+						<div class="card">
+						<div class="tab-content" id="nav-tabContent">
+						  
+						  <div class="tab-pane fade show active" id="nav-earned" role="tabpanel" aria-labelledby="earned-tab-pane" tabindex="0">
+						  		<div class="container text-center" style="padding-top: 50px;">
+								  <div class="row row-cols-auto">
+								    <div th:each="earnedBadge, status : ${mybadges.earnedBadgeList}" style="padding: 10px">  		
+								      		<div class="card" style="max-width: 18rem;">
+								      		
+								      		<div class="card-header" th:text="${earnedBadge.awardedAtCode}"></div>								      		
+								      		
+								      		<img class="img-fluid card-img-top" style="align-self: center; padding: 15px;" th:src="${earnedBadge.attachment}"
+																	       th:title="${earnedBadge.badgeName}" />
+											   <div class="card-body" style="padding: 0px;">											  
+											   
+											   <div class="card-footer"> 
+											   	<a th:attr="data-placement='bottom', 
+			                                       			title=${earnedBadge.awardedAt}, 
+			                                       			href=${'badgeDetails?uniquehash=' + earnedBadge.uniquehash + '&amp;badgeId=' + earnedBadge.badgeId + '&amp;awardedAt=' + earnedBadge.awardedAt}">
+											   		
+											   		<input type="button" style="width: 90%;" class="btn btn-md btn-outline-success btn-position"
+															        th:value="Claim" th:attr="onclick=|claimedMyBadge('${earnedBadge.uniquehash}')|" />
+														</a>
+													</div>
+												</div>										  
+											</div>
+								    	</div>
+									</div>
+								</div>
+								 <div>
+	                             	<th:block th:if="${mybadges.earnedBadgeList.size() == 0 }">
+	                                	<p class="alert alert-danger" role="alert">You haven't earned any badges yet!</p>
+	                               </th:block>
+                               </div>
+							</div>
+						  
+						  
+						<div class="tab-pane fade" id="nav-claimed" role="tabpanel" aria-labelledby="claimed-tab-pane" tabindex="0">
+							<div class="container text-center" style="padding-top: 50px;">
+								<div class="row row-cols-auto">
+									<div th:each="claimedBadge, status : ${mybadges.claimedBadgeList}" style="padding: 10px">  		
+								    	<div class="card" style="max-width: 18rem;">
+								      		<div class="card-header" th:text="${claimedBadge.awardedAtCode}"></div>
+								      			<a th:attr="data-placement='bottom',
+			                                            	title=${claimedBadge.awardedAt}, 
+			                                            	href=${'badgeDetails?uniquehash=' + claimedBadge.uniquehash + '&amp;badgeId=' + claimedBadge.badgeId + '&amp;awardedAt=' + claimedBadge.awardedAt}">
+			                                  								      		
+								      				<img class="img-fluid card-img-top" style="align-self: center; padding: 15px;" th:src="${claimedBadge.attachment}" th:title="${claimedBadge.badgeName}" />											   		
+												</a>
+											</div>
+								    	</div>
+									</div>
+								</div>
+						</div>						  
+						  
+						  
+						<div class="tab-pane fade" id="nav-locked" role="tabpanel" aria-labelledby="locked-tab-pane" tabindex="0">
+							<div class="container text-center" style="padding-top: 50px;">
+								<div class="row row-cols-auto">
+									<div th:each="lockedBadge, status : ${mybadges.lockedBadgeList}" style="padding: 10px">  		
+								    	<div class="card" style="max-width: 18rem;">
+								      		<div class="card-header" th:text="${lockedBadge.awardedAt}"></div>							      		
+								      		<a th:attr="data-placement='bottom',
+			                                            	title=${lockedBadge.awardedAt}, 
+			                                            	href=${'badgeDetails?uniquehash=0' + '&amp;badgeId=' + lockedBadge.badgeId + '&amp;awardedAt=' + lockedBadge.awardedAt}">
+			                                  	
+								      		<img class="img-fluid card-img-top" style="align-self: center; padding: 15px;" th:src="${lockedBadge.attachment}"
+																	       th:title="${lockedBadge.badgeName}" />
+											   
+											</a>											
+										</div>
+							    	</div>
+								</div>
+							</div>
+						</div>					
+                    	
+						<div class="tab-pane fade" id="nav-revoked" role="tabpanel" aria-labelledby="revoked-tab-pane" tabindex="0">
+						  <div class="container text-center" style="padding-top: 50px;">
+								  <div class="row row-cols-auto">
+								    <div th:each="revokedBadge, status : ${mybadges.revokedBadgeList}" style="padding: 10px">  		
+								      		<div class="card" style="max-width: 18rem;">
+								      		
+								      		<div class="card-header" th:text="${revokedBadge.awardedAtCode}"></div>								      		
+								      		
+								      		<img class="img-fluid card-img-top" style="align-self: center; padding: 15px;" th:src="${revokedBadge.attachment}"
+																	       th:title="${revokedBadge.badgeName}" />
+											   <div class="card-body" style="padding: 0px;">											  
+											   
+											   <div class="card-footer"> 
+											   	<a th:attr="data-placement='bottom', 
+			                                       			title=${revokedBadge.awardedAt}, 
+			                                       			href=${'badgeDetails?uniquehash=' + revokedBadge.uniquehash + '&amp;badgeId=' + revokedBadge.badgeId + '&amp;awardedAt=' + revokedBadge.awardedAt}">
+											   		
+											   		<input type="button" style="width: 90%;" class="btn btn-md btn-outline-success btn-position"
+															        th:value="Reclaim" th:attr="onclick=|reclaimedMyBagde('${revokedBadge.uniquehash}')|" />
+														</a>
+													</div>
+												</div>
+											</div>
+								    	</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</div>
+					</div>
+				</div>
+		</div>
+	</div>	
+
+	<div th:include="templates/fragments/common/footer :: footer"></div>
+</body>
+
+<script th:inline="javascript">
+
+$(document).ready(function() {
+	 $('[data-toggle="tooltip"]').tooltip(); 
+
+	// this will disable right-click on all images
+	$('img').bind('contextmenu', function(e) {
+		e.preventDefault()
+	    return false;
+	}); 
+
+	// this will disable dragging of all images
+    $("img").mousedown(function(e){
+         e.preventDefault()
+    });
+});
+
+function claimedMyBadge(uniquehash){
+	/* alert("Claimed my Badge: " + uniquehash); */
+	
+	let data = {
+ 			"uniquehash" :  uniquehash
+ 		};
+	
+	/* console.log("Data from Claimed my badge: ", JSON.stringify(data)); */
+ 		$.ajax({
+ 			type : "POST",
+ 			url : 'm/claimedMyBadge',
+ 			contentType : "application/json",
+ 			data : JSON.stringify(data),
+ 			dataType : "JSON",
+ 			success : function(data) {
+ 			/* console.log("Claimed my badge: " + data);	 */
+	  			if(data == 1) {
+	  				location.reload();
+	  	  	  	}else{
+					alert('Error In calling API !!!');
+	  	  	  	}
+ 			}
+ 		});
+ }
+
+function reclaimedMyBagde(uniquehash){
+	
+	 let data = {
+				"uniquehash" :  uniquehash
+			};
+		$.ajax({
+			type : "POST",
+			url : 'm/reClaimedRevokedMyBadge',
+			contentType : "application/json",
+			data : JSON.stringify(data),
+			dataType : "JSON",
+			success : function(data) {
+			 /* console.log("data "+data);	 */
+	  			if(data == 1){
+	  				location.reload();
+	  	  	  	}else{
+					alert('Error In calling API !!!');
+	  	  	  	} 	  	  					
+			}
+		});	
+}
+
+</script>
+
+</html>

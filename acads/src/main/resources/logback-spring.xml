@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+	<property name="catalina-base" value="${catalina.base}/logs/acdas_logs" />
+ 	
+ 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level %C{1.}.%M\(%line\) - %m%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="acads" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/acads/%d{yyyy-MM,aux}/acads-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="emailCount" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/email_count/%d{yyyy-MM,aux}/email_count-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="session_emails" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/session_emails/%d{yyyy-MM,aux}/session_emails-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>    
+
+    <appender name="session_SMS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/session_SMS/%d{yyyy-MM,aux}/session_SMS-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>    
+
+    <appender name="session_firebase_notification" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/session_firebase_notification/%d{yyyy-MM,aux}/session_firebase_notification-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+	
+    <appender name="qnaOfLiveSessionsService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/QnAOfLiveSessionsService/%d{yyyy-MM,aux}/QnAOfLiveSessionsService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="adhocAdminFileUploadService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/AdhocAdminFileUploadService/%d{yyyy-MM,aux}/AdhocAdminFileUploadService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="session_Notification_Faculty" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/session_Notification_Faculty/%d{yyyy-MM,aux}/session_Notification_Faculty-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="contentService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/ContentService/%d{yyyy-MM,aux}/ContentService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>            	
+	
+	<appender name="session_recording_upload" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+       </encoder>
+        
+ 		 <!-- rollover daily  -->
+       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/session_recording_upload/%d{yyyy-MM,aux}/session_recording_upload-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+      <appender name="fileMigrationService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/FileMigrationService/%d{yyyy-MM,aux}/FileMigrationService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+	<appender name="contentService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+       </encoder>
+        
+ 		 <!-- rollover daily  -->
+       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/ContentLogs/%d{yyyy-MM,aux}/ContentLogs-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="video_Downloads_Urls" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/video_Downloads_Urls/%d{yyyy-MM,aux}/video_Downloads_Urls-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="queryAnswerService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/QueryAnswerService/%d{yyyy-MM,aux}/QueryAnswerService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="sessionSchedulingService" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/sessionSchedulingService/%d{yyyy-MM,aux}/sessionSchedulingService-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender> 
+    
+    <appender name="quickVideoContentForNewMasterKey" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+       </encoder>
+        
+ 		 <!-- rollover daily  -->
+       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/quickVideoContentForNewMasterKey/%d{yyyy-MM,aux}/quickVideoContentForNewMasterKey-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+     <appender name="sessionAttendanceReport" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+       </encoder>
+        
+ 		 <!-- rollover daily  -->
+       <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/sessionAttendanceReport/%d{yyyy-MM,aux}/sessionAttendanceReport-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <root level="info">
+      <!--	<appender-ref ref="console" />-->
+		<appender-ref ref="acads" />
+    </root>
+    
+    
+    <logger name="emailCount" level="info" additivity="false">
+        <appender-ref ref="emailCount" />
+    </logger>
+
+    <logger name="session_emails" level="info" additivity="false">
+        <appender-ref ref="session_emails" />
+    </logger>
+
+    <logger name="session_SMS" level="info" additivity="false">
+        <appender-ref ref="session_SMS" />
+    </logger>
+
+    <logger name="session_firebase_notification" level="info" additivity="false">
+        <appender-ref ref="session_firebase_notification" />
+    </logger>
+
+    <logger name="qnaOfLiveSessionsService" level="info" additivity="false">
+        <appender-ref ref="qnaOfLiveSessionsService" />
+    </logger>
+
+    <logger name="adhocAdminFileUploadService" level="info" additivity="false">
+        <appender-ref ref="adhocAdminFileUploadService" />
+    </logger>
+
+    <logger name="session_Notification_Faculty" level="info" additivity="false">
+        <appender-ref ref="session_Notification_Faculty" />
+    </logger>
+
+    <logger name="contentService" level="info" additivity="false">
+        <appender-ref ref="contentService" />
+    </logger>
+    
+    <logger name="session_recording_upload" level="trace" additivity="false">
+        <appender-ref ref="session_recording_upload" />
+    </logger>
+    
+
+    <logger name="contentService" level="trace" additivity="false">
+        <appender-ref ref="contentService" />
+    </logger>
+
+     <logger name="fileMigrationService" level="trace" additivity="false">
+        <appender-ref ref="fileMigrationService" />
+    </logger>
+
+	<logger name="video_Downloads_Urls" level="trace" additivity="false">
+		<appender-ref ref="video_Downloads_Urls" />
+	</logger>
+	
+	<logger name="queryAnswerService" level="info" additivity="false">
+        <appender-ref ref="queryAnswerService" />
+    </logger>
+    
+    <logger name="sessionSchedulingService" level="info" additivity="false">
+        <appender-ref ref="sessionSchedulingService" />
+    </logger>
+    
+     <logger name="quickVideoContentForNewMasterKey" level="trace" additivity="false">
+        <appender-ref ref="quickVideoContentForNewMasterKey" />
+    </logger>
+    
+    <logger name="sessionAttendanceReport" level="trace" additivity="false">
+        <appender-ref ref="sessionAttendanceReport" />
+    </logger>
+
+ 
+</configuration>

@@ -1,0 +1,29 @@
+/*
+	Client: NMIMS Distance Learning
+	Company: Clique Communications Group  
+	Author: Nikhil Karmokar - Clique Communications
+	Version: 1.0.5
+*/
+.lt-ie9 .container {
+	width: 1170px;
+}
+
+.lt-ie9 .col-xs-18.col-sm-6 {
+	width: 500px;
+}
+
+.lt-ie9 .col-xs-18.col-sm-12 {
+	width: 670px;
+}
+
+.lt-ie9 .text-right {
+	text-align: right;
+}
+
+.lt-ie9 .col-sm-5 {
+	width: 250px;
+}
+
+.lt-ie9 .col-sm-8 {
+	width: 500px;
+}

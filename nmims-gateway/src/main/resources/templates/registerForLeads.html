@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Student Portal</title>
+<link
+	href="https://d3udzp2n88cf0o.cloudfront.net/css/bootstrap.min.css"
+	rel="stylesheet"
+/>
+<link
+	href="https://d3udzp2n88cf0o.cloudfront.net/css/all.min.css"
+	rel="stylesheet"
+/>
+<link href="../../css/style.css" rel="stylesheet" />
+</head>
+<body>
+  <!------------------------------------------------ NavBar ------------------------------------------------------------------------->
+  <div th:replace="./common/navbar.html :: headerNav('LEAD REGISTRATION')"></div>
+       
+   <!----------------------------------------------------------- Register Form ------------------------------------------------------->
+   <div class="container">
+	   <h4 class="text-danger">Register Now</h4>
+	   <div class="card">
+          <div class="card-body">
+              <div class="col-md-6">
+	            <form id="registerLead">
+	              <div class="mb-3">
+	                  <label class="form-label" for="salutation"><strong>Salutation</strong></label>
+	                  <select class="form-select" id="salutation">
+	                      <option disabled selected value="0">Select Salutation</option>
+	                      <option value="Mr.">Mr.</option>
+	                      <option value="Ms.">Ms.</option>
+	                      <option value="Mrs.">Mrs.</option>
+	                      <option value="Miss.">Miss</option>
+	                  </select>
+	              </div>
+	              <div class="mb-3">
+	                  <label class="form-label" for='firstName'><strong>First Name</strong></label> 
+	                  <input id='firstName' class="form-control" placeholder="Enter First Name"/>
+	              </div>
+	              <div class="mb-3">
+	                  <label class="form-label" for='lastName'><strong>Last Name</strong></label> 
+	                  <input id='lastName' class="form-control" placeholder="Enter Last Name"/>
+	              </div>
+	              <div class="mb-3">
+	                  <label class="form-label" for='email'><strong>Email</strong></label> 
+	                  <input id='email' class="form-control" placeholder="Enter Email Id" /> 
+	              </div> 
+	              <div class="mb-3">
+	                  <label class="form-label" for='number'><strong>Mobile Number</strong></label> 
+	                  <input id='number' class="form-control" placeholder="Enter Mobile Number"/>
+	              </div>
+	              <div class="mb-3">
+	                  <label class="form-label" for='currentLocation'><strong>Current Location</strong></label>
+	                  <select class="form-select" id='currentLocation'>
+	                      <option disabled selected value="0">Select Current Location</option>
+	                      <option value="Mumbai">Mumbai</option>
+	                      <option value="Pune">Pune</option>
+	                      <option value="Delhi">Delhi</option>
+	                      <option value="Bangalore">Bangalore</option>
+	                      <option value="Kolkata">Kolkata</option>
+	                      <option value="Hyderabad ">Hyderabad </option>
+	                      <option value="Indore">Indore</option>
+	                      <option value="Chandigarh">Chandigarh</option>
+	                      <option value="Chennai">Chennai</option>
+	                  </select>
+	              </div>
+	              <div class="btn-group mb-3">
+	                  <button type="submit" class="btn btn-danger" id='requestOtp'><b>REGISTER</b></button>
+	              </div>
+	            </form>
+          	</div>
+          <div id="modal" class="action-modal">
+			<div id='action-modal-content' class="action-modal-content" style="max-width: 500px;">
+				<div id="modal-heading"></div>
+				
+				<div id='modal-text' style="text-align: center;">
+				</div>
+				
+				<div id='modal-option' class="wrapper" style="text-align: center;">
+					<button type='submit' class='btn btn-primary' id='triggerLogin'>Submit</button>
+					<button type='submit' class='btn btn-primary' id='closeModal'>Close</button>
+				</div>
+			</div>
+		   </div>
+
+			<div id="fullPageLoading" style="display: none;">
+				<div class="modal-backdrop fade in"></div>
+				<div id="loader-container">
+					<div id="loader"></div>
+					<div>Please wait...</div>
+				</div>
+			</div>
+          </div>
+        </div>
+    </div>
+    <!---------------------------------------------------------------- Footer ------------------------------------------>
+    <div th:replace="./common/footer.html"></div>
+      
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/jquery-3.6.0.min.js'></script>
+	<script> 
+	
+		let salutation;
+		let firstName;
+		let lastName;
+		let email;
+		let mobile;
+		let agency
+		let highestQualification;
+		let admissionYear;
+		let currentLocation;
+		let courseIntrestedIn;
+		let agencyPassword;
+		let redirectURL;
+	
+		$(document).ready(function(){
+	
+			$('#closeModal').on('click', function(){
+				$('#modal').hide();
+			});
+			
+			
+			$('#triggerLogin').click(function(event){
+	
+				let otp = $('#otp').val();
+				number = $('#number').val();
+	
+				let verifyDetails = {
+					'mobile' : number,
+					'otp' : otp
+				}
+	
+				console.log('verifyDetails: '+JSON.stringify(verifyDetails))
+				
+				$.ajax({
+					type : 'POST',
+					url : '/studentportal/verifyRequestOTP',
+					data : JSON.stringify(verifyDetails),
+					contentType : "application/json;",
+					complete: function (xhr, status) {
+						
+						console.log('xhr: '+JSON.stringify(xhr))
+				        if (status === 'error' || !xhr.responseText) {
+	
+							$('#triggerLogin').show();
+					        $('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-key"></i> <b>Enter Code</b></p>');
+				        	$('#modal-text') .html('<p>Incorrect OTP, please try again.</p> <br> <input type=text id="otp" placeholder=Enter OTP  class="form-control"  required=required/>');
+							$('#modal').show();
+							$('#otp').focus();
+							return;
+							
+				        }
+				        else {
+				        	$('#modal').hide();
+				        	registerLead();
+							$('#fullPageLoading').show();
+									
+				        }
+				        
+					} 
+				});
+	
+			});
+	
+			$('#requestOtp').click(function(event){
+				
+				event.preventDefault();
+				$('#fullPageLoading').show();
+				
+				if( validation() ){
+					
+				    number = $('#number').val();
+					email = $('#email').val();
+					
+					let body = {
+						'emailId' : email,
+						'mobile' : number,
+						'deviceType' : 'ios'
+					}
+					
+					checkIfLeadPresentForEmailAndMobile( body );
+			
+				}
+				else {
+					$('#fullPageLoading').hide();
+				}
+				
+			});
+	
+		});
+	
+	
+		function checkIfLeadPresentForEmailAndMobile( body ){
+			
+			$.ajax({
+				type : "POST",
+				url : "/studentportal/checkIfLeadPresentForEmailAndMobile",
+				contentType : "application/json",
+				data : JSON.stringify(body),
+				dataType: 'json',
+				success: function(data) {	
+	
+					console.log('body: '+JSON.stringify(body))
+					requestOtp( body );
+		
+				},
+				error: function(error){
+	
+					let response = JSON.parse(error.responseText);
+					let count = 1;
+					
+					let modal_text = '<p>Account already present. Please try logging in using the following details </p>';
+					modal_text = modal_text + '<table class="table table-borderless"><thead><tr><th style=text-align:center;>Sr No.</th>';
+					modal_text = modal_text + '<th style=text-align:center;>Email Id</th><th style=text-align:center;>Mobile No.</th>';
+					modal_text = modal_text + '<th style=text-align:center;>Registration Id</th><tr></thead> <tbody>';
+						
+					for( record in response ){
+						modal_text = modal_text + '<tr><td>'+count+'</td><td>'+response[record].emailId+'</td>'+'<td>'+response[record].mobile+'</td>';
+						modal_text = modal_text + '<td>'+response[record].registrationId+'</td></tr>'
+						count++;
+					}
+					modal_text = modal_text + '</tbody></table>'
+					
+					let modal_option = '<a href="loginForLeadForm" class="btn btn-primary">Login</button>';
+					
+					$('#fullPageLoading').hide();
+					$('#triggerLogin').hide();
+				    $('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>Error</b></p>');
+					$('#modal-text').html( modal_text);
+					$('#modal-option').append( modal_option );
+					$('#modal').show();
+				    	
+				}
+			});
+	
+		}
+		
+		function requestOtp( body ){
+	
+			$.ajax({
+				type : "POST",
+				url : "/studentportal/requestOTP",
+				contentType : "application/json",
+				data : JSON.stringify(body),
+			    dataType: 'json',
+			    cache: false,
+			    complete: function (xhr, status) {
+					console.log('xhr: '+JSON.stringify(xhr))
+			        if (status === 'error' || !xhr.responseText) {
+						alert("An error occured while registering, please try again later.")
+			        }
+			        else {
+				        
+						if (xhr.status == 200) { 
+							$('#fullPageLoading').hide();
+							$('#triggerLogin').show();
+					        $('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-key"></i> <b>Enter Code</b></p>');
+							$('#modal-text') .html('<p>We have sent you a SMS on '+ number+ ' with a 4 digit verification code</p> <br> <input type=text id="otp" placeholder=Enter OTP  class="form-control"  required=required/>');
+							$('#modal').show();
+							$('#otp').focus();
+							
+						}else{
+	
+							$('#fullPageLoading').hide();
+							$('#modal-text') .html('<p>We have encountered an error, please try again.')
+							$('#modal').show();
+							
+						}
+			        }
+				} 
+			});
+			
+		}
+	
+		function registerLead(){
+	
+			$('#fullPageLoading').show();
+	
+			let salutation = $('#salutation').val();
+			let firstName = $('#firstName').val();
+			let lastName = $('#lastName').val();
+			let email = $('#email').val();
+			let number = $('#number').val();
+			let currentLocation = $('#currentLocation').val();
+		
+			let body = {
+							"salutation":salutation,
+							"firstName":firstName,
+							"lastName":lastName,
+							"emailId":email,
+							"mobile":number,
+							"currentLocation":currentLocation,
+						};
+	
+					
+			$.ajax({
+				type : "POST",
+				url : "/studentportal/m/registerLeads",
+				contentType : "application/json",
+				data : JSON.stringify(body),
+				dataType: 'json',
+				success: function(data) {
+					    
+					if( data.isError ){
+						$('#fullPageLoading').hide();
+						$('#triggerLogin').hide();
+					    $('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>Error</b></p>');
+						$('#modal-text') .html('<p>'+data.message+'</p>');
+						$('#modal').show();
+					}else{
+				        window.location = data.redirectURL;
+					}
+		
+				},
+				error: function(error){
+	
+					console.log('error: '+JSON.stringify(error))
+				    let response = JSON.parse(error.responseText);
+					$('#fullPageLoading').hide();
+					$('#triggerLogin').hide();
+				    $('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b>Error</b></p>');
+					$('#modal-text') .html('<p>'+response.message+'</p>');
+					$('#modal').show();
+				    	
+				}
+			});
+	
+		}
+	
+		function validation(){
+	
+			let salutation = $('#salutation :selected').val()
+			let firstName = $('#firstName').val();
+			let lastName = $('#lastName').val();
+			let email = $('#email').val();
+			let number = $('#number').val();
+			let currentLocation = $('#currentLocation :selected').val()
+			
+			if(salutation === '0'){
+	
+				selectValues = { "0": "Please Select Salutation", "Mr.": "Mr.", "Mrs.":"Mrs.", "Miss":"Miss" };
+				$('#salutation').empty();
+				$.each(selectValues, function(key, value) {
+				     $('#salutation') .append($('<option>', { key : value }) .text(value));
+				});
+				
+				$('#salutation').focus();
+				$('#salutation').addClass('highlight');
+				return false;
+		
+			}
+	
+			if( !firstName ){
+				$('#salutation').removeClass('highlight');
+				$('#firstName').attr("placeholder", "Please Enter Your First Name");	
+				$('#firstName').focus();
+				$('#firstName').addClass('highlight');
+				return false;
+			}
+			
+			if(!lastName){
+				$('#salutation, #firstName').removeClass('highlight');
+				$('#lastName').attr("placeholder", "Please Enter Your Last Name");	
+				$('#lastName').focus();
+				$('#lastName').addClass('highlight');
+				return false;
+			}
+	
+			if(!email){
+				$('#salutation, #firstName, #lastName').removeClass('highlight');
+				$('#email').val('');
+				$('#email').attr("placeholder", "Please Enter Your Email Id");	
+				$('#email').focus();
+				$('#email').addClass('highlight');
+				return false;
+			}else if(!isEmail(email)){
+				$('#salutation, #firstName, #lastName').removeClass('highlight');
+				$('#email').val('');
+				$('#email').attr("placeholder", "Please Enter a Proper Email Id");	
+				$('#email').focus();
+				$('#email').addClass('highlight');
+				return false;
+			}
+			
+			if(!number){
+				$('#salutation, #firstName, #lastName, #email').removeClass('highlight');
+				$('#number').val('');
+				$('#number').attr("placeholder", "Please Enter Your Mobile Number");	
+				$('#number').focus();
+				$('#number').addClass('highlight');
+				return false;
+			}else if(number.length != 10){
+				$('#salutation, #firstName, #lastName, #email').removeClass('highlight');
+				$('#number').val('');
+				$('#number').attr("placeholder", "Please Enter a Proper Mobile Number");	
+				$('#number').focus();
+				$('#number').addClass('highlight');
+				return false;
+			}else{
+				if(!checkForMobile(number)){
+					$('#salutation, #firstName, #lastName, #email').removeClass('highlight');
+					$('#number').val('');
+					$('#number').attr("placeholder", "Please Make Sure That The Mobile Number Starts With 7 or 8 or 9");	
+					$('#number').focus();
+					$('#number').addClass('highlight');
+					return false;
+				}
+			}
+	
+			if(currentLocation === '0'){
+	
+				selectValues = { "0": "Please Select Salutation", "Mumbai": "Mumbai", "Pune":"Pune", "Delhi":"Delhi", "Bangalore":"Bangalore", "Kolkata":"Kolkata",
+						 "Hyderabad":"Hyderabad", "Indore":"Indore", "Chandigarh":"Chandigarh", "Chennai":"Chennai" };
+				$('#currentLocation').empty();
+				$.each(selectValues, function(key, value) {
+				     $('#currentLocation') .append($('<option>', { key : value }) .text(value));
+				});
+				
+				$('#currentLocation').focus();
+				$('#currentLocation').addClass('highlight');
+				return false;
+		
+			}
+			return true;
+		}	
+		
+		function isEmail(emailId) {
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			return regex.test(emailId);
+		}
+	
+		function checkForMobile(mobileNumber){
+			index = mobileNumber.charAt(0);
+			if(index == '7' || index == '8' || index == '9'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	
+	</script>
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/logout_for_sso.js'></script>
+</body>
+</html>

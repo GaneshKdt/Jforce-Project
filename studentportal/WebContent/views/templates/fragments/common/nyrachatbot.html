@@ -1,0 +1,21 @@
+<div th:fragment="nyrachatbot">
+<html>
+
+<head>
+
+<meta charset="utf-8"/>
+
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+<title></title>
+
+</head>
+
+<body th:with="encJsonURL='https://cognitive.findabilityplatform.com/NMSTApplication-uat/resources/js/chatwidget.js?key='+${session.encJson}">
+<script id="fsChatWidget" data-view= "false" data-anime="bounce" th:src="${encJsonURL}">
+		</script>
+</body>
+</html>
+</div>
+
+

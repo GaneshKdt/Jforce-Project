@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+	<property name="catalina-base" value="${catalina.base}/logs/careerservices_logs" />
+ 	
+ 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level %C{1.}.%M\(%line\) - %m%n
+            </Pattern>
+        </layout>
+    </appender>
+ 	
+    <appender name="careerservices" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/careerservices/%d{yyyy-MM,aux}/careerservices-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+	
+    <root level="info">
+        <appender-ref ref="careerservices" />
+    </root>
+         
+</configuration>

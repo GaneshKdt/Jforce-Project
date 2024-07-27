@@ -1,0 +1,26 @@
+AWS_ACCESS_KEY: AKIA4LGISU2UZ5Z4KQMJ
+AWS_SECRET_KEY: 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
+ZOOM_AUDIO_TARGET_FOLDER: D:/audioFileTarget/
+eureka:
+  client:
+    fetch-registry: true
+    fetchRegistry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    healthCheckUrlPath: /actuator/health
+    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 1
+    statusPageUrlPath: /actuator/info
+spring:
+  application:
+    name: awsfileupload-service
+  jmx:
+    default-domain: awsfileupload-service
+  profiles:
+    active: prod
+  servlet:
+    multipart:
+      max-file-size: 38MB
+      max-request-size: 38MB

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<style>
+		.accordion-button:focus{box-shadow: none !important;}
+		.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{background-color: lightgray !important;border-color: gray !important;}
+		.active>.page-link, .page-link.active{z-index: 1 !important;color: #ffffff !important;background-color: #d2232a !important;border-color: #d2232a !important;box-shadow: none !important;}
+		.dataTables_wrapper {overflow: auto;}
+		.dataTables_wrapper div div .dataTables_length,.dataTables_wrapper div div .dataTables_info{margin: 5px auto;text-align: left !important;}
+		.dataTables_wrapper div div .dataTables_filter,.dataTables_wrapper div div .dataTables_paginate{margin: 5px auto;}
+		.page-link{color: #6c757d !important;box-shadow: none !important;}
+		@media (max-width: 768px) {.panel-body{margin-top: 60px;}}
+		@media (max-width: 425px) {.panel-body {margin-top: 140px;}}
+	</style>
+</head>
+<body>
+	<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"></div>
+	<div th:replace="templates/fragments/common/header :: headerbar"></div> 
+	<div class="sz-main-content-wrapper">
+	 	<div th:replace="templates/fragments/common/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;My Activity')"></div>	
+		<div class="sz-main-content menu-closed">
+            <div class="sz-main-content-inner">
+            	<div id="sticky-sidebar"></div> 
+    			<div th:include="templates/fragments/common/left-sidebar :: left-sidebar(activeMenu='My Activity')"></div>
+    			<div class="sz-content-wrapper dashBoard">
+      				<div th:include="templates/fragments/common/studentInfoBar :: studentInfoBar" class="studentInfo"></div>
+      				<div class="sz-content">
+						<div class="container-fluid">	
+							<div class="panel-body">
+								<div class="card card-body text-center shadow p-3 mb-5 bg-body rounded">
+									<p class="d-none" id="my-activity-data" th:text="${myActivity}"></p>
+									<p class="d-none" id="session-attendance-count" th:text="${sessionAttendanceCountList}"></p>
+									<p class="d-none" id="track_details" th:text="${trackDetailsList}"></p>
+									<p class="d-none" id="video-attempt-count" th:text="${videoDetailsCountList}"></p>
+									<h4 class="text-danger fw-bold">My Activity</h4>
+									
+									<!-- Portal Time Spent -->
+									<div th:replace="templates/fragments/myActivity/PortalTimeSpent :: portal-time-spent"></div>
+									
+									<!-- Session Attendance Report -->
+									<div th:replace="templates/fragments/myActivity/SessionAttendanceReport :: session-attendance-report"></div>
+									
+									<!-- Session Video View Report -->
+									<div th:replace="templates/fragments/myActivity/SessionVideoViewReport :: session-video-view-report"></div>
+									
+									<!-- Learning Resources Report -->
+									<div th:replace="templates/fragments/myActivity/LearningResourcesReport :: learning-resources-report"></div>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+    			</div>
+    		</div>
+   	 	</div>
+    </div> 
+	<div th:include="templates/fragments/common/footer :: footer"></div>
+</body>
+<script src="assets/js/myActivity.js"></script>
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Welcome To Student Portal</title>
+	<link
+	  href="https://d3udzp2n88cf0o.cloudfront.net/css/bootstrap.min.css"
+	  rel="stylesheet"
+	/>
+	<link
+	  href="https://d3udzp2n88cf0o.cloudfront.net/css/all.min.css"
+	  rel="stylesheet"
+	/>
+	<link href="../../css/style.css" rel="stylesheet" />  
+</head>
+<body>
+    <!------------------------------------------------ NavBar ------------------------------------------------------------------------->
+    <div th:replace="./common/navbar.html :: headerNav('LEAD LOGIN')"></div>
+
+    <!------------------------------------------------------------------------ Content -------------------------------------------------------->
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <!------------------------------------------ Left Site Content ---------------------------------------------------------------- -->
+          <div class="col-12 col-lg-4 col-xl-2" >
+           <div class="login-cont">
+             <h4 class="text-light pt-4">LOGIN</h4>
+             <form class="profileForm" id="leadLogin" action="/authLeadUser" method="post">
+                 <div class="mb-3 ">
+                     <label for="name" class="form-label text-light">EMAIL ID / MOBILE / REGISTATION NUMBER</label>
+                     <select id='loginTypeSelect' class="form-select">
+                       <option value="NA" selected>Select Login Type</option>
+                       <option value="Mobile_No__c">Mobile Number</option>
+                       <option value="Email">Email Id</option>
+                       <option value="nm_RegistrationNo__c">Registration Id</option>
+                     </select>
+                   </div>
+                 <div class="mb-3">
+                     <input type="text" class="form-control" placeholder="Select Login Type" id="userId" name="userId"></input>
+                     <div class="mt-3">
+                       <a class="text-decoration-none" href="registerForLeadsForm">Not Registered? Register Now!</a>
+                   </div>
+                 </div>
+
+                 <button type="submit" id="loginBtn" class="btn  btn-danger button mt-1" disabled="disabled">LOGIN</button>
+             </form>
+           </div>
+          </div>
+          <!------------------------------------------ Right Site Content ---------------------------------------------------------------- -->
+             <div class="col-12 col-lg-8 col-xl-8">
+               <div class="card">
+                 <div class="card-body">
+                 <img src="https://d3udzp2n88cf0o.cloudfront.net/css/content-image.jpg" class="img-fluid pb-3"/>
+                 <p>Welcome to NMIMS Global Access - School
+                     for Continuing Education (NGASCE)! You are about to log in to
+                     the world of Online Learning at NGASCE, a world made possible
+                     due to a combination of 30 years of legacy of best in class
+                     education and state of the art learning technology!</p>
+                 <p>As you log in using the credentials
+                     given to you by the University, please take time to go through
+                     your profile and update your contact information. The details
+                     mentioned there are your details as per the current University
+                     Student Database. In case there is any change or any error in
+                     these details, it will hamper the University to stay in touch
+                     with you.</p>
+                 <p>With this Portal, we hope to provide you
+                     all the support you need during your enrolment with the
+                     Program offered by the University. It will be our endeavour to
+                     keep improving your experience with this Portal as we go
+                     along.</p>
+                 <p>Happy Learning!</p>
+                 <p>
+                     <b>Team NGASCE</b>
+                 </p>
+               </div>
+             </div>
+             </div>
+           </div>
+           
+           <div id="modal" class="action-modal">
+				<div id='action-modal-content' class="action-modal-content" style="max-width: 500px;">
+				
+					<div id='modal-heading'>
+					</div>
+					
+					<div id='modal-text' style="text-align: center;">
+					</div>
+					
+					<div class="wrapper" style="text-align: center;">
+						<button type='submit' class='btn btn-primary' id='triggerLogin' onclick="verifyDetails()">Submit</button>
+						<button type='submit' class='btn btn-primary' id='closeButton'>close</button>
+					</div>
+				</div>
+			</div>
+   		</div>
+		<!---------------------------------------------------------------- Footer ------------------------------------------>
+        <div th:replace="./common/footer.html"></div>
+    
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/jquery-3.6.0.min.js'></script>
+	<script>
+		let mobile;
+		
+		$(document).ready(function(e) {
+	
+			$('#loginBtn').prop('disabled', false);
+	
+			$('#loginTypeSelect').on('change', function(event){
+	
+				var selectedText = $(this).find("option:selected").text();
+				if( selectedText == "Select Login Type" )
+					alert('Please select a login type');
+				$('#userId').attr("placeholder", selectedText);
+				
+			});
+			
+			$('#loginBtn').click(function(event){
+	
+				event.preventDefault();
+				
+// 				$.ajax({
+// 		             type: 'POST',
+// 		             url: '/studentportal/login',
+// 		             data: {
+// 		                 userId: "ENTER_LEAD_USERID_HERE",
+// 		                  password: "ENTER_LEAD_PASSWORD_HERE"
+// 		             },
+// 		             success: function (data) {
+// 		                 $(".error_msg").text(data);
+// 		             }
+// 		         }); 
+				
+// 			    $.ajax({
+// 		             type: 'POST',
+// 		             url: '/acads/login',
+// 		             data: {
+// 		                 userId: "ENTER_LEAD_USERID_HERE",
+// 		                  password: "ENTER_LEAD_PASSWORD_HERE"
+// 		             },
+// 		             success: function (data) {
+// 		                 $(".error_msg").text(data);
+// 		             }
+// 		         }); 
+	
+// 		        $.ajax({
+// 		             type: 'POST',
+// 		             url: '/exam/login',
+// 		             data: {
+// 		                 userId: "ENTER_LEAD_USERID_HERE",
+// 		                  password: "ENTER_LEAD_PASSWORD_HERE"
+// 		             },
+// 		             success: function (data) {
+// 		                 $(".error_msg").text(data);
+// 		             }
+// 		         });
+	
+				let userId = $('#userId').val();
+				let loginType = $('#loginTypeSelect').val();
+				let selectedText = $('#loginTypeSelect').find("option:selected").text();
+	
+				if ( loginType == "NA"){
+					$('#triggerLogin').hide();
+					$('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b> Warning </b></p>' );
+					$('#modal-text').html('<p>Please select a login type.</p>');
+					$('#modal').show();
+					return;
+				}else if( userId==null || userId=="" || typeof userId == "undefined" ){
+					$('#triggerLogin').hide();
+					$('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b> Warning </b></p>' );
+					$('#modal-text').html('<p>Please enter your '+selectedText+'.</p>');
+					$('#modal').show();
+					return;
+				}
+	
+				$('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> <b> Error </b></p>' );
+				
+				if( loginType == "Email" ){
+	
+					if( !isEmail(userId) ){
+						$('#triggerLogin').hide();
+						$('#modal-text').html('<p>Incorrect email id, please enter a valid email id.</p>');
+						$('#modal').show();
+						return;
+					}
+				}else if( loginType == "Mobile_No__c" ){
+	
+					if( !Number(userId) || userId.length < 10 || userId.length > 10 ){
+						$('#triggerLogin').hide();
+						$('#modal-text').html('<p>Incorrect mobile number, please enter a valid mobile number.</p>');
+						$('#modal').show();
+						return;
+					}
+				}else if( loginType == "nm_RegistrationNo__c" ) {
+	
+					if( !Number(userId) ){
+						$('#triggerLogin').hide();
+						$('#modal-text').html('<p>Incorrect registration number, please enter a valid registration number.</p>');
+						$('#modal').show();
+						return;
+					}
+				}
+									
+				let body = {
+							'userId' : userId,
+							'loginType' : loginType
+						};
+	
+				$.ajax({
+					type : "POST",
+					url : "/studentportal/getLoginDetailsForLeads",
+					contentType : "application/json",
+					data : JSON.stringify(body),
+					dataType: 'json',
+					success: function(data) {              
+	
+						mobile = data.mobile;
+						sendOtp(data.mobile, data.emailId);
+						return;
+					    	
+				     },
+					error: function(error){
+	
+						let loginType;
+						let response = JSON.parse(error.responseText);
+				        $('#triggerLogin').hide();
+				        
+				        switch( response.loginType ){
+				        	case "nm_RegistrationNo__c":
+				        		loginType = 'registration number.';
+					        	break;
+				        	case "Mobile_No__c":
+				        		loginType = 'mobile number.';
+					        	break;
+				        	case "Email":
+				        		loginType = 'email id.';
+					        	break;
+				        }
+				        
+						$('#modal-text').html('<p>'+response.errorMessage+' for ' + loginType + '</p>');
+						$('#modal').show();
+				            
+				   	}
+				});
+				
+			});
+	
+			$('#closeButton').on('click', function(){
+	
+				$('#modal').hide();
+	
+			});
+			
+			//////Enter Method for submitting form//////
+		    $(document).keypress(function (e) {
+		    	var key = e.which;
+		    	console.log('enter key pressed: '+key)
+		        if(key == 13){
+		        	verifyDetails(event)
+		            return false;
+		        }
+		     });
+		     document.getElementById("userId").focus();
+		});
+	
+		
+		function verifyDetails(event){
+	
+			let otp = $('#otp').val();
+	
+			let verifyDetails = {
+				'mobile' : mobile,
+				'otp' : otp
+			}
+			
+			$.ajax({
+				type : 'POST',
+				url : '/studentportal/verifyRequestOTP',
+				data : JSON.stringify(verifyDetails),
+				contentType : "application/json;",
+				complete: function (xhr, status) {
+					console.log('xhr: '+xhr)
+			        if (status === 'error' || !xhr.responseText) {
+	
+						$('#triggerLogin').show();
+						$('#modal-heading').html( "<p style='text-align: center; font-size: 1em'><i class='fa fa-key'></i> <b>Enter Code</b></p>" );
+			        	$('#modal-text').html('<p>Incorrect OTP, please try again.</p> <br> <input type=text id="otp" placeholder=Enter OTP  class="form-control"  required=required/>');
+						$('#modal').show();
+						$('#otp').focus();
+						return;
+						
+			        }
+			        else {
+						$('#leadLogin').submit();
+						
+						$('body').prepend(' <div id="fullPageLoading"> <div class="modal-backdrop fade in"></div> <div id="loader-container"> <div id="loader"></div> <div> Please wait... </div> </div> </div>')
+			        }
+				} 
+			});
+	
+		}
+	
+		function sendOtp(mobile_number, email){
+	
+			let otpDetails = {
+				'mobile' : mobile_number,
+				'emailId' : email,
+				'deviceType' : 'ios'
+			}
+	
+			$.ajax({
+				type : "POST",
+				url : "/studentportal/requestOTP",
+				contentType : "application/json",
+				data : JSON.stringify(otpDetails),
+			    dataType: 'json',
+			    cache: false,
+			    complete: function (xhr, status) {
+					console.log('xhr: '+xhr)
+			        if (status === 'error' || !xhr.responseText) {
+						alert("An error occured while registering, please try again later.")
+			        }
+			        else {
+				        
+						if (xhr.status == 200) {
+							
+							$('#triggerLogin').show();
+							$('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-key"></i> <b>Enter Code</b></p>' );
+							$('#modal-text') .html('<p>We have sent you a SMS on mobile number '+ mobile_number+ ' with a 4 digit verification code</p> <br> <input type=text id="otp" placeholder=Enter OTP  class="form-control"  required=required/>');
+							$('#modal').show();
+							$('#otp').focus();
+						}else{
+	
+							$('#modal-heading').html( '<p style="text-align: center; font-size: 1em"><i class="fa fa-key"></i> <b>Enter Code</b></p>' );
+							$('#modal-text') .html('<p>We have encountered an error, please try again.')
+							$('#modal').show();
+						}
+			        }
+				} 
+			});
+	
+		}
+		
+		function isEmail(emailId) {
+			
+			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+			console.log(regex.test(emailId))
+			return regex.test(emailId);
+			
+		}
+	
+		function checkForMobile(mobileNumber){
+			index = mobileNumber.charAt(0);
+			if(index == '7' || index == '8' || index == '9'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+	</script>
+	<script src='https://d3udzp2n88cf0o.cloudfront.net/js/logout_for_sso.js'></script>
+</body>
+</html>

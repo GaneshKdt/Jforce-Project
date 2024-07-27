@@ -1,0 +1,71 @@
+<div th:fragment="adminCSheaderbar(roles)" th:remove="tag">
+<th:block th:with="isExternallyAffiliatedForProducts=${session.isExternallyAffiliatedForProducts != null} ? ${session.isExternallyAffiliatedForProducts} : false ,
+isCSSpeaker=${session.isCSSpeaker != null} ? ${session.isCSSpeaker} : false ,
+isCSAdmin=${session.isCSAdmin != null} ? ${session.isCSAdmin} : false ,
+isCSSessionsAdmin=${session.isCSSessionsAdmin != null} ? ${session.isCSSessionsAdmin} : false ,
+isCSProductsAdmin=${session.isCSProductsAdmin != null} ? ${session.isCSProductsAdmin} : false">
+<!-- CAREER SERVICES ADMIN HEADER-->
+				<li class="has-sub-menu"
+					th:if="${isExternallyAffiliatedForProducts or isCSSpeaker or isCSAdmin or isCSSessionsAdmin or isCSProductsAdmin}"><a
+					href="#">Career Services</a>
+					<ul class="sz-sub-menu subMenu">
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/jobsearch/hiringCompanies"
+							style="font-weight: 700; font-size: 16px; text-align: start;">Hiring
+								Companies</a></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/jobsearch/jobs"
+							style="font-weight: 700; font-size: 16px; text-align: start;">Jobs</a></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><b
+							style="color: white">Package set up</b></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/careerservices/addPackageFamily">View Package Families
+								Details</a></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/careerservices/addUpgradePath">View Upgrade Paths
+								Details</a></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/careerservices/allFeatures">View Features Details</a></li>
+						<li th:if="${isCSAdmin} or ${isCSProductsAdmin}"><a
+							href="/careerservices/addPackage">View Packages Details</a></li>
+
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><b
+							style="color: white">Session set up</b></li>
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><a
+							href="/careerservices/addScheduledSessionForm">Direct Session
+								Creation</a></li>
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><a
+							href="/careerservices/batchSessionSchedulingForm">Upload
+								Session By Excel</a></li>
+						<li
+							th:if="(${isCSAdmin} or ${isCSSessionsAdmin}) and ${!isExternallyAffiliatedForProducts}"><a
+							href="/careerservices/autoScheduleForm">Create Webinar Links</a></li>
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><a
+							href="/careerservices/searchScheduledSessionForm">Search
+								Generated Schedule</a></li>
+
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><b
+							style="color: white">Misc. </b></li>
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><a
+							href="/careerservices/addVideoContent">Add/View Video Content
+								Details</a></li>
+						<li
+							th:if="(${isCSAdmin} or ${isCSSessionsAdmin}) and ${!isExternallyAffiliatedForProducts}"><a
+							href="/careerservices/addFeedbackQuestion">Add/View Feedback
+								Questions</a></li>
+						<li th:if="${isCSAdmin} or ${isCSSessionsAdmin}"><a
+							href="/careerservices/addCSFaculty">Add/View Faculties
+								assigned to CS</a></li>
+
+						<li th:if="${isCSAdmin and !isExternallyAffiliatedForProducts}"><b
+							style="color: white">Administrator Tools. </b></li>
+						<li><a href="/careerservices/showAllStudentsAndPackages">Show
+								All Students Info</a></li>
+						<li><a href="/careerservices/showAllStudentFeedback">Show
+								All Session Feedback</a></li>
+						<li><a href="/careerservices/showAllSessionQueryStatus">Show
+								All Session Query And Status</a></li>
+					</ul></li>
+				<!-- CAREER SERVICES ADMIN HEADER END-->
+</th:block>
+</div>

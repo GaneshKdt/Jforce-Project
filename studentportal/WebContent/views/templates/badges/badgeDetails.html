@@ -1,0 +1,233 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+		.congrats {
+			padding: 20px 10px;
+			text-align: center;
+		}
+		#modalTitle {
+			transform-origin: 50% 50%;
+			font-family: 'Sigmar One', cursive;
+			cursor: pointer;
+			z-index: 2;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+		.blob {
+			height: 50px;
+			width: 50px;
+			color: #ffcc00;
+			position: absolute;
+			top: 45%;
+			left: 45%;
+			z-index: 1;
+			font-size: 30px;
+			display: none;
+		}
+		#outer-content{
+			padding: 50px 1em 0 1em !important;
+		}
+		.icon_claimed{
+			fill: #2BAB9C;
+		}
+		.icon_not_claimed{
+			fill: #d2d2d2;
+		}
+		@media (max-width: 1024px) {.panel-body{margin-top: 30px;}}
+		@media (max-width: 768px) {.panel-body{margin-top: 75px;}}
+		@media (max-width: 425px) {.panel-body{margin-top: 90px;}}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
+</head>
+<body>
+	<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"></div>
+	<div th:replace="templates/fragments/common/header :: headerbar"></div> 
+	<div class="sz-main-content-wrapper">
+	 	<div th:replace="templates/fragments/common/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;My Badges')"></div>	
+		<div class="sz-main-content menu-closed">
+            <div class="sz-main-content-inner">
+            	<div id="sticky-sidebar"></div> 
+    			<div th:include="templates/fragments/common/left-sidebar :: left-sidebar(activeMenu='My Badges')"></div>
+    			<div class="sz-content-wrapper dashBoard">
+      				<div th:include="templates/fragments/common/studentInfoBar :: studentInfoBar" class="studentInfo"></div>
+      				<div id="outer-content" class="sz-content">
+      				
+						<div class="container-fluid">							
+							<div class="alert alert-danger alert-dismissible fade show" role="alert" id="messages" style="display:none;">
+							  <strong>Error!</strong> <span id="errorMessage"></span>
+							  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" id="errorButton"></button>
+							</div>
+							<div class="panel-body py-2">
+								<h4 class="red text-danger text-capitalize fw-bold">Badge Details</h4>
+								<div class="row bg-white px-4 py-4 shadow">
+									<div class="col-lg-6 col-md-9 col-12">
+										<div class="row">
+											<div class="col-lg-6 col-md-6 col-12">
+												<img th:class="${(badgesDetails.isBadgeIssued == 0 || badgesDetails.isClaimed == 0 || badgesDetails.isRevoked == 1) ? 'opacity-50 img-fluid' : 'img-fluid'}" th:src="${badgesDetails.attachment}" th:title="${badgesDetails.badgeName}" alt="Badge Image" /> 
+												<span th:class="${(badgesDetails.isBadgeIssued == 0) ? 'fa-solid fa-2x fa-lock' : ''}" style="position: absolute; top: 15%; left: 11%; transform: translate(-50%, -50%); z-index: 1;"></span>
+											</div>
+											<div class="col-lg-6 col-md-6 col-12">
+												<div>
+													<h5 class="fw-bold text-capitalize" th:text="${badgesDetails.badgeName}"></h5>
+													<p class="card-title fw-normal text-capitalize">Awarded For <span class="fw-semibold" th:text="${badgesDetails.awardedAt}"></span></p>
+													<div th:if="${badgesDetails.isBadgeIssued != 0}">
+														<p class="fw-normal">Issued on <span class="fw-semibold" th:text="${badgesDetails.dateissued}"></span></p>
+														<p class="fw-normal" th:text="${badgesDetails.badgeDescription}"></p>
+													</div>
+													<div th:if="${badgesDetails.isBadgeIssued != 0 &amp;&amp; badgesDetails.isRevoked == 0}" class="text-uppercase">
+														<svg th:class="${badgesDetails.isClaimed == 1 ? 'icon_claimed' : 'icon_not_claimed'}" viewBox="0 0 200 24">
+											                <path d="M12 1C5.935 1 1 5.935 1 12C1 18.065 5.935 23 12 23C18.065 23 23 18.065 23 12C23 5.935 18.065 1 12 1ZM10.585 16.4925L6.3425 12.25L7.7575 10.835L10.585 13.6625L16.2425 8.005L17.6575 9.42L10.585 16.4925Z"></path>
+											                <text x="25" y="16" font-size="12" font-weight="bold" >Claimed</text>
+										            	</svg>
+													</div>
+													<div th:if="${badgesDetails.isRevoked == 1}" class="text-uppercase">
+														<svg viewBox="0 0 200 24">
+															<path d="M22.7,17.5l-8.1-14c-0.8-1.4-2.7-1.9-4.1-1.1C10,2.7,9.6,3.1,9.4,3.5l-8.1,14c-0.8,1.4-0.3,3.3,1.1,4.1c0.5,0.3,1,0.4,1.5,0.4h16.1c1.7,0,3-1.4,3-3C23.1,18.4,22.9,17.9,22.7,17.5z M12,18c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,18,12,18z M13,13c0,0.6-0.4,1-1,1s-1-0.4-1-1V9c0-0.6,0.4-1,1-1s1,0.4,1,1V13z" style="fill:#3b3b3b;"></path>
+															<text x="25" y="16" font-size="12" font-weight="bold" fill="#3b3b3b">Revoked</text>
+														</svg>
+													</div>
+												</div>
+												<div th:if="${badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 0 
+												|| badgesDetails.isClaimed == 0 || badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 0 
+												|| badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 1}">
+													<div class="card-footer">
+														<div class="row">
+															<div th:if="${badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 0}" class="col col-sm-6 col-md-6 col-lg-6">
+
+																<input type="button" class="btn btn-primary fw-bold btn-sm btn-block" value="Share" id="sharebtn" data-bs-toggle="modal" data-bs-target="#shareableLink"/>
+																<!-- <input type="button" class="btn btn-primary fw-bold btn-sm btn-block" value="Share On LinkedIn" id="sharebtn" th:attr="onclick=|shareOnLinkedinHandler('${linkedinCredentials.client_id}', '${linkedinCredentials.scope}', '${linkedinCredentials.code}', '${linkedinCredentials.redirect_uri}' ,'${badgesDetails.uniquehash}')|" /> -->
+
+															</div>
+
+															<div th:if="${badgesDetails.isClaimed == 0}"
+																class="col-sm-6 col-md-6 col-lg-6">
+																<input type="button" class="btn btn-danger fw-bold btn-sm btn-block" value="Claim My Badge" th:attr="onclick=|claimedMyBadge('${badgesDetails.uniquehash}')|"/>
+															</div>
+															<div th:if="${badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 0}"
+																class="col col-sm-6 col-md-6 col-lg-6">
+																<input type="button" class="btn btn-danger fw-bold btn-sm btn-block" value="Revoke My Badge" th:attr="onclick=|revokedMyBadge('${badgesDetails.uniquehash}')|"/>
+															</div>
+															<div th:if="${badgesDetails.isClaimed == 1 &amp;&amp; badgesDetails.isRevoked == 1}" class="col-sm-6 col-md-6 col-lg-6">
+																<input type="button" class="btn btn-info fw-bold btn-sm btn-block" value="Reclaim My Badge" th:attr="onclick=|reclaimedMyBadge('${badgesDetails.uniquehash}')|"/>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 col-md-3 col-12 text-center">
+										<p>Issued By</p>
+										<p class="fs-6 text-danger" th:text="${badgesDetails.issuername}"></p>
+									</div>
+								</div>
+								<div class="row bg-white my-3 px-3 py-3 shadow">
+									<div class="col-lg-3 col-md-12 col-12">
+										<p class="fs-6 text-uppercase">Earning Criteria</p>
+										<p class="text-secondary">Recipients must complete the earning criteria to earn this Badge</p>
+									</div>
+									<div class="col-lg-9 col-md-12 col-12">
+										<p th:text="${badgesDetails.criteriaDescription}"></p>
+									</div>
+								</div>
+								<div th:if="${badgesDetails.isBadgeIssued != 0}" class="row bg-white my-3 px-3 py-3 shadow">
+									<div class="col-lg-3 col-md-12 col-12">
+										<p class="fs-6 text-uppercase">Evidence</p>
+										<p class="text-secondary">Proof that the recipient met the earning criteria</p>
+									</div>
+									<div th:each="evidenceBean : ${badgesDetails.evidenceBeanList}" class="col-lg-9 col-md-12 col-12">
+										<p th:text="${evidenceBean.evidenceValue}"></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						
+					</div>
+    			</div>
+    		</div>
+   	 	</div>
+    </div> 
+    <div class="modal fade" id="claimedModal" role="dialog">
+	    <div class="modal-dialog modal-md">
+	        <div class="modal-content" style="border-radius: 5px;">
+	            <div class="modal-header congrats" style="background-color: #E24A4A; color: white; border-radius: 5px 5px 0px 0px;">
+	                <h4 class="modal-title" id="modalTitle" style="color: white; text-transform: capitalize; text-align: center; font-size: 1.5rem;">Congratulations!</h4>
+	            </div>
+	            <div class="modal-body" style="overflow: hidden; text-align: center;">
+	                <div class="row">
+	                	<div class="col-sm-12 col-md-12 col-lg-12">
+	                    	<strong class="text-size-12 font-weight-bold text-center">You have completed the criteria for this badge. <br/>Please claim this badge to be able to add it in your profile</strong>
+	                    </div>                    
+	                </div>
+	                <div class="row">
+	                    <div class="col-sm-12 col-md-12 col-lg-12">                        
+	                    	<input type="button" class="btn btn-outline-danger" value="Claim My Badge" th:attr="onclick=|claimedMyBadge('${badgesDetails.uniquehash}')|"/>                        
+	                    </div>
+	                </div>
+	            </div>
+	           
+	        </div>
+	    </div>
+	</div> 
+	<div class="modal fade" id="shareableLink" tabindex="-1" aria-labelledby="shareableLink" aria-hidden="true">
+  		<div class="modal-dialog modal-md">
+    		<div class="modal-content" style="border-radius: 5px;">
+      			<div class="modal-header">
+        			<h1 class="modal-title fs-5" id="shareableLink">Share Badge</h1>
+        			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      			</div>
+			    <div class="modal-body" style="overflow: hidden;">
+	    
+			    <button class="btn btn-outline-secondary" style="border-radius: 5px; background-color: transparent; width: 120px;" 
+			    	id="sharebtn" th:attr="onclick=|shareOnLinkedinHandler('${linkedinCredentials?.client_id ?: ''}', '${linkedinCredentials?.scope ?: ''}', '${linkedinCredentials?.code ?: ''}', '${linkedinCredentials?.redirect_uri ?: ''}' ,'${badgesDetails?.uniquehash ?: ''}')|">
+						<i class="fa-brands fa-linkedin" style="font-size: 80px; color: #2867B2;"></i>
+					</button>
+			    								
+					<div class="input-group mb-3" style="margin-top:50px">
+					<div class="d-flex flex-row">
+					  <input type="text" class="form-control flex-grow-1" id="shareableLink" placeholder="Shareable Url" aria-label="shareableLink" aria-describedby="basic-addon2" 
+					  		th:value="${badgesDetails.url == null &amp;&amp; badgesDetails.uniquehash == null ? ' ' : badgesDetails.url + badgesDetails.uniquehash}" style="min-width: 400px"/>
+					  
+					  <div class="input-group-append">				  
+					    <button class="btn btn-outline-secondary" style="border: 1px solid #6C757D; border-radius: 5px; background-color: #F4F5F7; color: #6C757D; min-width: 50px;" 
+					    		th:attr="onclick=|copyLinkHandler('${badgesDetails.url}', '${badgesDetails.uniquehash}')|">
+			 				<svg id="clipBoard" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-clipboard" viewBox="0 0 16 16">
+							  	<path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+							  	<path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+							</svg>
+
+							<span class="position-absolute top-0 start-100 translate-middle badge bg-light text-dark" id="copiedText" style="display: none;">Copied!</span>
+
+							<svg id="checkMark" width="25" height="20" viewBox="0 0 9 8" fill="blue" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+								<path d="M6.96963 0.96967C7.26253 0.676777 7.7374 0.676777 8.03029 0.96967C8.31959 1.25897 8.32314 1.72582 8.04094 2.01947L4.04873 
+									7.00973C4.04297 7.01693 4.03682 7.02381 4.03029 7.03033C3.7374 7.32322 3.26253 7.32322 2.96963 7.03033L0.323186 4.38388C0.0302923 
+									4.09099 0.0302923 3.61612 0.323186 3.32322C0.616079 3.03033 1.09095 3.03033 1.38385 3.32322L3.47737 5.41674L6.94974 0.992105C6.95592 
+									0.984235 6.96256 0.976743 6.96963 0.96967Z" 
+									fill="blue"/>
+							</svg>							
+						</button>
+					  </div>
+					</div>
+					</div>
+			    </div>
+		      	<div class="modal-footer">
+		        	<input type="button" class="btn btn-outline-primary" value="Open in a New Window" 
+		        		th:attr="onclick=|openShareUrlHandler('${badgesDetails.url}', '${badgesDetails.uniquehash}')|"/>
+		      	</div>
+    		</div>
+  		</div>
+	</div>
+	<div th:include="templates/fragments/common/footer :: footer"></div>
+	
+	<script th:inline="javascript">
+		var isClaimed = /*[[${badgesDetails.isClaimed}]]*/ -1;
+		/*NOTE: isClaimed variable is initialized here and value is available in the external js*/
+	</script>
+	
+	<script th:src="@{/assets/js/badges/badgeDetails.js}"></script>
+</body>
+</html>

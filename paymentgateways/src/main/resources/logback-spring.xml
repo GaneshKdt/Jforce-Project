@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+	<property name="catalina-base" value="${catalina.base}/logs/paymentgateways_logs" />
+ 	
+ 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level %C{1.}.%M\(%line\) - %m%n
+            </Pattern>
+        </layout>
+    </appender>
+    
+    <appender name="paymentgateways" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/paymentgateways/%d{yyyy-MM,aux}/paymentgateways-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="razorpay_webhook" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/razorpay_webhookcalls/%d{yyyy-MM,aux}/razorpay_webhook-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="razorpay_payments" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/razorpay_payments/%d{yyyy-MM,aux}/razorpay_payments-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="payment_scheduler" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) [%thread] - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- each file should be at most 100MB -->
+	       <maxFileSize>100MB</maxFileSize>    
+            <fileNamePattern>${catalina-base}/payment_scheduler/%d{yyyy-MM,aux}/payment_scheduler-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="billdesk_payments" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) [%thread] - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- each file should be at most 100MB -->
+	       <maxFileSize>100MB</maxFileSize>    
+            <fileNamePattern>${catalina-base}/billdesk_payments/%d{yyyy-MM,aux}/billdesk_payments-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <appender name="paytm_payments" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) [%thread] - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- each file should be at most 100MB -->
+	       <maxFileSize>100MB</maxFileSize>    
+            <fileNamePattern>${catalina-base}/paytm_payments/%d{yyyy-MM,aux}/paytm_payments-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+<appender name="paytm_webhook" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/paytm_webhook/%d{yyyy-MM,aux}/paytm_webhook-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+                
+    <appender name="payment_logs" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/payment_logs/%d{yyyy-MM,aux}/payment_logs-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+ <appender name="ccavenue_logger" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) [%thread] - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- each file should be at most 100MB -->
+	       <maxFileSize>100MB</maxFileSize>    
+            <fileNamePattern>${catalina-base}/ccavenue_logger/%d{yyyy-MM,aux}/ccavenue_logger-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+    
+    <root level="info">
+		<appender-ref ref="paymentgateways" />
+    </root>
+    
+    <logger name="payment_scheduler" level="info" additivity="false">
+        <appender-ref ref="payment_scheduler" />
+    </logger>
+    
+    <logger name="payment_logs" level="info" additivity="false">
+        <appender-ref ref="payment_logs" />
+    </logger>
+    
+    
+    <logger name="razorpay_webhook" level="info" additivity="false">
+        <appender-ref ref="razorpay_webhook" />
+    </logger>
+    
+    <logger name="razorpay_payments" level="info" additivity="false">
+        <appender-ref ref="razorpay_payments" />
+    </logger>
+     
+    <logger name="billdesk_payments" level="info" additivity="false">
+        <appender-ref ref="billdesk_payments" />
+    </logger>
+    
+
+      <logger name="ccavenue_logger" level="info" additivity="false">
+        <appender-ref ref="ccavenue_logger" />
+</logger>
+    <logger name="paytm_webhook" level="info" additivity="false">
+        <appender-ref ref="paytm_webhook" />
+    </logger>
+    
+    <logger name="paytm_payments" level="info" additivity="false">
+        <appender-ref ref="paytm_payments" />
+    </logger>
+    
+</configuration>

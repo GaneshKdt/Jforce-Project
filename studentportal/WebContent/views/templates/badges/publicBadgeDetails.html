@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<style>
+		@import url(https://fonts.googleapis.com/css?family=Sigmar+One);
+		.congrats {
+			padding: 20px 10px;
+			text-align: center;
+		}
+		#modalTitle {
+			transform-origin: 50% 50%;
+			font-family: 'Sigmar One', cursive;
+			cursor: pointer;
+			z-index: 2;
+			position: absolute;
+			top: 0;
+			width: 100%;
+		}
+		.blob {
+			height: 50px;
+			width: 50px;
+			color: #ffcc00;
+			position: absolute;
+			top: 45%;
+			left: 45%;
+			z-index: 1;
+			font-size: 30px;
+			display: none;
+		}
+		#outer-content{
+			padding: 50px 1em 0 1em !important;
+		}
+		.icon_claimed{
+			fill: #2BAB9C;
+		}
+		.icon_not_claimed{
+			fill: #d2d2d2;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.0/TweenMax.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.13.1/underscore-min.js"></script>
+</head>
+<body>
+	<div th:replace="templates/fragments/common/jscssNew :: jscssbar(title='Welcome to Student Zone')"></div>
+	<div class="container-fluid px-2 py-2">
+		<div class="sz-logo">
+			<img th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/images/logo.png'" class="img-responsive" alt="" /> 
+		</div>
+	</div>
+	<div class="sz-main-content menu-closed">
+		<div class="sz-main-content-inner">
+			<div id="sticky-sidebar"></div>
+			<div class="dashBoard px-5">
+				<div id="outer-content" class="sz-content">
+					
+					<div class="container-fluid">
+						<div th:if="${badgesDetails.isRevoked == 0}" class="panel-body py-2">
+							<h4 class="red text-danger text-capitalize fw-bold">Badge Details</h4>
+							<div class="row bg-white px-4 py-4 shadow">
+								<div class="col-lg-6 col-md-9 col-12">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-12">
+											<img th:class="${(badgesDetails.isBadgeIssued == 0 || badgesDetails.isClaimed == 0 || badgesDetails.isRevoked == 1) ? 'opacity-50 img-fluid' : 'img-fluid'}" th:src="${badgesDetails.attachment}" th:title="${badgesDetails.badgeName}" alt="Badge Image" /> 
+											<span th:class="${(badgesDetails.isBadgeIssued == 0) ? 'fa-solid fa-8x fa-lock' : ''}" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;"></span>
+										</div>
+										<div class="col-lg-6 col-md-6 col-12">
+											<div>
+												<h5 class="fw-bold text-capitalize" th:text="${badgesDetails.badgeName}"></h5>
+												<p class="card-title fw-normal text-capitalize">Awarded For <span class="fw-semibold" th:text="${badgesDetails.awardedAt}"></span></p>
+												<div th:if="${badgesDetails.isBadgeIssued != 0}">
+													<p class="fw-normal">Issued on <span class="fw-semibold" th:text="${badgesDetails.dateissued}"></span></p>
+													<p class="fw-normal" th:text="${badgesDetails.badgeDescription}"></p>
+													<div th:if="${badgesDetails.isBadgeIssued != 0 &amp;&amp; badgesDetails.isRevoked == 0}" class="text-uppercase">
+														<svg th:class="${badgesDetails.isClaimed == 1 ? 'icon_claimed' : 'icon_not_claimed'}" viewBox="0 0 200 24">
+											                <path d="M12 1C5.935 1 1 5.935 1 12C1 18.065 5.935 23 12 23C18.065 23 23 18.065 23 12C23 5.935 18.065 1 12 1ZM10.585 16.4925L6.3425 12.25L7.7575 10.835L10.585 13.6625L16.2425 8.005L17.6575 9.42L10.585 16.4925Z"></path>
+											                <text x="25" y="16" font-size="12" font-weight="bold" >Claimed</text>
+										            	</svg>
+										            	<div th:if="${badgesDetails.isRevoked == 1}" class="text-uppercase">
+										            		<svg viewBox="0 0 200 24">
+											            		<path d="M22.7,17.5l-8.1-14c-0.8-1.4-2.7-1.9-4.1-1.1C10,2.7,9.6,3.1,9.4,3.5l-8.1,14c-0.8,1.4-0.3,3.3,1.1,4.1c0.5,0.3,1,0.4,1.5,0.4h16.1c1.7,0,3-1.4,3-3C23.1,18.4,22.9,17.9,22.7,17.5z M12,18c-0.6,0-1-0.4-1-1s0.4-1,1-1s1,0.4,1,1S12.6,18,12,18z M13,13c0,0.6-0.4,1-1,1s-1-0.4-1-1V9c0-0.6,0.4-1,1-1s1,0.4,1,1V13z" style="fill:#3b3b3b;"></path>
+																<text x="25" y="16" font-size="12" font-weight="bold" fill="#3b3b3b">Revoked</text>
+															</svg>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6 col-md-3 col-12 text-center">
+									<p>Issued By:</p>
+									<p class="fs-6 text-danger" th:text="${badgesDetails.issuername}"></p>
+								</div>
+							</div>
+							<div class="row bg-white my-3 px-3 py-3 shadow">
+								<div class="col-lg-3 col-md-12 col-12">
+									<p class="fs-6 text-uppercase">Earning Criteria</p>
+									<p class="text-secondary">Recipients must complete the earning criteria to earn this Badge</p>
+								</div>
+								<div class="col-lg-9 col-md-12 col-12">
+									<p th:text="${badgesDetails.criteriaDescription}"></p>
+								</div>
+							</div>
+							<div th:if="${badgesDetails.isBadgeIssued != 0}" class="row bg-white my-3 px-3 py-3 shadow">
+								<div class="col-lg-3 col-md-12 col-12">
+									<p class="fs-6 text-uppercase">Evidence</p>
+									<p class="text-secondary">Proof that the recipient met the earning criteria</p>
+								</div>
+								<div th:each="evidenceBean : ${badgesDetails.evidenceBeanList}" class="col-lg-9 col-md-12 col-12">
+									<p th:text="${evidenceBean.evidenceValue}"></p>
+								</div>
+							</div>
+							
+							<div th:if="${isLinkGeneratedFromFC == 'Y'}">
+								<a id="courseCompletionBadgeUrl" name="submit" class="btn btn-danger" target="_blank"
+       								th:href="${@environment.getProperty('S3_WATERMARK_CERTIFICATE_PATH') + filepath}">
+        							View Final Certificate
+    							</a>
+    						
+	    						<div class="row">
+	    							<h4>Note : &nbsp;</h4>
+									<div class="row">
+										<div class="row" >
+										    <p style="color: red;">
+										        This verification being provisional in nature requires further authorization from NMIMS University.
+										        For credentials verification, please log on to
+										        <a target="_blank" th:href="'https://nmims.edu/education-verification'">https://nmims.edu/education-verification</a>
+										        and send mail to <a th:href="'mailto:edu.verification@nmims.edu'">edu.verification@nmims.edu</a>
+										    </p>
+									    </div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div th:unless="${badgesDetails.isRevoked == 0}" class="panel-body py-2">
+							<div class="row bg-white px-4 py-4 shadow">
+								<p class="fs-5 pt-3">Sorry, Badge is Revoked...</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

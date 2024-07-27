@@ -1,0 +1,55 @@
+<div th:fragment="studentInfoBar">
+	<th:block
+		th:with="userId=${session.userId},user=${session.user_studentportal},studentBean=${session.student_studentportal},isLoginAsLead=${session.isLoginAsLead}
+,noOfAnnouncemntsInHeader=(!${#strings.isEmpty(session.announcementsPortal)} ? ${session.announcementsPortal.size()} : 0),
+ validity=${studentBean.validityEndMonth}+' '+${studentBean.validityEndYear}, studentPhotoUrl=${studentBean.imageUrl},
+ validityEndDate=${session.validityEndDate}">
+		<style>
+@media ( min-width : 480px) {
+	.student-info-bar .mobile-menu {
+		display: none;
+	}
+}
+</style>
+<script src="https://d3q78eohsdsot3.cloudfront.net/assets/js/main2.js"></script>
+		<!--Top Student Profile bar -->
+		<div id="main-content-info-bar" class="student-info-bar">
+			<div class="mobile-menu visible-xs">
+				<div class="row">
+					<div class="col-4 col-xs-4">
+						<a href="#" id="mobileToggleNav"> <i class="fa fa-bars"
+							aria-hidden="true"></i>
+						</a>
+					</div>
+
+					<div class="col-8 col-xs-8 text-end">
+						<a href="/studentportal/student/updateProfile"><span
+							class="icon-my-profile"></span></a> <a href="/logout"><span
+							class="icon-logout"></span></a> <a href="#mobile-announcements"
+							id="mobileNotification"><span class="icon-no-announcements"></span><span
+							class="count" th:text="${noOfAnnouncemntsInHeader}"></span></a>
+					</div>
+					</div>
+				</div>
+				<span class="student-image"
+					th:style="'background-image:url('+${studentBean.imageUrl}+');'"></span>
+				<h3 class="student-name"
+					th:text="${#strings.toUpperCase(studentBean.firstName)}+' '+${#strings.toUpperCase(studentBean.lastName)}"></h3>
+				<div class="text-lg-nowrap">
+					<ul class="student-info-list ">
+						<li class="hidden-xs" th:text="${studentBean.emailId}"></li>
+						<li class="hidden-xs" th:text="${studentBean.mobile}"></li>
+						<li class="hidden-xs" th:text="${studentBean.program}"></li>
+						<li th:if="${isLoginAsLead == 'false'}" th:text="${userId}"></li>
+						<!-- <fmt:parseDate value="${validityEndDate}" var="validityEndDate" pattern="yyyy/MM/dd" /> -->
+						<li th:if="${isLoginAsLead == 'false'}"
+							th:text="'Validity End: '+${validityEndDate}"></li>
+						<li th:unless="${isLoginAsLead == 'false'}"
+							th:text="${'Validity End: '+${validity}"></li>
+					</ul>
+					</div>
+					<!-- <a href="#" class="customize-btn hidden-xs">CUSTOMIZE</a> -->
+					<div class="clearfix"></div>
+				</div>
+	</th:block>
+</div>

@@ -1,0 +1,45 @@
+eureka:
+  client:
+    fetch-registry: true
+    fetchRegistry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULTZONE}
+  instance:
+    healthCheckUrlPath: /acads/health
+    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 1
+    statusPageUrlPath: /acads/info
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          context:
+            web:
+              ErrorPageFilter: 'off'
+security:
+  basic:
+    enabled: false
+server:
+  error:
+    whitelabel:
+      enabled: false
+  servlet-path: /acads
+spring:
+  application:
+    name: acads-service
+  datasource:
+    driver-class-name: ${mysql.datasource.driver-class-name}
+    password: ${mysql.datasource.password}
+    url: ${mysql.datasource.url}/portal?useSSL=false
+    username: ${mysql.datasource.username}
+  jmx:
+    default-domain: acads-service
+  profiles:
+    active: prod
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+  session:
+    store-type: redis

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	  xsi:schemaLocation="http://www.thymeleaf.org "> 
+	<head>
+		<style>
+		</style>
+	</head>
+
+	<body>
+		<h4>
+			<span th:text="${error}" />
+			<br/><br/>
+			<a href="/">Go Home</a>
+		</h4>
+		<br/>
+		<div style="display: none">
+			
+			<h4>
+				<span th:text="${errorHidden}" />
+			</h4>
+		</div>
+	</body>
+</html>

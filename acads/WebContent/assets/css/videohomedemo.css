@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+		.thumbnailDiv:hover .playIconStyle{
+			color:#d2232a !important;
+			}
+		
+		.thumbnailDiv:hover .videoThumbnail{
+			    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    			filter: grayscale(100%);
+			    -webkit-filter: blur(3px); /* Safari 6.0 - 9.0 */
+    			filter: blur(3px);
+		}
+		.playIconStyle{
+			transform: translate(-50%, -50%); 
+			color:#00000087 !important;
+		}
+       .pagination > li > a
+		{
+		    background-color: white;
+		    color: #337AB7;
+		}
+		

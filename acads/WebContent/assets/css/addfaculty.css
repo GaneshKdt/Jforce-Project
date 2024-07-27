@@ -1,0 +1,22 @@
+#countryCode::-webkit-outer-spin-button,
+#countryCode::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+#countryCode{
+	-moz-appearance: textfield;
+	padding:8px 5px 5px 30px;
+}
+#countryDiv{
+	position:relative; 
+	width: 20%;  
+}
+#countryLable{
+	position:absolute; 
+	left:10px; 
+	font-weight:normal; 
+	font-size:1.5em; 
+	width:20px; 
+	color:gray; 
+	top:2px;
+}

@@ -1,0 +1,274 @@
+ <div th:fragment="adminStudentheader(roles)" th:remove="tag" xmlns:th="http://www.thymeleaf.org"> 						
+ <!-- Student PORTAL HEADER -->
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Information Center') != -1)}">
+					<a href="#" title="Manage Users"><i class="fa fa-users fa-lg"
+						aria-hidden="true"></i></a>
+					<ul class="sz-sub-menu">
+						<li><a href="/studentportal/changeUserPassword">Change
+								User Password</a></li>
+								<li th:text="${roles}"></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1)}"><a
+							href="/studentportal/admin/createUserForm">Create Users in
+								LDAP</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1)}"><a
+							href="/studentportal/admin/createSingleUserForm">Create
+								Single User</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1)}"><a
+							href="/studentportal/searchUserAuthorizationForm">User
+								Authorization</a></li>
+					</ul>
+				</li>
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Acads Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) }">
+					<a href="#" title="Policy">Policy</a>
+					<ul class="sz-sub-menu">
+						<li><a href="/knowyourpolicy/admin/knowYourPolicy">Policy's</a></li>
+						<li><a href="/knowyourpolicy/admin/knowYourPolicyEntry ">Policy
+								Entry</a></li>
+						<li><a href="/knowyourpolicy/admin/knowYourPolicyCategory">Policy
+								Category</a></li>
+						<li><a href="/knowyourpolicy/admin/knowYourPolicySubCategory">Policy
+								Sub Category</a></li>
+					</ul>
+				</li>
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Acads Admin') != -1) || (#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) || (#strings.indexOf('__${roles}__','TEE Admin') != -1)}">
+					<a href="#" title="Announcements"> <i
+						class="fa-solid fa-bullhorn fa-lg"></i>
+				</a>
+					<ul class="sz-sub-menu">
+						<li><a href="/announcement/admin/addProgramAnnouncementForm">Create
+								Program Announcements</a></li>
+						<li><a href="/announcement/admin/addSubjectAnnouncementForm">Create
+								Subject Announcements</a></li>
+						<li><a href="/announcement/admin/addBatchAnnouncementForm">Create
+								Batch Announcements</a></li>
+						<li><a
+							href="/announcement/admin/viewAllAnnouncements?type=program">View
+								All Announcements</a></li>
+					</ul>
+				</li>
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Acads Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) }">
+					<a href="#" title="Email Notifications"><i
+						class="fa-solid fa-paper-plane fa-lg" aria-hidden="true"></i></a>
+					<ul class="sz-sub-menu">
+						<li><a href="/studentportal/emailTemplate">Email Template
+						</a></li>
+						<li><a href="/studentportal/sendEmailFromExcelForm">Send
+								Emails to Excel List</a></li>
+						<li><a href="/studentportal/sendEmailToStudentGroupForm">Send
+								Emails based on Groups</a></li>
+						<li><a href="/studentportal/downloadFeedBacks">Download
+								FeedBack Report</a></li>
+						<!-- Newly added by Vikas for download excel -->
+					</ul>
+				</li>
+				
+				<li class="has-sub-menu" th:if="${(#strings.indexOf('__${roles}__','Admin') != -1)}">
+             	<a href="#" title="MDM">MDM</a>
+                 <ul class="sz-sub-menu">
+                	 <li><a href="/exam/admin/consumerTypeForm">Consumer Type Entries</a></li>
+                	 <li><a href="/exam/admin/programStructureForm">Program Structure Entries</a></li>
+                	 <li><a href="/exam/admin/programTypeForm">Program Type Entries</a></li>
+                	 <li><a href="/exam/admin/specializationTypeForm">Specialization Entries</a></li>
+                	 <li><a href="/exam/admin/programForm">Program Entries</a></li>
+                	 <li><a href="/exam/admin/consumerProgramStructureMappingForm">Consumer Program Structure Mapping</a></li>  
+                	 <li><a href="/exam/admin/programDetailsForm">Program Details Entries</a></li>
+                	 <li><a href="/exam/admin/mdmSubjectCodeForm">Subject Data Entries</a></li>
+                 	 <li><a href="/exam/admin/mdmSubjectCodeMappingForm">Program Subject Entries</a></li>
+                 	 <li><a href="/exam/addBatchDetailsForm">Add Batch Details</a></li>
+                 	 <li><a href="/exam/admin/addSubjectDateForm">Add TimeBound Date/Student/Faculty</a></li>
+                 	 <li><a href="/exam/addTimeBoundStudentMappingForm">Add Student Mapping</a></li>
+                 	 <li><a href="/exam/moveStagingToTimeBoundTableForm">Move TimeBound Staging</a></li>
+                 	 <li><a href="/exam/addStudentCourseMappingForm">Add Student Course Mapping</a></li>
+                 	 <li><a href="/exam/admin/currencyDetailsForm">Add Currency Details</a></li> 
+                 	 <li><a href="/exam/admin/exitSrCertificateMappingForm">Exit Certificate Entries</a></li>   
+					 <li><a href="/exam/admin/failedSubjectCriteriaForm">Failed Subject Criteria Entries</a></li>   
+                 	 <li><a href="/exam/addSpecializationMapping">Specialization Mapping</a></li>
+                 </ul>
+	</li>
+
+
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1)
+					||(#strings.indexOf('__${roles}__','Learning Center') != -1) || (#strings.indexOf('__${roles}__','Information Center') != -1) 
+					|| (#strings.indexOf('__${roles}__','Corporate Center') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1)
+  					|| (#strings.indexOf('__${roles}__','Consultant') != -1)}">
+					<a href="#">Service Request</a>
+					<ul class="sz-sub-menu">
+						<li><a href="/studentportal/admin/searchSRForm">Search
+								Service Request</a></li>
+						<li><a href="/studentportal/admin/searchSRHistoryForm">Search
+								Service Request History</a></li>
+						<li th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1)}"><a href="/studentportal/admin/massUpdateSRStatusForm">Mass
+								Update SR Status</a></li>
+						<li th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1)}"><a href="/studentportal/admin/changeConfigurationForm">Set
+								up Service Request Dates</a></li>
+						<li th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1)}"><a href="/studentportal/admin/massUploadTrackingSRForm">Mass
+								Upload Tracking SR</a></li>
+						<li th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1)}"><a href="/studentportal/admin/searchTrackingSRForm">Search
+								SR Tracking Records</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1) || (#strings.indexOf('__${roles}__','Exam Admin') != -1)}"><a
+							href="/studentportal/admin/addStudentExtendedSRTimeForm">Extend
+								Service Request Time </a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1) || (#strings.indexOf('__${roles}__','Exam Admin') != -1)}"><a
+							href="/studentportal/admin/teeRevaluationReportForm">TeeRevaluation
+								Report</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1) || (#strings.indexOf('__${roles}__','Exam Admin') != -1)}"><a
+							href="/studentportal/admin/printWithdrawalForm">Print Mass
+								Withdrawal Form</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Admin') != -1) || (#strings.indexOf('__${roles}__','SR Admin') != -1) || (#strings.indexOf('__${roles}__','Exam Admin') != -1)}"><a
+							href="/studentportal/SearchSrTypesForm">Search SR Types</a></li>
+					</ul>
+				</li>
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Finance') != -1)}">
+					<a href="#">Refund Amount</a>
+					<ul class="sz-sub-menu">
+						<li><a href="/studentportal/admin/refundPaymentForm">Refund
+								Payments</a></li>
+						<li><a
+							href="/studentportal/admin/walletTransactionReportForm">Generate
+								Wallet Report</a></li>
+						<li><a
+							href="/studentportal/admin/downloadAdHocPaymentReportForm">Adhoc
+								Payment Report</a></li>
+						<li><a href="/studentportal/admin/refundSRForm">Refund SR
+								Amount</a></li>
+					</ul>
+				</li>
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Finance') != -1)}">
+					<a href="#">Service Request</a>
+					<ul class="sz-sub-menu">
+
+						<li><a href="/studentportal/admin/searchSRForm">Search
+								Service Request</a></li>
+
+						<li><a href="/studentportal/admin/searchSRDetailsByTrackId">Search
+								TrackId</a></li>
+
+					</ul>
+				</li>
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Learning Center') != -1) || (#strings.indexOf('__${roles}__','Information Center') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || 
+	 (#strings.indexOf('__${roles}__','Consultant') != -1)}">
+					<a href="#" title="Important Doc">Important Documents</a>
+					<ul class="sz-sub-menu">
+						<li><a href="/studentportal/trainingDocsICLC?viewer=All">Training
+								Documents</a></li>
+						<li><a href="/studentportal/modelAssignmentsICLC">Model
+								Assignments</a></li>
+						<li><a href="/studentportal/admin/demoExamICLC">Demo
+								Exams</a></li>
+						<li><a href="/studentportal/faqICLC?viewer=All">FAQ's</a></li>
+						<li><a href="/studentportal/faqEntryPage">FAQ Entry</a></li>
+						<li><a href="/studentportal/faqCategoryEntryPage">FAQ
+								Category Entry</a></li>
+						<li><a href="/studentportal/faqSubCategoryEntryPage">FAQ
+								SubCategory Entry</a></li>
+
+						<li class="has-sub-menu"
+							th:if="${(#strings.indexOf('__${roles}__','SAS Team') != -1)}"><a
+							href="#" title="SAS" id="main">SAS</a>
+							<ul class="sz-sub-menu" id="sas">
+								<li><a href="/studentportal/trainingDocsICLC?viewer=SAS">Training
+										Documents</a></li>
+								<li><a href="/studentportal/demoLecturesICLC">Demo
+										Lectures</a></li>
+								<li><a href="/studentportal/mockCallsICLC"> Mock calls</a></li>
+								<li><a href="/studentportal/faqSAS">FAQ's</a></li>
+								<li><a href="/studentportal/callRecordingsICLC?viewer=SAS">Call
+										recordings</a></li>
+								<li><a href="/studentportal/webinar">Webinar</a></li>
+							</ul></li>
+
+					</ul>
+				</li>
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) }">
+					<a href="#" title="Settings"><i class="fa-solid fa-gear fa-lg"
+						aria-hidden="true"></i></a>
+					<ul class="sz-sub-menu">
+
+						<li><a href="/studentportal/admin/makeSurveyLiveForm">Make
+								Survey Live Settings</a></li>
+
+
+					</ul>
+				</li>
+				<li class=""><a href="/ltidemo/FacultyTimeline">
+						<p>EMBA</p>
+				</a></li>
+
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','MBA-WX Admin') != -1) || (#strings.indexOf('__${roles}__','Learning Center') != -1)}">
+					<a href="#" title="EMBA Reports">EMBA Reports</a>
+					<ul class="sz-sub-menu">
+						<li><a
+							href="/acads/admin/searchAttendanceFeedbackForMbaWxForm">Session
+								Attendance For Mba Wx Report</a></li>
+						<li><a href="/exam/admin/embaPassFailReportForm">EMBA
+								PassFail Report</a></li>
+						<li><a href="/exam/consolidatedStudentsWiseReportsForm">Consolidated
+								Students Wise Reports</a></li>
+						<li><a href="/internal-assessment/searchIaToEvaluateForm">IA Evaluates
+								Reports</a></li>
+					</ul>
+				</li>
+				<li class="has-sub-menu"
+					th:if="${(#strings.indexOf('__${roles}__','Faculty') == -1) || (#strings.indexOf('__${roles}__','Insofe') == -1)}">
+					<a href="#" title="EMBA Reports">Leads</a>
+					<ul class="sz-sub-menu">
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Learning Center') != -1) || (#strings.indexOf('__${roles}__','Information Center') != -1)}">
+							<a href="/studentportal/admin/leadReport">Lead Report </a>
+						</li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) || (#strings.indexOf('__${roles}__','MBA-WX Admin') != -1)}"><a
+							href="/exam/admin/makeTestLiveFormForLeads">Lead Make Test
+								Live</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) || (#strings.indexOf('__${roles}__','MBA-WX Admin') != -1)}"><a
+							href="/exam/admin/viewAllTestsForLeads">Lead Search Test</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) || (#strings.indexOf('__${roles}__','MBA-WX Admin') != -1)}"><a
+							href="/exam/admin/addTestForLeadsForm">Lead Add Test</a></li>
+						<li
+							th:if="${(#strings.indexOf('__${roles}__','Portal Admin') != -1) || (#strings.indexOf('__${roles}__','Student Support') != -1) || (#strings.indexOf('__${roles}__','Consultant') != -1) || (#strings.indexOf('__${roles}__','MBA-WX Admin') != -1)}"><a
+							href="/studentportal/admin/leadReport">Lead Report</a></li>
+					</ul>
+				</li>
+				<!-- Student PORTAL HEADER END-->
+<script th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/js/jquery-1.11.3.min.js'"></script>				
+<script th:inline="javascript">
+/*<![CDATA[*/
+    function myFunction() {
+        alert("You pressed a key inside the input field");
+    }
+    
+    $(document).ready(function () {
+    	
+   	 $("#sas").hide();
+       $("#main").click(function(){
+         $("#sas").toggle();
+       });
+
+   }); 
+/*]]>*/
+</script>
+</div>

@@ -1,0 +1,236 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous" />
+</head>
+<style>
+.jumbotron {
+	background-color: #fff;
+	padding: 0.5px;
+}
+</style>
+<div
+	th:replace="templates/fragments/adminCommon/jscss :: jscssbar(title='Welcome to Student Zone')"></div>
+<body>
+	<th:block th:with="person=${session.user_studentportal}">
+		<div
+			th:replace="templates/fragments/adminCommon/adminHeader :: adminHeader">
+		</div>
+		<div class="sz-main-content-wrapper">
+			<div
+				th:replace="templates/fragments/adminCommon/breadcrum :: breadcrumbar(breadcrumItems='Student Zone;Power BI Reports')"></div>
+			<div class="sz-main-content menu-closed">
+				<div class="sz-main-content-inner">
+					<div
+						th:replace="templates/fragments/adminCommon/left-sidebar :: leftsidebar"></div>
+					<div class="sz-content-wrapper examsPage">
+						<div
+							th:replace="templates/fragments/adminCommon/adminInfoBar :: adminInfoBar"></div>
+						<div class="sz-content">
+							<br />
+							<div th:if="${#lists.isEmpty(reportList)}">
+								<h2 class="red text-capitalize">You don't have access to
+									any report. Please contact NGASCE IT support.</h2>
+							</div>
+							<div class="clearfix"></div>
+							<div class="starter-template"
+								th:unless="${#lists.isEmpty(reportList)}">
+								<div class="col-md-2 sidebar">
+									<div id="accordion1" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#academic"> Academic
+													Reports<i class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="academic" class="collapse"
+												data-bs-parent="#accordion1">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Academic')}">
+															<span class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="accordion2" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#common"> Common
+													Reports <i class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="common" class="collapse"
+												data-bs-parent="#accordion2">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Common')}">
+															<span class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div id="accordion3" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#exam"> Exam Reports <i
+													class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="exam" class="collapse" data-bs-parent="#accordion3">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Exam')}"><span
+															class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div id="accordion4" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#studentsupport"> Student Support Reports <i
+													class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="studentsupport" class="collapse" data-bs-parent="#accordion4">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Student Support')}"><span
+															class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div id="accordion5" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#admission"> Admission Reports <i
+													class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="admission" class="collapse" data-bs-parent="#accordion5">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Admission')}"><span
+															class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div id="accordion6" class="my-1">
+										<div style="background-color: transparent;"
+											class="card border border-0">
+											<div class="card-header border border-0">
+												<a
+													class="collapsed text-dark fs-6 fw-bold d-flex justify-content-between"
+													data-bs-toggle="collapse" href="#logistics"> Logistics Reports <i
+													class="fa-solid fa-chevron-down pt-1"></i>
+												</a>
+											</div>
+											<div id="logistics" class="collapse" data-bs-parent="#accordion6">
+												<div class="card-body p-0">
+													<ul style="scroll-behavior: smooth;"
+														class="list-group overflow-auto">
+														<li class="list-group-item border border-0"
+															th:each="bean : ${reportList}" th:object="${bean}"
+															th:if="${#strings.equals(bean.category, 'Admission')}"><span
+															class="text-secondary"><a href="#"
+																th:text="*{reportname}"
+																th:onclick="|iFramefunction('*{link}','*{reportname}')|"></a></span>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-md-10 sidebar">
+									<h4 class="red text-capitalize" id="reportname"></h4>
+									<iframe id="myIframe" title="Report Section" width="100%"
+										height="700" frameborder="0" allowFullScreen="true"></iframe>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div th:replace="templates/fragments/adminCommon/footer :: footerbar"></div>
+	</th:block>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+		crossorigin="anonymous"></script>
+	<script>
+		function iFramefunction(link, reportname) {
+			var reportnameNew = reportname
+			console.log('reportname', reportname);
+			var iframe = document.getElementById('myIframe');
+			iframe.src = link;
+			var reportname = document.getElementById('reportname');
+			reportname.textContent = reportnameNew;
+		}
+	</script>
+</body>
+</html>

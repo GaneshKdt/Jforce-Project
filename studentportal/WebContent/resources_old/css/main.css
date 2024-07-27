@@ -1,0 +1,404 @@
+/*
+	Client: NMIMS Distance Learning
+	Company: Clique Communications Group  
+	Author: Nikhil Karmokar - Clique Communications
+	Version: 1.0.5
+*/
+a {
+	color: #c72127;
+}
+
+a:hover {
+	color: #da471f;
+	text-decoration: none;
+}
+
+body {
+	background-color: #202020;
+}
+
+/*------------------------------------------*/
+/*	02. HEADER
+/*------------------------------------------*/
+header {
+	min-height: 120px;
+	background-color: #c72127;
+	position: relative;
+}
+
+.inside header {
+	min-height: 135px;
+}
+
+header section.main-header {
+	max-height: 100px;
+	padding: 5px;
+	background-color: #ffffff;
+	-webkit-box-shadow: #7a1114 0px 2px 3px;
+	-moz-box-shadow: #7a1114 0px 2px 3px;
+	box-shadow: #7a1114 0px 2px 3px;
+}
+
+header section.top-bar {
+	background-color: #000000;
+}
+
+header section.top-bar ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: right;
+}
+
+header section.top-bar ul li {
+	float: left;
+}
+
+header section.top-bar ul li a {
+	display: block;
+	padding: 5px 10px;
+	color: #ffffff;
+	text-transform: uppercase;
+	border-right: 1px solid #ffffff;
+}
+
+header section.top-bar ul li:first-child a {
+	border-left: 1px solid #ffffff;
+}
+
+header section.top-bar ul li a:hover {
+	background-color: #8F080A;
+}
+
+.content-container {
+	background-color: #f0f0f0;
+	min-height: 400px;
+}
+
+h1 {
+	text-align: center;
+	color: #c72127;
+	margin: 14px 0 0 0;
+	padding: 0;
+	font-size: 2.4em;
+	text-transform: uppercase;
+	padding: 2%;
+}
+
+.content-container h2 {
+	text-align: left;
+	color: #c72127;
+	font-size: 1.8em;
+	padding: 0;
+}
+
+.student-details {
+	background-color: #e2e2e2;
+	padding: 8px;
+}
+
+.student-details span {
+	font-family: "AllerBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	text-transform: uppercase;
+}
+
+.login-box {
+	margin: 20px 0;
+	padding: 0px;
+	background-color: #ffffff;
+	border: 1ps solid #e0e0e0;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+	text-align: center;
+	-moz-box-shadow: 0px 0px 5px 6px #eee;
+	-webkit-box-shadow: 0px 0px 5px 6px #eee;
+	box-shadow: 0px 0px 5px 6px #eee;
+}
+
+.login-box h2 {
+	margin: 0;
+	padding: 3%;
+	display: block;
+	color: #ffffff;
+	font-size: 1.4em;
+	text-transform: uppercase;
+	background-color: #198a9f;
+	text-align: center;
+}
+
+.login-box form {
+	padding: 5%;
+	display: block;
+	text-align: left;
+}
+
+.login-box input {
+	height: 48px;
+}
+
+.login-box .btn {
+	width: 100%;
+	padding: 3%;
+	background-image: none;
+	background-color: #911216;
+	color: #ffffff;
+	border: 0px;
+	box-shadow: none;
+	text-transform: uppercase;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+
+.module-box {
+	margin: 8px 0;
+	background-color: #ffffff;
+	padding: 12px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box; /* Firefox, other Gecko */
+	box-sizing: border-box; /* Opera/IE 8+ */
+	-moz-box-shadow: 0px 0px 5px 6px #eee;
+	-webkit-box-shadow: 0px 0px 5px 6px #eee;
+	box-shadow: 0px 0px 5px 6px #eee;
+}
+
+.module-box h3 {
+	margin-top: 0;
+	line-height: 2em;
+}
+
+.module-box h3:before {
+	content: '';
+	float: left;
+	padding: 10px;
+	height: 45px;
+	width: 45px;
+	margin-right: 10px;
+	line-height: 1em;
+	font-family: FontAwesome;
+	font-size: 28px;
+	color: #ffffff;
+}
+
+.module-box.blackboard h3:before {
+	content: '\f19d';
+	background-color: #00b5ad;
+}
+
+.module-box.library h3:before {
+	content: '\f19c';
+	background-color: #dd5928;
+}
+
+.module-box.support h3:before {
+	content: '\f1cd';
+	background-color: #005e97;
+}
+
+.module-box.exam h3:before {
+	content: '\f1b3';
+	background-color: #04B431;
+}
+
+.module-box.announce h3:before {
+	content: '\f0a1';
+	background-color: #DF01A5;
+}
+
+.module-box.calendar h3:before {
+	content: '\f073';
+	background-color: #00f0ff;
+}
+
+.module-box h4 {
+	margin-top: 0;
+}
+
+ul.policy {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+ul.policy li {
+	margin: 5px 0;
+	color: #808080;
+}
+
+.module-box a {
+	display: inline-block;
+	margin: 0 0 0 0;
+	padding: 5px 10px;
+	text-align: center;
+	background-color: #c72127;
+	color: #ffffff;
+}
+
+.module-box a:hover, .module-box a:focus {
+	background-color: #ed1d24;
+}
+
+label.error {
+	background-color: #c72127;
+	color: #ffffff;
+	padding: 5px 0;
+	text-align: center;
+	width: 100%;
+}
+
+.bottom-pass-button {
+	margin-top: 100px;
+}
+
+footer {
+	height: auto;
+	margin: 0 auto;
+}
+
+footer .quick-links {
+	background-color: #525252;
+	height: 36px;
+}
+
+footer .quick-links h3 {
+	margin: 5px 0 0 5px;
+	font-size: 1.4em;
+	color: #ffffff;
+}
+
+footer .quick-links ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+footer .quick-links ul li {
+	float: left;
+	padding: 6px 1.5%;
+}
+
+footer .quick-links ul li a {
+	color: #b8b8b8;
+}
+
+footer .quick-links ul li a:hover {
+	color: #f0f0f0;
+}
+
+footer .footer-links {
+	height: 68px;
+	color: #ffffff;
+	background-color: #202020;
+	margin: 15px 15px;
+	font-size: 0.825em;
+}
+
+footer .footer-links a {
+	color: #ffffff;
+}
+
+footer .footer-links a:hover {
+	color: #e0e0e0;
+}
+
+footer .footer-icons {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	float: right;
+}
+
+footer .footer-icons li {
+	float: left;
+	margin-left: 5px;
+}
+
+footer .footer-icons li a {
+	padding: 8px 12px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 20px;
+	background-color: #ffffff;
+	color: #202020;
+	font-size: 1.5em;
+}
+
+.ico-facebook {
+	padding: 8px 15px !important;
+}
+
+footer .footer-icons li a:hover {
+	background-color: #808080;
+	color: #ffffff;
+}
+
+@media ( max-width : 480px) {
+	header {
+		min-height: 220px;
+		text-align: center;
+	}
+	.home header {
+		min-height: 170px;
+	}
+	.inside header {
+		min-height: 200px;
+	}
+	header section.main-header {
+		max-height: 210px;
+		text-align: center;
+	}
+	header section.main-header h1 {
+		text-align: center;
+		font-size: 2.2em;
+		margin: 10px;
+	}
+	.content-container h2 {
+		text-align: center;
+	}
+	.bottom-pass-button {
+		margin-top: 10px;
+	}
+	footer .footer-links {
+		display: table;
+		margin: 0 auto;
+		padding-top: 10px;
+	}
+	footer .footer-icons {
+		margin-top: 15px;
+	}
+}
+
+@media ( min-width : 481px) and (max-width: 767px) {
+	header {
+		min-height: 300px;
+		text-align: center;
+	}
+	.home header {
+		min-height: 180px;
+	}
+	.inside header {
+		min-height: 210px;
+	}
+	header section.main-header {
+		max-height: 220px;
+		text-align: center;
+	}
+	header section.main-header h1 {
+		text-align: center;
+		font-size: 2.8em;
+		margin: 5px;
+	}
+	.content-container h2 {
+		text-align: center;
+	}
+	.bottom-pass-button {
+		margin-top: 10px;
+	}
+}
+
+@media ( min-width : 768px) and (max-width: 991px) {
+}
+
+@media ( min-width : 992px) and (max-width: 1199px) {
+}

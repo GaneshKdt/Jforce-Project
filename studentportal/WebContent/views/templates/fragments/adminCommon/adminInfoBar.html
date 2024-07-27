@@ -1,0 +1,37 @@
+<div th:fragment="adminInfoBar">
+	<th:block th:with="userId=${session.userId}
+	,noOfAnnouncemntsInHeader=(!${#strings.isEmpty(session.announcementsPortal)} ? ${session.announcementsPortal.size()} : 0)
+	,user=${session.user_studentportal}
+	,firstName=${!#strings.isEmpty(user.firstName)} ? ${user.firstName} : '', lastName=${!#strings.isEmpty(user.lastName)} ? ${user.lastName} : ''
+	,studentImage=(${session.student_studentportal != null} and ${!#strings.isEmpty(session.student_studentportal.imageUrl)}) ?  ${session.student_studentportal.imageUrl} : ''">
+
+
+<!--Top Student Profile bar -->
+<div class="student-info-bar">
+	<div class="mobile-menu visible-xs">
+		<div class="row">
+			<div class="col-xs-4">
+				<a href="#" id="mobileToggleNav"><span
+					class="glyphicon glyphicon-menu-hamburger"></span></a>
+			</div>
+			<div class="col-xs-8 text-right">
+				<a href="/studentportal/student/updateProfile"><span
+					class="icon-my-profile"></span></a> <a href="/logout"><span
+					class="icon-logout"></span></a> <a href="#mobile-announcements"
+					id="mobileNotification"><span class="icon-no-announcements"></span><span
+					class="count" th:text="${noOfAnnouncemntsInHeader}"></span></a>
+			</div>
+		</div>
+	</div>
+   		<span th:if="${!#strings.isEmpty(studentImage)}" class="student-image" style="background-image:url(${studentImage});"></span>
+	<h3 class="student-name" th:text="${#strings.toUpperCase(firstName)}+' '+${#strings.toUpperCase(lastName)}"></h3>
+	<ul class="student-info-list">
+		<li class="hidden-xs" th:text="${user.email}"></li>
+		<li class="hidden-xs" th:text="${user.contactNo}"></li>
+		<li class="hidden-xs" th:text="${user.program}"></li>
+		<li th:text="${userId}"></li>
+	</ul>
+	<div class="clearfix"></div>
+</div>	
+</th:block>
+</div>

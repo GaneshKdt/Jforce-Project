@@ -1,0 +1,29 @@
+
+	<span th:if="${success == 'true'}">
+    	SUCCESS
+    	<div class="alert alert-success alert-dismissible">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"  aria-hidden="true">  &times;  </button>
+			<div th:text = "${successMessage}"></div>
+		</div>
+	</span>
+	<span th:if="${error == 'true'}">
+		ERROR
+		<div class="alert alert-danger alert-dismissible">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"  aria-hidden="true">  &times;  </button>
+			<div th:text = "${errorMessage}"></div>
+		</div>
+	</span>
+	
+	<!-- <div th:if="$("true" == (String)request.getAttribute("success"))"> { 
+		<div class="alert alert-success alert-dismissible">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"  aria-hidden="true">  &times;  </button>
+			<div th:text = "$((String)request.getAttribute("successMessage"))"></div>
+		</div>
+	}<div/> 
+
+	<div th:if="$("true" ==  (String)request.getAttribute("error"))"> { 
+		<div class="alert alert-danger alert-dismissible">
+			<button type="button" class="btn-close" data-bs-dismiss="alert"  aria-hidden="true">  &times;  </button>
+			<div th:text = "$((String)request.getAttribute("errorMessage"))"></div>
+		</div>
+	} </div> -->

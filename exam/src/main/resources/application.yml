@@ -1,0 +1,58 @@
+eureka:
+  client:
+    fetch-registry: true
+    fetchRegistry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: ${EUREKA_DEFAULTZONE}
+      
+  instance:
+    healthCheckUrlPath: /exam/health
+    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 1
+    statusPageUrlPath: /exam/info
+    
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          context:
+            web:
+              ErrorPageFilter: 'off'
+security:
+  basic:
+    enabled: false
+server:
+  error:
+    whitelabel:
+      enabled: true
+  servlet-path: /exam
+  session:
+    cookie:
+      secure: true
+spring:
+  application:
+    name: exam-service
+  cache:
+    type: redis
+  datasource:
+    driver-class-name: ${mysql.datasource.driver-class-name}
+    password: ${mysql.datasource.password}
+    url: ${mysql.datasource.url}/exam?useSSL=false
+    username: ${mysql.datasource.username}
+  jmx:
+    default-domain: exam-service
+  profiles:
+    active: prod
+  redis:
+    host: ${REDIS_HOST}
+    port: ${REDIS_PORT}
+    pool: 
+      max-active: 200
+      max-idle: 8
+      max-wait: -1
+      min-idle: 8
+  session:
+    store-type: redis
+

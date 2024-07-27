@@ -1,0 +1,18 @@
+
+canvas{
+  border: 1px solid #000;
+}
+input{
+  height:50px;
+  font-size:3vh;
+}
+.brush-size {
+  font-size:25px;
+  text-align:center;
+  vertical-align:top:
+}
+
+.range{
+  vertical-align:bottom:
+}
+

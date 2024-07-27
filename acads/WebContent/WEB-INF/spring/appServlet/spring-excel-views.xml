@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="scheduledSessionExcelView"  class="com.nmims.views.ScheduledSessionsExcelView"/>
+	<bean id="attendanceFeedbackExcelView"  class="com.nmims.views.AttendanceFeedbackExcelView"/>
+	<bean id="sessionAttendanceForMbaWxExcelView"  class="com.nmims.views.SessionAttendanceForMbaWxExcelView"/>
+	
+	<!-- <bean id="AttendanceFeedbackSSFExcelView"  class="com.nmims.views.AttendanceFeedbackSSFExcelView"/> -->
+	<bean id="queryAnswerExcelView"  class="com.nmims.views.QueryAnswerExcelView"/>
+	<bean id="postQueryReportExcelView"  class="com.nmims.views.PostQueryReportExcelView"/>
+	<bean id="QnAReportExcelView"  class="com.nmims.views.QnAReportExcelView"/>
+	<bean id="pcpBookingReportExcelView"  class="com.nmims.views.PCPBookingReportExcelView"/>
+	<bean id="facultyExcelView"  class="com.nmims.views.FacultyExcelView"/>
+	<bean id="FacultyAllocationExcelView"  class="com.nmims.views.FacultyAllocationExcelView"/>
+	<bean id="SessionFacultyReviewsExcelView"  class="com.nmims.views.SessionFacultyReviewsExcelView"/>
+	<bean id="FeedPostsExcelView"  class="com.nmims.views.FeedPostsExcelView"/>
+	<bean id="dummyUsersExcelView"  class="com.nmims.views.DummyUsersExcelView"/>
+	<bean id="manualRecordingUploadReportExcelView" class="com.nmims.views.ManualRecordingUploadExcelView"/>
+	
+	
+	
+	
+	<bean id="sessionsWithErrorsExcelView" class="com.nmims.views.SessionsWithErrorsExcelView"/>
+	<bean id="sessionVideoReportExcelView" class="com.nmims.views.SessionVideoReportExcelView"/>
+	<bean id="cancelledSessionsExcelView" class="com.nmims.views.CancelledSessionsExcelView"/>
+	<bean id="batchSessionRecommendationsExcelView" class="com.nmims.views.BatchSessionRecommendationsExcelView"/>
+	<bean id="availableSessionSlotsExcelView" class="com.nmims.views.AvailableSessionSlotsExcelView"/>
+	
+<!-- 	<bean id="studentPortalRediret" class="org.springframework.web.servlet.view.RedirectView">  
+        <property name="url"  value="/studentportal/?sessionExpired=true"></property>  
+    </bean>    -->
+
+	<bean id="searchTimeBoundContentExcelView" class="com.nmims.views.SearchTimeBoundContentExcelView"/>
+	 
+</beans>

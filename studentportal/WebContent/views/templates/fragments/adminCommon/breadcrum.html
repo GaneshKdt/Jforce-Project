@@ -1,0 +1,14 @@
+<div th:fragment="breadcrumbar(breadcrumItems)">
+<div class="sz-breadcrumb-wrapper">
+    <div class="container-fluid">
+        <ul class="sz-breadcrumbs">
+        	
+       <li th:each="url,status : ${#strings.arraySplit('__${breadcrumItems}__', ';')}" >
+       <a th:href="${url}" th:text="${url}" ></a>
+       </li>	  	
+      		
+        </ul>
+      
+    </div>
+</div>
+</div>

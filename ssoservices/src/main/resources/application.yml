@@ -1,0 +1,30 @@
+eureka:
+  client:
+    fetch-registry: true
+    fetchRegistry: true
+    register-with-eureka: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    healthCheckUrlPath: /actuator/health
+    leaseExpirationDurationInSeconds: 2
+    leaseRenewalIntervalInSeconds: 1
+    statusPageUrlPath: /actuator/info
+    hostname: localhost
+server:
+  servlet:
+    contextPath: /ssoservices
+spring:
+  application:
+    name: ssoservices-service
+  cache:
+    type: redis
+  jmx:
+    default-domain: ssoservices-service
+  profiles:
+    active: prod
+  redis:
+    host: localhost
+    port: 6379
+  session:
+    store-type: redis

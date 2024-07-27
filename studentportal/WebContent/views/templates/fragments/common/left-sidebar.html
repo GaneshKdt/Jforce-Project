@@ -1,0 +1,494 @@
+<div th:fragment="left-sidebar(activeMenu)">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+		rel="stylesheet"></link>
+	<link href="https://d3q78eohsdsot3.cloudfront.net/assets/css/ToolTip.css" rel="stylesheet" />
+	<th:block
+		th:with="perspective=(!${#strings.isEmpty(session.student_studentportal.perspective)} ? ${session.student_studentportal.perspective} : ''),noOfAnnouncemntsInHeader=(!${#strings.isEmpty(session.announcementsPortal)} ? ${session.announcementsPortal.size()} : 0),hasAssignmentFlag=${hasAssignmentFlag},hasTestFlag=${hasTestFlag},activeMenu=${activeMenu},
+hideProfileLink=${hideProfileLink},validityExpired=${session.validityExpired},
+earlyAccess=${session.earlyAccess},isLoginAsLead=${session.isLoginAsLead},
+diableLink=(${session.isLoginAsLead == 'true'} ? 'disabled' : ''),color=(${session.isLoginAsLead == 'true'} ? '#b9b9b9;' : ''),notify=(${session.isLoginAsLead == 'true'} ? 'notifyLead()' : ''),lastCycleContentLink=(${session.isLoginAsLead == 'true'} ? '#' : ''),
+dashboardMenuClass=(${activeMenu == 'Dashboard'} ? 'active' : ''),academicCalendarMenuClass=(${activeMenu == 'Academic Calendar'} ? 'active' : ''),
+myCoursesMenuClass=(${activeMenu == 'My Courses'} ? 'active' : ''),myGetCertifiedMenuClass=(${activeMenu == 'Get Certified'} ? 'active' : ''),
+bookmarksMenuClass=(${activeMenu == 'Bookmarks'} ? 'active' : ''),walletMenuClass=(${activeMenu == 'My Wallet'} ? 'active' : ''),
+examMenuClass=(${activeMenu != null and #strings.contains('Exam Results-Assignment Marks-Marks History-Exam Time Table-Hall Ticket-Transcript-Marksheet-Assignment-Exam Registration-Resit-Exam Registration-Project Submission', activeMenu)} ? 'active' : ''),
+examResultsMenuClass=(${activeMenu == 'Exam Results'} ? 'active' : ''),
+examAssignmentResultsMenuClass=(${activeMenu == 'Assignment Marks'} ? 'active' : ''),
+examMarksHistoryMenuClass=(${activeMenu == 'Marks History'} ? 'active' : ''),
+examTimetableMenuClass=(${activeMenu == 'Exam Time Table'} ? 'active' : ''),
+examHallTicketMenuClass=(${activeMenu == 'Hall Ticket'} ? 'active' : ''),
+examMarksheetMenuClass=(${activeMenu == 'Transcript'} ? 'active' : ''),
+examTranscriptMenuClass=(${activeMenu == 'Marksheet'} ? 'active' : ''),
+examAssignmentsMenuClass=(${activeMenu == 'Assignment'} ? 'active' : ''),
+examRegistrationMenuClass=(${activeMenu == 'Exam Registration'} ? 'active' : ''),
+examResitRegistrationMenuClass=(${activeMenu == 'Resit-Exam Registration'} ? 'active' : ''),
+examProjetSubmissionMenuClass=(${activeMenu == 'Project Submission'} ? 'active' : ''),
+studentSupportMenuClass=(${activeMenu != null and #strings.contains('Service Request-Overview-FAQs-Contact Us-FeedBack-Know Your Policy-connectWithUs', activeMenu)} ? 'active' : ''),
+studentSupportServiceRequestMenuClass=(${activeMenu == 'Service Request'} ? 'active' : ''),
+studentSupportOverviewMenuClass=(${activeMenu == 'Overview'} ? 'active' : ''),
+studentSupportFAQMenuClass=(${activeMenu == 'FAQs'} ? 'active' : ''),
+studentSupportContactMenuClass=(${activeMenu == 'Contact Us'} ? 'active' : ''),
+studentSupportFeedback=(${activeMenu == 'FeedBack'} ? 'active' : ''),
+studentpolicy=(${activeMenu == 'Know Your Policy'} ? 'active' : ''),
+connectWithUs=(${activeMenu == 'connectWithUs'} ? 'active' : ''),
+quickLinksMenuClass=(${activeMenu != null and #strings.contains('PCP/VC Registration Receipt-Change Password-PCP/VC Registration-Exam Fee Receipt-Registration Fee Receipt-Dispatch Orders-My Documents-lastCycle-studentAttendance-Announcement Archival', activeMenu)} ? 'active' : ''),
+quickLinksPCPFeeReceiptMenuClass=(${activeMenu == 'Know Your Policy'} ? 'active' : ''),
+quickLinksChangePasswordMenuClass=(${activeMenu == 'Change Password'} ? 'active' : ''),
+quickLinksUFMDashboardMenuClass=(${activeMenu == 'lastCycle'} ? 'active' : ''),
+quickLinkAttendance=(${activeMenu == 'studentAttendance'} ? 'active' : ''),
+quickLinkAnnouncementArchival=(${activeMenu == 'Announcement Archival'} ? 'active' : ''),
+almashinesClass=(${activeMenu == 'almashines'} ? 'active' : ''),
+mybadgesClass=(${activeMenu == 'My Badges'} ? 'active' : '')">
+
+<style>
+a.disabled{
+	pointer-events: none;
+	cursor: default;
+}
+@media ( min-width : 480px) {
+	.sz-main-navigation .mobile-logo {
+		display: none;
+	}
+}
+.has-sub-menu {
+  display: none;
+}
+#toggle-nav:hover + .has-sub-menu {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 100%;
+}
+
+.open .icon-arrow-right:before {
+  content: "\2190";
+}
+
+.open .has-sub-menu {
+  display: block;
+} 
+</style>
+		<script>
+			function notifyLead() {
+				alert("Please enrole for the complete course...");
+			}
+		</script>
+		<div class="sz-main-navigation">
+			<div class="mobile-logo visible-xs">
+				<a href="#"><img
+					th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/images/logo.png'"
+					class="img-responsive" alt="" />
+				</a>
+			</div>
+			<ul class="sz-nav">
+				  <li id="toggle-nav" th:if="${validityExpired == 'No'} and ${session.student_studentportal.program != 'Program Withdrawal'}">
+						<a href="#">
+							<span class="icon-arrow-right"></span>
+						</a>
+					</li>
+					<li class="" id="ListwithToltip" tooltip="Dashboard" flow="right"  th:classappend="${dashboardMenuClass}"  th:if="${ isLoginAsLead != 'true' and validityExpired == 'No' }">
+						<a href="/studentportal/home">
+							<span class="icon-dashboard"></span>
+							<p class="toggle-name" style="display: none;">Dashboard</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="Dashboard" flow="right"  th:classappend="${dashboardMenuClass}" th:unless="${ isLoginAsLead != 'true'}">
+						<a href="/studentportal/leadHome">
+							<span class="icon-dashboard"></span>
+							<p class="toggle-name" style="display: none;">Dashboard</p>
+						</a>
+					</li>
+					<li th:classappend="${myGetCertifiedMenuClass}" th:if="${isLead == 'true' }">
+						<a href="/studentportal/student/getFreeCoursesList">
+							<span class="material-icons">card_membership</span>
+							<p>Get Certified</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="Academic Calendar" flow="right"  th:classappend="${academicCalendarMenuClass }" th:if="${validityExpired == 'No'}">
+						<a href="/acads/student/viewStudentTimeTable">
+							<span class="fa-regular fa-calendar-days"></span>
+							<p class="toggle-name" style="display: none;">Academic Calendar</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="My Courses" flow="right" th:classappend="${myCoursesMenuClass }" th:if="${validityExpired == 'No'}">
+						<a href="/studentportal/student/viewCourseHomePage">
+							<span class="fa-solid fa-book-bookmark"></span>
+							<p class="toggle-name" style="display: none;">My Courses</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="E-Learn" flow="right" class="" th:if="${session.student_studentportal.program == 'PD - DM'}">
+						<a href="/acads/viewELearnResources">
+							<span>
+								<i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+							</span>
+							<p class="toggle-name" style="display: none;">E-Learn</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="Session Videos" flow="right" class="" th:if="${validityExpired == 'No'}">
+						<a href="/acads/student/videosHome?pageNo=1(academicCycle=${currentSessionCycle})">
+							<span><i class="fa-regular fa-play-circle" aria-hidden="true"></i></span>
+							<p class="toggle-name" style="display: none;">Session Videos</p>
+						</a>
+					</li>
+					<li id="ListwithToltip" tooltip="Bookmarks" flow="right" th:classappend="${bookmarksMenuClass }" th:if="${validityExpired == 'No'}"> 
+						<a href="/studentportal/student/bookmarks">
+							<span>
+								<i class="fa-solid fa-bookmark" aria-hidden="true"></i>
+							</span>
+							<p class="toggle-name" style="display: none;">Bookmarks</p>
+						</a>
+					</li>
+					<!-- _______________________________________________________ Exam _____________________________________________________ -->
+					<li class="has-sub-menu ${examMenuClass }" th:classappend="${examMenuClass}">
+							<a th:classappend="${diableLink }"
+								href="/exam/student/getMostRecentResultsSaS" 
+								th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<span class="icon-exams"></span>
+								<p class="toggle-name" style="display: none;">Exam</p>
+							</a>
+							<a th:classappend="${diableLink }"
+								href="/exam/student/getMostRecentResults" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<span class="icon-exams"></span>
+								<p class="toggle-name" style="display: none;">Exams</p>
+							</a>
+							
+					<ul class="sz-sub-menu">
+						<li th:classappend="${examAssignmentsMenuClass }" th:if="${session.student_studentportal.program != 'MPDV'} and ${session.student_studentportal.program != 'EPBM'} and ${validityExpired == 'No'}">
+					  		<a href="/exam/student/viewAssignmentsForm">
+								<p> Assignment </p>
+							</a>
+						</li>
+				  		<li th:classappend="${examAssignmentResultsMenuClass }" th:if="${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program != 'EPBM'}">
+				  			<a href="/exam/student/getMostRecentAssignmentResults">
+								<p>Assignment Marks</p>
+							</a>
+				  		</li>
+						<li th:classappend="${examResultsMenuClass }">
+					   	 	<a href="/exam/student/getMostRecentResultsSaS" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p>Exam Results</p>
+						 	</a>
+				          	<a href="/exam/student/viewNotice" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+					     		<p>Exam Results</p>
+						    </a>
+				  		</li>
+						<li th:if="${session.student_studentportal.program == 'BBA'} or ${session.student_studentportal.program == 'B.Com'} or ${session.student_studentportal.program == 'BBA-BA'}">
+							<a href="/exam/student/stepRGResults">
+								<p>Employability Skills Results</p>
+							</a>
+						</li>
+						<li th:if= "${validityExpired == 'No'}">	
+				  			<a href="/exam/student/viewModelQuestionForm" >
+		                  	   <p>Demo Exam</p>
+		            	 	</a>
+			           </li>
+						<li th:classappend="${examTimetableMenuClass }" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+						  	<a th:classappend="${diableLink }" href="/exam/executiveStudentTimeTable">
+								<p th:styleappend="${color }">Exam Calendar</p>
+							</a>
+						</li>
+						<li th:classappend="${examTimetableMenuClass }" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'} or ${validityExpired == 'No'}">
+						  	<a th:classappend="${diableLink }" href="/exam/studentTimeTable">
+								<p th:styleappend="${color }">Exam Calendar</p>
+							</a>
+						</li>
+						<li th:classappend="${examHallTicketMenuClass }" th:if= "${validityExpired == 'No'}">		
+						  	<a th:classappend="${diableLink }" href="/exam/downloadExecutiveHallTicket" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Hall Ticket</p>
+							</a>			
+						  	<a th:classappend="${diableLink }" href="/exam/student/previewHallTicket" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Hall Ticket</p>
+							</a>
+						</li>
+				
+						<li th:classappend="${examMarksheetMenuClass }">
+						  	<a th:classappend="${diableLink }" href="/exam/student/studentSelfSASMarksheetForm" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Marksheet</p>
+							</a>
+							<a th:classappend="${diableLink }" href="/exam/student/studentSelfMarksheetForm" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Marksheet</p>
+							</a>
+						</li>
+				
+						<li  th:classappend="${examTranscriptMenuClass }" th:if="${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+							<a th:classappend="${diableLink }" href="/exam/student/generateStudentSelfTranscriptForm">
+								<p th:styleappend="${color }">Transcript</p>
+							</a>
+						</li>
+			
+						<li th:classappend="${examRegistrationMenuClass }" th:if="(${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}) and ${earlyAccess == 'No' } or ${validityExpired == 'No'}">
+						  	<a th:classappend="${diableLink }" href="/exam/executiveRegistrationForm">
+								<p th:styleappend="${color }">Exam Registration</p>
+							</a>
+						</li>
+			 
+						<li th:classappend="${examRegistrationMenuClass }" th:unless="${session.student_studentportal.program == 'MPDV' or session.student_studentportal.program == 'EPBM'} or ${validityExpired == 'Yes'}">
+						  	<a th:classappend="${diableLink }" href="/exam/selectSubjectsForm">
+								<p th:styleappend="${color }">Exam Registration</p>
+							</a>
+						</li>
+						<li th:classappend="${examProjetSubmissionMenuClass }" th:if="${validityExpired == 'No'} and (${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program != 'EPBM'} and (${#strings.startsWith(session.student_studentportal.program,'PG')} or ${#strings.startsWith(session.student_studentportal.program,'MBA')} or ${#strings.startsWith(session.student_studentportal.program,'B')} or ${session.student_studentportal.consumerType == 'Diageo')}))">
+						  	<a th:classappend="${diableLink }" href="/exam/student/viewProject(subject='Project')">
+		
+								<p th:styleappend="${color }">Project Submission</p>
+							</a> 
+						</li> 
+					
+				<!-- <a class="${diableLink }" href="/exam/student/viewProject(subject='Module 4 - Project')"/> -->
+
+						<li th:classappend="${examProjetSubmissionMenuClass }" th:if="${validityExpired == 'No'} and (${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program != 'EPBM'} and (${session.student_studentportal.program == 'PD - WM'} and ${session.student_studentportal.consumerType == 'Retail')}))"> 
+						  	<a th:classappend="${diableLink }" href="/exam/student/guidedProjectSubmissionSummary(subject='Module 4 - Project')"> 
+		
+								<p th:styleappend="${color }">Project Submission</p>
+							</a> 
+						</li>  
+						<li th:if="${session.student_studentportal.program == 'EPBM'}">
+						  	<a href="/exam/student/caseStudy">
+								<p>Case Study</p>
+							</a>
+						</li>
+					</ul>
+				</li>
+			<!-- Validity expired end -->
+			<!-- _______________________________________________________ CareerServices _____________________________________________________ -->
+				 <div th:replace="templates/fragments/common/CSStudentSidebar :: careerServiceBar" th:if="${isLoginAsLead != 'true' }"> </div>	
+				<!-- CareerServices end -->
+				<!-- ___________________________________________________________ Student Support ________________________________________________ -->
+			<li class="has-sub-menu" th:classappend="${studentSupportMenuClass }">
+				<a href="/studentportal/student/connectWithUs">
+					<span class="icon-student-support"></span>
+		            <p class="toggle-name" style="display: none;">Student Support</p>
+           		 </a>
+            <ul class="sz-sub-menu">
+					<li th:classappend="${studentpolicy }" th:if="${validityExpired == 'No'} and ${session.student_studentportal.program != 'Program Withdrawal'}"><a
+						href="/knowyourpolicy/student/StudentPolicy">
+							<p th:styleappend="${color }">Know Your Policy</p>
+					</a></li>
+              <li th:classappend="${studentSupportFAQMenuClass }" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}"> 
+                <a href="/studentportal/faqSAS">
+                   <p>FAQs</p>
+                </a> 
+              </li>
+              	 <li th:classappend="${studentSupportFAQMenuClass }" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}"> 
+                	<a href="/studentportal/faq">
+                   		<p>FAQs</p>
+                	</a> 
+              	</li>
+					<li th:classappend="${connectWithUs }"><a
+						href="/studentportal/student/connectWithUs">
+							<p th:styleappend="${color }">Connect With Us</p>
+					</a></li>
+					<li th:classappend="${studentSupportServiceRequestMenuClass }"> <a th:classappend="${diableLink }" href="/studentportal/student/selectSRForm">
+                <p th:styleappend="${color }">Service Request</p>
+                </a> </li>					 
+					
+				</ul>
+			</li>
+			<!--  Student Support END -->
+			<!-- Almashine -->
+                <li id="ListwithToltip" tooltip="NGASCE Alumni Portal" flow="right" th:classappend="${almashinesClass }" th:if="${session.student_studentportal.almashinesId != null}">
+		                <a href="/studentportal/student/welcomeToAlmashines">
+			                <span class="fa-solid fa-user-graduate"></span>
+				            <p class="toggle-name" style="display: none;">NGASCE Alumni Portal</p>
+			            </a>
+	                </li>
+            <!-- Validity Expired True -->
+          
+  				 <li id="ListwithToltip" tooltip="E-Learn" flow="right" class="" th:if="${validityExpired == 'Yes'} and ${session.student_studentportal.program == 'Program Withdrawal'} and (${session.student_studentportal.program == 'PD - DM'})"> 
+			          	<a href="/acads/viewELearnResources">
+			          		<span>
+			          			<i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+			          		</span>
+			            	<p class="toggle-name" style="display: none;">E-Learn</p>
+			            </a> 
+		         	 </li>
+          	         <li class="has-sub-menu" th:classappend="${examMenuClass }" th:if="${validityExpired == 'Yes'} and ${session.student_studentportal.program == 'Program Withdrawal'}"> 
+			  	 
+				     <a href="/exam/student/getMostRecentResultsSaS" th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}"><span class="icon-exams"></span>
+						<p>Exam</p>
+					 </a>
+				    <a href="/exam/student/getMostRecentResults" th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}"><span class="icon-exams"></span>
+						<p>Exams</p> 
+					</a>
+					<ul class="sz-sub-menu">
+					<li th:classappend="${examResultsMenuClass }"><a
+							href="/exam/student/getMostRecentResultsSaS"
+							th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p>Exam Results</p>
+						</a> <a href="/exam/student/viewNotice"
+							th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p>Exam Results</p>
+						</a></li>
+						<li th:classappend="${examAssignmentResultsMenuClass }"
+							th:if="${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program != 'EPBM'}">
+							<a href="/exam/student/getMostRecentAssignmentResults">
+								<p>Assignment Marks</p>
+						</a>
+						</li>
+						<li th:classappend="${examMarksheetMenuClass }"><a
+							th:classappend="${diableLink }"
+							href="/exam/student/studentSelfSASMarksheetForm"
+							th:if="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Marksheet</p>
+						</a> <a classappend="${diableLink }"
+							href="/exam/student/studentSelfMarksheetForm"
+							th:unless="${session.student_studentportal.program == 'MPDV'} or ${session.student_studentportal.program == 'EPBM'}">
+								<p th:styleappend="${color }">Marksheet</p>
+						</a></li>
+					</ul>
+				</li>
+				<li th:classappend="${examTranscriptMenuClass }"
+					th:if="${validityExpired == 'Yes'} and ${session.student_studentportal.program == 'Program Withdrawal'} and (${session.student_studentportal.program != 'MPDV'}  or ${session.student_studentportal.program != 'EPBM'})">
+					<a th:classappend="${diableLink }"
+					href="/exam/student/generateStudentSelfTranscriptForm">
+						<p th:styleappend="${color }">Transcript</p>
+				</a>
+				</li>
+				<li class="has-sub-menu" th:classappend=" ${quickLinksMenuClass}"
+					th:if="${validityExpired == 'Yes'} or ${session.student_studentportal.program == 'Program Withdrawal'}">
+					<a href="#"><span class="fa-solid fa-link"></span>
+					</a>
+					<ul class="sz-sub-menu">
+						<li th:classappend="${quickLinksMyDocuments }"><a
+							th:classappend="${diableLink }" href="/exam/student/myDocuments">
+								<p th:styleappend="${color }">My Documents</p>
+						</a></li>
+						<li th:classappend="${quickLinksUFMDashboardMenuClass }"><a
+							th:classappend="${diableLink }" href="/exam/student/ufmStatus">
+								<p th:styleappend="${color }">UFM Dashboard</p>
+						</a></li>
+					</ul>
+				</li>
+				<li class="has-sub-menu re_reg_li"
+					th:if="${isLoginAsLead != 'true' }"><a
+					href="/studentportal/reRegistrationPage" target="_blank"> <span
+						class="icon-reregister"></span>
+						<p>Re-Registration</p></a></li>
+						
+				<!--              My Badges Start -->	
+			<li id="ListwithToltip" tooltip="My Badges" flow="right" class="has-sub-menu" th:classappend="${mybadgesClass}" th:if="isLoginAsLead != 'true' and (${session.student_studentportal.program != 'MBA - WX'} and ${session.student_studentportal.program != 'MBA - X'}
+    	and ${session.student_studentportal.program != 'DBSM'} and ${session.student_studentportal.program != 'KTN'}
+    	and ${session.student_studentportal.program != 'IBS'} and ${session.student_studentportal.program != 'SSMM'}
+    	and ${session.student_studentportal.program != 'MFB'} and ${session.student_studentportal.program != 'EPBM'}
+    	and ${session.student_studentportal.program != 'EPBM'})"><a
+				href="/studentportal/student/myBadges"> <span
+					class="fa-solid fa-trophy"></span>
+					 <p class="toggle-name" style="display: none;">My Badges</p></a></li>  
+            
+			
+			<!--             My Badges End -->
+
+         	<!-- ______________________________________________ QuickLink _______________________________________________ -->
+         	
+           <li  class="has-sub-menu" th:if="${validityExpired != 'Yes'}" th:classappend="${quickLinksMenuClass}"> <a href="#"><span class="fa-solid fa-link" th:if="${validityExpired == 'No'} and ${session.student_studentportal.program != 'Program Withdrawal'}"></span>
+           <p class="toggle-name" style="display: none;">Quick Links</p>
+            </a>
+            <ul class="sz-sub-menu">
+              <li> <a th:classappend="${diableLink }" href="/studentportal/gotoEZProxy"  target="_blank">
+                <p  th:styleappend="${color }">Digital Library</p>
+                </a> </li>
+               
+            <li th:classappend="${quickLinksUFMDashboardMenuClass }"> 
+              	<a th:classappend="${diableLink }" href="/exam/student/ufmStatus">
+                	<p th:styleappend="${color }">UFM Dashboard</p>
+                </a> 
+            </li>    
+	            <li th:classappend="${quickLinksDispatchOrder }"> <a th:classappend="${diableLink }" href="/studentportal/student/getDispatches">
+                <p th:styleappend="${color }">Study Kit Dispatch Orders</p>
+                </a> </li>
+                <li th:classappend="${quickLinksMyDocuments }"> <a th:classappend="${diableLink }" href="/exam/student/myDocuments">
+                <p th:styleappend="${color }">My Documents</p>
+                </a></li>
+              <li th:classappend="${quickLinksChangePasswordMenuClass }"> <a th:classappend="${diableLink }" href="/studentportal/changePassword">
+                <p th:styleappend="${color }">Change Password</p>
+                </a> </li>
+                
+              <li th:classappend="${quickLinkAttendance }"> <a th:classappend="${diableLink }" href="/studentportal/studentAttendence">
+                <p th:styleappend="${color }"> Attendence </p>
+                </a>
+                 </li>
+                 
+              <li th:classappend="${quickLinkKeyEvent }"> 
+              	<a th:classappend="${diableLink }" href="/acads/student/keyEvents">
+                	<p th:styleappend="${color }"> Key Events </p>
+                </a>
+              </li>
+              <li th:if="${session.student_studentportal.program != 'MPDV'} or ${session.student_studentportal.program != 'EPBM'}"><a th:classappend="${diableLink }" href="/studentportal/reRegistrationPage" target="_blank">
+						<p th:styleappend="${color }">Re-Registration</p>
+				 </a>
+				 </li>
+				  <li><a th:classappend="${diableLink }" href="/studentportal/student/studentSettings">
+						<p th:styleappend="${color }">Settings</p>
+				 </a>
+				</li>
+				 </ul>
+				</li>
+			</ul>
+		</div>
+		<!-- Mobile notification contents -->
+		<div th:if="${noOfAnnouncemntsInHeader > 0 }">
+			<div class="mobile-notification-wrapper visible-xs"
+				id="mobile-announcements">
+				<div class="mobile-notification-header">
+					<a href="#" class="hide-link">Hide <span
+						class="glyphicon glyphicon-menu-right"></span></a>
+					<div class="clearfix"></div>
+					<h4>Announcements</h4>
+				</div>
+				<ul class="announcement-list">
+					<th:block
+						th:each="announcement,iter : ${session.announcementsPortal}">
+						<a href="#" data-bs-toggle="modal" data-bs-dismiss="modal"
+							data-bs-target="#announcementModal${iter.index}">
+							<li><a href="#" onclick="return false;"
+								style="cursor: default;"></a></li>
+
+
+							<div
+								th:with="announcemntBrief=(${#strings.length(announcement.description)} > 150 ? ${#strings.substring(announcement.description, 0, 149)} : '...')">
+								<p class="card-text text-dark fw-bold"
+									th:text="${announcement.subject}"></p>
+								<p class="card-text text-dark" th:text="${announcemntBrief}"></p>
+								<p class="card-text text-dark "
+									th:text="${announcement.startDate}">
+									by <span class="card-text text-dark "
+										th:text="${announcement.category}"></span>
+								</p>
+							</div>
+						</a>
+
+					</th:block>
+				</ul>
+			</div>
+		</div>
+	</th:block>
+	<script
+		th:src="${@environment.getProperty('BASE_URL_STUDENTPORTAL_STATIC_RESOURCES')}+'assets/js/jquery-1.11.3.min.js'"></script>
+	<script>
+		var sapid = "${session.student_studentportal.sapid}";
+		let data = {
+			'sapId' : sapid
+		};
+		$(".re_reg_li").css("display", "none");
+		
+		
+		$('#toggle-nav').on('click', function() {
+			$('.sz-main-content').toggleClass('menu-closed');	
+		});
+		
+			
+		//Script added for toggle effect on arrow click 
+		const toggleNav = document.getElementById('toggle-nav');
+		const dashboards = document.querySelectorAll('.toggle-name');
+		
+		toggleNav.addEventListener('click', () => {
+			  dashboards.forEach((dashboard) => {
+				
+			    if (dashboard.style.display === 'none') {
+			       dashboard.style.display = 'inline-block';
+			    } else {
+			        dashboard.style.display = 'none';	  
+			    }
+			  });
+		}) 
+
+		</script>
+</div>

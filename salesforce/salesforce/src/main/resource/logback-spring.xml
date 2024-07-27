@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+	<property name="catalina-base" value="${catalina.base}/logs/salesforce_logs" />
+ 	
+ 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level %C{1.}.%M\(%line\) - %m%n
+            </Pattern>
+        </layout>
+    </appender>
+ 	
+    <appender name="salesforce" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/salesforce/%d{yyyy-MM,aux}/salesforce-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+	
+	 <appender name="aws_document" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder>
+        
+ 		 <!-- rollover daily  -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/aws_document/%d{yyyy-MM,aux}/aws_document-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+	 <appender name="studentCourses" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level %logger - %m%n </Pattern>
+        </encoder>
+        
+ 		<!-- roll-over daily -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${catalina-base}/StudentCourses/%d{yyyy-MM,aux}/studentCourses-%d{yyyy-MM-dd}.log</fileNamePattern>
+        </rollingPolicy>
+    </appender>
+	
+
+    <root level="info">
+    	<appender-ref ref="console" /> 
+        <appender-ref ref="salesforce" />
+    </root>
+         
+    <logger name="aws_document" level="info" additivity="false">
+        <appender-ref ref="aws_document" />
+    </logger>
+      <logger name="studentCourses" level="info" additivity="false">
+        <appender-ref ref="studentCourses" />
+    </logger>
+    
+
+</configuration>

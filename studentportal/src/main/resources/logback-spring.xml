@@ -1,0 +1,1355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 	<property file="C:/NMIMS_PROPERTY_FILE/ngasce.properties" />
+ 	
+ 	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level %C{1.}.%M\(%line\) - %m%n
+            </Pattern>
+        </layout>
+    </appender>
+ 	
+    <appender name="portal" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+         <!--  <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %level  %C{1.}.%M\(%line\) - %m%n </Pattern>
+        </encoder> -->
+        		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+    </appender>
+
+	
+	 <appender name="bulk-email-from-excel" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+    </appender>
+	
+	
+	 <appender name="email-count"  class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+
+    </appender>
+	
+	
+	<appender name="course-query" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+
+    </appender>
+
+
+	<appender name="salesforce-pass-fail-sync-pg" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        	
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+    </appender>
+
+
+	<appender name="salesforce-pass-fail-sync-mbawx" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+
+
+	<appender name="salesforce-pass-fail-sync-mbax" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+         	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+    </appender>
+
+	<appender name="rank-denormalization" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+
+
+	<appender name="badge-scheduler" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+
+	<appender name="loginLog" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+    </appender>
+    
+    <appender name="profile-sync-sfdc" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+      	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+    </appender>
+    
+     <appender name="aws_document" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+
+
+
+    <appender name="adhoc_payments" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+ 	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+    <appender name="studentCourses" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+
+	<appender name="service_request" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+
+    </appender>
+    
+    <appender name="salesforce-pass-fail-sync-pddm" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+    <appender name="razorpay_payments" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+    </appender>
+    
+    <appender name="gateway_payments" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+     <appender name="id_card_creation" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 	
+	</appender>
+	
+	  <appender name="transcript_sr" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+
+	</appender>
+	
+	 <appender name="alumni_reReg_badge" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+         	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+	</appender>
+	
+	<appender name="redis_result" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 
+	</appender>
+	
+    <appender name="exitSrClosed" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+        
+        	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 
+	</appender>
+
+         
+    <logger name="bulkEmailFromExcel" level="info" additivity="false">
+        <appender-ref ref="bulk-email-from-excel" />
+    </logger>
+    
+    <logger name="emailCount" level="info" additivity="false">
+        <appender-ref ref="email-count" />
+    </logger>
+    
+    <logger name="courseQuery" level="info" additivity="false">
+        <appender-ref ref="course-query" />
+    </logger>
+
+    <logger name="salesforcePFSyncPG" level="info" additivity="false">
+        <appender-ref ref="salesforce-pass-fail-sync-pg" />
+    </logger>
+
+	<logger name="razorpay_payments" level="info" additivity="false">
+        <appender-ref ref="razorpay_payments" />
+    </logger>
+    
+    <logger name="gateway_payments" level="info" additivity="false">
+        <appender-ref ref="gateway_payments" />
+    </logger>
+
+    <logger name="salesforcePFSyncMBAWX" level="info" additivity="false">
+        <appender-ref ref="salesforce-pass-fail-sync-mbawx" />
+    </logger>
+
+    <logger name="salesforcePFSyncMBAX" level="info" additivity="false">
+        <appender-ref ref="salesforce-pass-fail-sync-mbax" />
+    </logger>
+
+    <logger name="badgeScheduler" level="info" additivity="false">
+        <appender-ref ref="badge-scheduler" />
+    </logger>
+ 
+    <logger name="login" level="info" additivity="false">
+        <appender-ref ref="loginLog" />
+    </logger>
+ 
+    <logger name="rankDenormalization" level="info" additivity="false">
+        <appender-ref ref="rank-denormalization" />
+    </logger>
+    
+    <logger name="profileSyncSFDC" level="info" additivity="false">
+        <appender-ref ref="profile-sync-sfdc" />
+    </logger>
+    
+      <logger name="aws_document" level="info" additivity="false">
+        <appender-ref ref="aws_document" />
+
+    </logger>  
+
+    
+
+     
+   <logger name="adhoc_payments" level="info" additivity="false">
+        <appender-ref ref="adhoc_payments" />
+    </logger>
+    
+
+    <logger name="service_request" level="info" additivity="false">
+        <appender-ref ref="service_request" />
+    </logger>
+
+      <logger name="studentCourses" level="info" additivity="false">
+        <appender-ref ref="studentCourses" />
+        </logger>
+
+       <logger name="salesforcePFSyncPDDM" level="info" additivity="false">
+        <appender-ref ref="salesforce-pass-fail-sync-pddm" />
+    </logger>
+    
+     <logger name="id_card_creation" level="info" additivity="false">
+        <appender-ref ref="id_card_creation" />
+      </logger>
+      
+       <logger name="transcript_sr" level="info" additivity="false">
+        <appender-ref ref="transcript_sr" />
+      </logger>
+      
+         <logger name="alumni_reReg_badge" level="info" additivity="false">
+        <appender-ref ref="alumni_reReg_badge" />
+      </logger>
+      
+      <logger name="redis_result" level="info" additivity="false">
+        <appender-ref ref="redis_result" />
+      </logger>
+  	
+  	   <appender name="redis_loginsso" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+        
+ 		
+	</appender>
+	
+	<appender name="slowMethods" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+
+	
+	</appender>
+	
+	<logger name="redis_loginsso" level="info" additivity="false">
+ 		<appender-ref ref="redis_loginsso" />
+   	</logger>
+    
+     <logger name="slowMethods" level="trace" additivity="false">
+        <appender-ref ref="slowMethods" />
+    </logger>  
+    
+    <logger name="exitSrClosed" level="info" additivity="false">
+        <appender-ref ref="exitSrClosed" />
+    </logger>  
+      ​
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	​
+	<springProperty scope="context" name="springAppName" source="spring.application.name"/>
+	<!-- Example for logging into the build folder of your project -->
+	<property name="LOG_FILE" value="${BUILD_FOLDER:-build}/${springAppName}"/>​
+
+	<!-- You can override this to have a custom pattern -->
+	<property name="CONSOLE_LOG_PATTERN"
+			  value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}"/>
+
+	<!-- Appender to log to console -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<!-- Minimum logging level to be presented in the console logs-->
+			<level>DEBUG</level>
+		</filter>
+		<encoder>
+			<pattern>${CONSOLE_LOG_PATTERN}</pattern>
+			<charset>utf8</charset>
+		</encoder>
+	</appender>
+
+​
+	<!-- Appender to log to file in a JSON format -->
+	<appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+		<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+	</appender>
+	
+	 <appender name="save-sfdc-emails-to-portal" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+    
+            <param name="Encoding" value="UTF-8"/>
+       		 <remoteHost>${LOGSTASH_REMOTEHOST}</remoteHost>
+        	<port>${LOGSTASH_REMOTEHOST_PORT}</port>
+       	<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+			<providers>
+				<timestamp>
+					<timeZone>UTC</timeZone>
+				</timestamp>
+				<version/>
+				<logLevel/>
+				<message/>
+				<loggerName/>
+				<threadName/>
+				<context/>
+				<pattern>
+                    <pattern>
+                        {
+                            "trace": {
+                                "trace_id": "%mdc{X-B3-TraceId}",
+                                "span_id": "%mdc{X-B3-SpanId}",
+                                "parent_span_id": "%mdc{X-B3-ParentSpanId}",
+                                "exportable": "%mdc{X-Span-Export}"
+                            }
+                        }
+                    </pattern>
+				</pattern>
+				  <mdc>
+                    <excludeMdcKeyName>traceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>parentId</excludeMdcKeyName>
+                    <excludeMdcKeyName>spanExportable</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-TraceId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-SpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-B3-ParentSpanId</excludeMdcKeyName>
+                    <excludeMdcKeyName>X-Span-Export</excludeMdcKeyName>
+                </mdc>
+                <stackTrace/>
+			</providers>
+		</encoder>
+ 		
+    </appender>
+    
+     <logger name="sfdcEmailsToPortal" level="info" additivity="false">
+        <appender-ref ref="save-sfdc-emails-to-portal" />
+    </logger>
+	
+	
+​
+	<root level="INFO">
+		<!-- <appender-ref ref="console"/> -->
+		<!-- uncomment this to have also JSON logs -->
+		<appender-ref ref="portal"/>
+		<!--<appender-ref ref="flatfile"/>-->
+	</root>
+</configuration>

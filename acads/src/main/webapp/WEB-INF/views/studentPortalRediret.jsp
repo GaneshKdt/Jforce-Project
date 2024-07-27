@@ -1,0 +1,1 @@
+<% response.sendRedirect("/studentportal/?sessionExpired=true");%>
